@@ -30,80 +30,107 @@ app.get('/createdb', (req, res) => {
     });
 });
 
-// Création table
-/*
-app.get('createpoststable', (req, res) => {
-    let sql = 'CREATE TABLE posts(id int AUTO_INCREMENT, title VARCHAR(255), content VARCHAR(500), attachment VARCHAR(255), likes INT, PRIMARY KEY (id))';
+// Création tables : users, messages, comments, reactions
+
+
+app.get('/createuserstable', (req, res) => {
+    let sql = 'CREATE TABLE users(id int AUTO_INCREMENT, pseudo VARCHAR(55), email VARCHAR(255), password VARCHAR(255), profilPicUrl VARCHAR(255), isAdmin TINYINT(1), PRIMARY KEY (id))';
     db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
-        res.send('Table posts créée');
+        res.send('Table users créée');
     });
 })
-*/
 
-// Création d'un post
-/*
-app.get('addpost', (req, res) => {
-    let post = {title: '', content: '', attachment: '', likes: ''};
-    let sql = 'INSERT INTO posts SET ?';  // le ? est comme un placeholder
-    let query = db.query(sql, post, (err, result) => {
+app.get('/createmessagestable', (req, res) => {
+    let sql = 'CREATE TABLE messages(id int AUTO_INCREMENT, message TEXT(500), urlImage VARCHAR(255), createdAt DATETIME, updatedAt DATETIME, PRIMARY KEY (id))';
+    db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
-        res.send('Post ajouté');
+        res.send('Table messages créée');
+    });
+})
+
+app.get('/createcommentstable', (req, res) => {
+    let sql = 'CREATE TABLE comments(id int AUTO_INCREMENT, pseudo VARCHAR(55), comment TEXT(500), createdAt DATETIME, updatedAt DATETIME, PRIMARY KEY (id))';
+    db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Table comments créée');
+    });
+})
+
+app.get('/createreactionstable', (req, res) => {
+    let sql = 'CREATE TABLE reactions(id int AUTO_INCREMENT, PRIMARY KEY (id))';
+    db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Table reactions créée');
+    });
+})
+
+// Création d'un message
+/*
+app.get('/addmessage', (req, res) => {
+    let message = {title: '', content: '', attachment: '', likes: ''};
+    let sql = 'INSERT INTO messages SET ?';  // le ? est comme un placeholder
+    let query = db.query(sql, message, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('message ajouté');
     });
 });
 */
 
-// Sélectionner tous les posts
+// Sélectionner tous les messages
 /*
-app.get('/getposts', (req, res) => {
-    let sql = 'SELECT * FROM posts';
+app.get('/getmessages', (req, res) => {
+    let sql = 'SELECT * FROM messages';
     let query = db.query(sql, (err, results) => {
         if(err) throw err;
         console.log(results);
-        res.send('Tous les posts sont récupérés');
+        res.send('Tous les messages sont récupérés');
     });
 });
 */
 
-// Sélectionner un unique post
+// Sélectionner un unique message
 /*
-app.get('/getpost/:id', (req, res) => {
-    let sql = `SELECT * FROM posts WHERE id = ${req.params.id}`;
+app.get('/getmessage/:id', (req, res) => {
+    let sql = `SELECT * FROM messages WHERE id = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
-        res.send('Post récupéré');
+        res.send('message récupéré');
     });
 });
 */
 
-// Màj d'un post
+// Màj d'un message
 /*
-app.get('/updatepost/:id', (req, res) => {
-    let updatedPost = {
+app.get('/updatemessage/:id', (req, res) => {
+    let updatedmessage = {
         newTitle: '';
         newContent: '';
         newAttachement: '';
     }
-    let sql = `UPDATE post SET post = ${updatedPost} WHERE id = ${req.params.id}`;
+    let sql = `UPDATE message SET message = ${updatedmessage} WHERE id = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
-        res.send('Post modifié');
+        res.send('message modifié');
     });
 });
 */
 
-// Surrpimer un post
+// Surrpimer un message
 /*
-app.get('/deletepost/:id', (req, res) => {
-    let sql = `DELETE FROM post WHERE id = ${req.params.id}`;
+app.get('/deletemessage/:id', (req, res) => {
+    let sql = `DELETE FROM message WHERE id = ${req.params.id}`;
     let query = db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
-        res.send('Post supprimé');
+        res.send('message supprimé');
     });
 });
 */
