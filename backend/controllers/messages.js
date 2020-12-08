@@ -1,6 +1,72 @@
 const Message = require('../models/message');
 const fs = require('fs');
 
+// Création d'un message
+/*
+app.get('/addmessage', (req, res) => {
+    let message = {title: '', content: '', attachment: '', likes: ''};
+    let sql = 'INSERT INTO messages SET ?';  // le ? est comme un placeholder
+    let query = db.query(sql, message, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('message ajouté');
+    });
+});
+*/
+
+// Sélectionner tous les messages
+/*
+app.get('/getmessages', (req, res) => {
+    let sql = 'SELECT * FROM messages';
+    let query = db.query(sql, (err, results) => {
+        if(err) throw err;
+        console.log(results);
+        res.send('Tous les messages sont récupérés');
+    });
+});
+*/
+
+// Sélectionner un unique message
+/*
+app.get('/getmessage/:id', (req, res) => {
+    let sql = `SELECT * FROM messages WHERE id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('message récupéré');
+    });
+});
+*/
+
+// Màj d'un message
+/*
+app.get('/updatemessage/:id', (req, res) => {
+    let updatedmessage = {
+        newTitle: '';
+        newContent: '';
+        newAttachement: '';
+    }
+    let sql = `UPDATE message SET message = ${updatedmessage} WHERE id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('message modifié');
+    });
+});
+*/
+
+// Surrpimer un message
+/*
+app.get('/deletemessage/:id', (req, res) => {
+    let sql = `DELETE FROM message WHERE id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('message supprimé');
+    });
+});
+*/
+
 // Mise en place CRUD
 exports.createMessage = (req, res, next) => {                                       // CREATE
     const messageObject = JSON.parse(req.body.message);
