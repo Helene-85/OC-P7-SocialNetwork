@@ -6,6 +6,7 @@
 
 <script>
 import Login from './Login'
+
 export default {
     name: 'home',
       components: {

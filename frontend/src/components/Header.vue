@@ -19,7 +19,7 @@
                 </a>
             </router-link>
             <router-link to="/feed">
-                <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400 mr-4">
+                <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-green-400 hover:text-white mr-4">
                     Groupo'Link
                 </a>
             </router-link>

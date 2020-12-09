@@ -17,7 +17,7 @@
                 </svg>
                 </div>
 
-                <input id="email" type="email" name="email" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400" placeholder="Adresse email" />
+                <input id="email" type="email" name="email" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400" placeholder="xxx@yyy.zzz" />
             </div>
             </div>
             <div class="flex flex-col mb-6">
@@ -31,7 +31,7 @@
                 </span>
                 </div>
 
-                <input id="password" type="password" name="password" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400" placeholder="Mot_de_passe" />
+                <input id="password" type="password" name="password" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400" placeholder="******************" />
             </div>
             </div>
 
@@ -53,8 +53,9 @@
             </div>
         </form>
         </div>
+        <router-link to="/signin">
         <div class="flex justify-center items-center mt-6">
-        <a href="#" target="_blank" class="inline-flex items-center font-bold text-green-500 hover:text-green-700 text-xs text-center">
+        <a href="#" target="_blank" class="inline-flex items-center text-green-500 hover:text-green-700 text-xs text-center">
             <span>
             <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                 <path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -63,6 +64,7 @@
             <span class="ml-2">Inscription</span>
         </a>
         </div>
+        </router-link>
     </div>
 </template>
 
