@@ -9,7 +9,7 @@ import Login from './Login'
 
 export default {
     name: 'home',
-      components: {
+    components: {
     'login' : Login,
   }
 }

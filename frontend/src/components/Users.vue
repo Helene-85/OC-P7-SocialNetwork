@@ -1,5 +1,5 @@
 <template>
-<div class=" m-6 flex flex-col">
+<div class="min-h-screen bg-gray-900 m-6 flex flex-col">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-5 align-middle inline-block min-w-full sm:px-6 lg:px-8">
       <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -28,7 +28,7 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 h-10 w-10">
-                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" alt="">
+                    <img class="h-10 w-10 rounded-full" src="../assets/profile_pic.png" alt="profil-pic">
                   </div>
                   <div class="ml-4">
                     <div class="text-sm text-gray-500">

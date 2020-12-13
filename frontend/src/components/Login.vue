@@ -30,27 +30,26 @@
                     </svg>
                 </span>
                 </div>
-
                 <input id="password" type="password" name="password" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400" placeholder="******************" />
+                </div>
             </div>
-            </div>
-
             <div class="flex items-center mb-6 -mt-4">
-            <div class="flex ml-auto">
-                <a href="#" class="inline-flex text-xs sm:text-sm text-green-500 hover:text-green-700">Mot de passe oublié ?</a>
+                <div class="flex ml-auto">
+                    <a href="#" class="inline-flex text-xs sm:text-sm text-green-500 hover:text-green-700">Mot de passe oublié ?</a>
+                </div>
             </div>
-            </div>
-
-            <div class="flex w-full">
-            <button type="submit" class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in">
-                <span class="mr-2 uppercase">Se connecter</span>
-                <span>
-                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                    <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                </span>
-            </button>
-            </div>
+            <router-link to="/feed">
+                <div class="flex w-full">
+                    <button type="submit" class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in">
+                        <span class="mr-2 uppercase">Se connecter</span>
+                        <span>
+                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        </span>
+                    </button>
+                </div>
+            </router-link>
         </form>
         </div>
         <router-link to="/signin">
@@ -69,8 +68,14 @@
 </template>
 
 <script>
+
 export default {
-    name: 'login'
+    name: 'login',
+    data() {
+        return {
+            
+        };
+    },
 }
 </script>
 

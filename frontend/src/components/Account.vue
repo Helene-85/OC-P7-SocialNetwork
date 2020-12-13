@@ -3,9 +3,9 @@
         <div class="w-9/12 relative mt-4 my-24 overflow-hidden">
             <div class="top h-64 w-full bg-gray-900 overflow-hidden relative" >
                 <div class="flex flex-col justify-center items-center relative h-full text-white">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" class="h-24 w-24 object-cover rounded-full">
-                <h1 class="text-2xl font-semibold">Pseudonyme</h1>
-                <a href="#" class="text-green-500 text-center hover:text-gray-200">Modifier ma photo</a>
+                    <img src="../assets/profile_pic.png" class="h-24 w-24 object-cover rounded-full">
+                    <h1 class="text-2xl font-semibold">Pseudonyme</h1>
+                    <a href="#" class="text-green-500 text-center hover:text-gray-200">Modifier ma photo</a>
                 </div>
             </div>
             <div class="flex justify-center bg-gray-900">
