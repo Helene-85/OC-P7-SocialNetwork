@@ -8,14 +8,18 @@ exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)                                            // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
     .then(hash => {
       const user = new User({
+        pseudo: '',
         email: req.body.email,
-        username: req.body.username,
         password: hash,
+        profilPic: '',
         isAdmin: 0
       });
-      user.save()
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-        .catch(error => res.status(400).json({ message: 'Cette adresse email est déjà utilisée :/' }));
+      user.create(user, (err, data) => {
+        if(err) {
+          return res.status(400).json({ message: 'Soucis' });
+        } 
+        res.send(data);
+      })
     })
     .catch(error => res.status(500).json({ error }));
 };

@@ -5,12 +5,12 @@ const router = express.Router();
 const userController = require("../controllers/user");
 
 // Importation du middleware verifyPassword pour contrôler la complexité du mot de passe
-const verifyPassword = require("../middleware/verifyPassword");
+/* const verifyPassword = require("../middleware/verifyPassword"); */
 
 // Route POST pour l'inscription d'un utilisateur
-router.post("/signup", verifyPassword, userController.signup);
+router.post("/signup", userController.signup);
 
 // Route POST pour la connexion d'un utilisateur
-router.post("/login", userController.login);
+/* router.post("/login", userController.login); */
 
 module.exports = router;
