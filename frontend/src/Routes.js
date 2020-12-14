@@ -5,6 +5,7 @@ import Feed from './components/Feed'
 import Message from './components/Message'
 import Login from './components/Login'
 import Signin from './components/Signin'
+import Welcome from './components/Welcome.vue'
 
 export default [
     {path: '/', component: Home},
@@ -13,5 +14,6 @@ export default [
     {path: '/feed', component: Feed},
     {path: '/message', component: Message},
     {path: '/login', component: Login},
-    {path: '/signin', component: Signin}
+    {path: '/signin', component: Signin},
+    {path: '/welcome', component: Welcome}
 ]
