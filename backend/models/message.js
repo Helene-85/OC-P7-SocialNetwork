@@ -1,47 +1,47 @@
 const db = require('./db');
 
-const Publication = function(publication) {
-    this.message=publication.message,
-    this.image=publication.image
+const Message = function(message) {
+    this.content=message.content,
+    this.image=message.image
 }
 
-Publication.create = (newPublication, result) => {
-    db.query("INSERT INTO messages SET ?", newPublication, (err, res) => {
+Message.create = (newMessage, result) => {
+    db.query("INSERT INTO messages SET ?", newMessage, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } else {
             result(null, {
                 id:res.id,
-                ...newPublication
+                ...newMessage
             })
         }
     })
 };
 
-Publication.modify = (newPublication, result) => {
-    db.query("UPDATE INTO messages SET ?", newPublication, (err, res) => {
+Message.modify = (newMessage, result) => {
+    db.query("UPDATE INTO messages SET ?", newMessage, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } else {
             result(null, {
                 id:res.id,
-                ...newPublication
+                ...newMessage
             })
         }
     })
 };
 
-Publication.delete = (newPublication, result) => {
-    db.query("DELETE INTO messages SET ?", newPublication, (err, res) => {
+Message.delete = (newMessage, result) => {
+    db.query("DELETE INTO messages SET ?", newMessage, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } else {
             result(null, {
                 id:res.id,
-                ...newPublication
+                ...newMessage
             })
         }
     })

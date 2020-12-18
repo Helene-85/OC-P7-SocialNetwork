@@ -11,7 +11,7 @@ const userRoutes = require("./routes/user");
 const app = express();
 
 app.listen('3001', () =>{
-    console.log('Serveur démarré sur le port 3000');
+    console.log('Serveur démarré sur le port 3001');
 });
 
 app.use(bodyParser.json());                                                // Définition de la fonction json comme middleware global
