@@ -21,3 +21,31 @@ User.create = (newUser, result) => {
         }
     })
 };
+
+User.modify = (newUser, result) => {
+    db.query("UPDATE INTO users SET ?", newUser, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, {
+                id:res.id,
+                ...newUser
+            })
+        }
+    })
+};
+
+User.delete = (newUser, result) => {
+    db.query("DELETE INTO users SET ?", newUser, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, {
+                id:res.id,
+                ...newUser
+            })
+        }
+    })
+};
