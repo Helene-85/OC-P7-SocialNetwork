@@ -10,13 +10,21 @@ const userRoutes = require("./routes/user");
 
 const app = express();
 
-app.listen('3001', () =>{
-    console.log('Serveur démarré sur le port 3001');
+app.listen('3000', () =>{
+    console.log('Serveur démarré sur le port 3000');
 });
 
 app.use(bodyParser.json());                                                // Définition de la fonction json comme middleware global
 
 app.use('/images', express.static(path.join(__dirname, 'images')));        // Gestiion de la source de manière statique grâce à Express
+
+//CORS error
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    next();
+});
 
 app.use(helmet());                                                         // Activation de la protection Helmet : équivaut à 11 protections
 
