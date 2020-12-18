@@ -23,7 +23,7 @@ Message.modify = (newMessage, result) => {
     db.query("UPDATE INTO messages SET ?", newMessage, (err, res) => {
         if(err) {
             result(err, null);
-            return;
+            return;!
         } else {
             result(null, {
                 id:res.id,
