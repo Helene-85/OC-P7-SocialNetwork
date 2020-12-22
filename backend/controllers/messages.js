@@ -83,65 +83,56 @@ exports.addLikeDislike = (req, res, next) => {
         message.usersLaught.includes(userId) || 
         message.usersBeSurprised.includes(userId) || 
         message.usersBeImpressed.includes(userId));
-  
+
+        // Ajout des réactions
         if (userWantsToLike && userCanLike) {
-          message.usersLiked.push(userId)                                       // Ajouter "Je like"
+          message.usersLiked.push(userId)
         }
         if (userWantsToLove && userCanLove) {
-            message.usersLoved.push(userId)                                     // Ajouter "J'adore"
+            message.usersLoved.push(userId)
         }
         if (userWantsToLaught && userCanLaught) {
-            message.usersLaught.push(userId)                                    // Ajouter "Je ris"
+            message.usersLaught.push(userId)
         }
         if (userWantsToBeSurprised && userCanBeSurprised) {
-            message.usersBeSurprised.push(userId)                               // Ajouter "Je suis surpris.e"
+            message.usersBeSurprised.push(userId)
         }
         if (userWantsToBeImpressed && userCanBeImpressed) {
-            message.usersBeImpressed.push(userId)                               // Ajouter "Je suis impressionné.e"
+            message.usersBeImpressed.push(userId)
         }
+
+        // Supression des réactions
         if (userWantsToCancel && notTheFirstVote) {
-          if (!userCanLike) {
-                                                                                // Annuler le like de l'utlisateur
             let index = message.usersLiked.indexOf(userId)
             message.usersLiked.splice(index, 1)
-          }
         }
-        if (userWantsToCancel && notTheFirstVote) {
-            if (!userCanLove) {
-                                                                                  // Annuler le love de l'utlisateur
+        if (userWantsToCancel && notTheFirstVote) {                                   
               let index = message.usersLoved.indexOf(userId)
               message.usersLoved.splice(index, 1)
-            }
         }
-        if (userWantsToCancel && notTheFirstVote) {
-            if (!userCanLaught) {
-                                                                                  // Annuler le love de l'utlisateur
+        if (userWantsToCancel && notTheFirstVote) {                                               
               let index = message.usersLaught.indexOf(userId)
               message.usersLaught.splice(index, 1)
-            }
         }
-        if (userWantsToCancel && notTheFirstVote) {
-            if (!userCanBeSurprised) {
-                                                                                  // Annuler le love de l'utlisateur
+        if (userWantsToCancel && notTheFirstVote) {                                                     
               let index = message.usersBeSurprised.indexOf(userId)
               message.usersBeSurprised.splice(index, 1)
-            }
         }
-        if (userWantsToCancel && notTheFirstVote) {
-            if (!userCanBeImpressed) {
-                                                                                  // Annuler le love de l'utlisateur
+        if (userWantsToCancel && notTheFirstVote) {                                                      
               let index = message.usersBeImpressed.indexOf(userId)
               message.usersBeImpressed.splice(index, 1)
-            }
         }
+
         // Calculer le nombre de réactions
         message.likes = message.usersLiked.length                     
         message.loves = message.usersLoved.length
         message.laught = message.usersLaught.length
         message.beSurprised = message.usersBeSurprised.length
         message.beImpressed = message.usersBeImpressed.lenght
+
+        // Mettre à jour le message avec les nouvelles valeurs
         let newmessage = message;
-        newmessage.save();                                                         // Mettre à jour le message avec les nouvelles valeurs
+        newmessage.save();
   
         return newmessage;
     })
