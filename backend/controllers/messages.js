@@ -43,7 +43,7 @@ exports.modifyMessage = (req, res, next) => {
         ...JSON.parse(sanitize(req.body.message)),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         } : { ...req.body };
-     Message.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
+     Message.modify(req.params.id, { ...messageObject, _id: req.params.id })
         .then(() => res.status(200).json({ message: 'Le message a été modifié !' }))
         .catch((error) => res.status(400).json({ error }));
 };
@@ -61,39 +61,9 @@ exports.deleteMessage = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-/* exports.addLikeDislike = (req, res, next) => {
+/* exports.addReactions = (req, res, next) => {
     Message.findOne(req.params.id)
-        .then(message => {
-            const userId = req.body.userId;
-            let userWantsToLike = (req.body.like === 1);
-            let userWantsToDislike = (req.body.like === -1);
-            let userWantsToCancel = (req.body.like === 0);
-            const userCanLike = (!message.usersLiked.includes(userId));
-            const userCanDislike = (!message.usersDisliked.includes(userId));
-            const notTheFirstVote = (message.usersLiked.includes(userId) || message.usersDisliked.includes(userId));
-
-            if (userWantsToLike && userCanLike) {
-                 message.usersLiked.push(userId)
-            }
-
-            if (userWantsToCancel && notTheFirstVote) {
-                if (userCanLike) {
-                // enlever le like de l'utlisateur
-                let index = message.usersDisliked.indexOf(userId)
-                message.usersDisliked.splice(index, 1)
-                }
-                if (userCanDislike) {
-                // enlever le dislike de l'utilisateur
-                let index = message.usersLiked.indexOf(userId)
-                message.usersLiked.splice(index, 1)
-                }
-            }
-
-            if (userWantsToDislike && userCanDislike) {
-                message.usersDisliked.push(userId)
-            }
-            message.likes = message.usersLiked.length
-            message.dislikes = message.usersDisliked.length
+        À METTRE EN PLACE !!
             let newmessage = message;
             newmessage.save();
 
