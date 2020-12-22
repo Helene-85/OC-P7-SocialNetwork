@@ -18,11 +18,11 @@
                     {{ message }}
                 </p>
                 <div class="flex ml-3 mt-4 mb-4 space-x-3 text-green-700">
-                    <i class="far fa-thumbs-up"></i>
-                    <i class="far fa-heart"></i>
-                    <i class="far fa-grin-squint-tears"></i>
-                    <i class="far fa-surprise"></i>
-                    <i class="far fa-grin-stars"></i>
+                    <a href="#"><span><i class="far fa-thumbs-up"></i> 0</span></a>
+                    <a href="#"><span><i class="far fa-heart"></i> 0</span></a>
+                    <a href="#"><span><i class="far fa-grin-squint-tears"></i> 0</span></a>
+                    <a href="#"><span><i class="far fa-surprise"></i> 0</span></a>
+                    <a href="#"><span><i class="far fa-grin-stars"></i> 0</span></a>
                 </div>
                 <form class="w-full max-w-xl bg-white rounded-lg px-4">
                     <div class="w-full md:w-full px-3 mb-2 mt-2">
