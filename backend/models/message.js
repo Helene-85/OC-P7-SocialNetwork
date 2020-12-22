@@ -19,8 +19,36 @@ Message.create = (newMessage, result) => {
     })
 };
 
+Message.findAll = (newMessage, result) => {
+    db.query("SELECT * FROM messages", (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, {
+                id:res.id,
+                ...newMessage
+            })
+        }
+    })
+};
+
+Message.findOne = (id, result) => {
+    db.query("SELECT * FROM messages WHERE id=" + id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, {
+                id:res.id,
+                ...newMessage
+            })
+        }
+    })
+};
+
 Message.modify = (newMessage, result) => {
-    db.query("UPDATE INTO messages SET ?", newMessage, (err, res) => {
+    db.query("UPDATE INTO messages WHERE id=" + id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -34,7 +62,7 @@ Message.modify = (newMessage, result) => {
 };
 
 Message.delete = (newMessage, result) => {
-    db.query("DELETE INTO messages SET ?", newMessage, (err, res) => {
+    db.query("DELETE INTO messages WHERE id=" + id, (err, res) => {
         if(err) {
             result(err, null);
             return;

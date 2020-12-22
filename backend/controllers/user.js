@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');                                               // Importation du package bcrytp
 const jwt = require('jsonwebtoken');                                            // Importation du package jasonwebtoken
 const User = require('../models/user');                                         // Importation modèle User
+const fs = require('fs');
 
 // Inscription
 exports.signup = (req, res, next) => {
@@ -69,7 +70,10 @@ exports.delete = (req, res, next) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateur non supprimé' });
     }
-    res.status(200).json({ message: 'Utilisateur supprimé' });
+    fs.unlink(`images/${filename}`, () => {
+      message.deleteOne(req.params.id)
+      .then (() => res.status(200).json({ message: 'Utilisateur supprimé' }));
+    })
+    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
   })
-  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
