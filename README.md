@@ -1,10 +1,10 @@
 # Projet 7 - Openclassrooms - parcours [Développeur.se Web Fullstack](https://openclassrooms.com/fr/paths/185-developpeur-web)
 
-📌 Créer un réseau social d'entreprise pour les employés de la société (fictive) Groupomania
+📌  Créer un réseau social d'entreprise pour les employés de la société (fictive) Groupomania
 
 ## Scénario du projet
 
-📌 Développement d'un réseau social d'entreprise.
+📌  Développement d'un réseau social d'entreprise.
 
 Mon rôle est de développer les parties **frontend** et **backend** de l'application.
 
@@ -17,9 +17,9 @@ Mon rôle est de développer les parties **frontend** et **backend** de l'applic
 
 ### Progression
 
-En cours de création 🚀
+En cours de création  🚀
 
-### Visual Studio Code 🖥️
+### Visual Studio Code  🖥️
 
 ## Backend
 
