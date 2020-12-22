@@ -4,14 +4,10 @@ const path = require('path');                         // Importation du package 
 const helmet = require('helmet');                     // Importation du package helmet
 
 
-/* const messageRoutes = require("./routes/messages"); */
+const messageRoutes = require("./routes/messages");
 const userRoutes = require("./routes/user");
 
 const app = express();
-
-app.use(bodyParser.json());                                                // Définition de la fonction json comme middleware global
-
-app.use('/images', express.static(path.join(__dirname, 'images')));        // Gestiion de la source de manière statique grâce à Express
 
 //CORS error
 app.use((req, res, next) => {
@@ -21,9 +17,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(helmet());                                                         // Activation de la protection Helmet : équivaut à 11 protections
-
-/* app.use("/api/messages", messageRoutes);   */                                 // L'application utilise le endpoint /api/messages pour les routes messageRoutes
-app.use("/api/auth", userRoutes);                               // L'application utilise le endpoint /api/auth pour les routes userRoutes
-
+app.use(bodyParser.json());                                                // Définition de la fonction json comme middleware global
+app.use('/images', express.static(path.join(__dirname, 'images')));        // Gestiion de la source de manière statique grâce à Express
+app.use(helmet());                                                          // Activation de la protection Helmet : équivaut à 11 protections
+app.use("/api/messages", messageRoutes);                                    // L'application utilise le endpoint /api/messages pour les routes messageRoutes
+app.use("/api/auth", userRoutes);                                           // L'application utilise le endpoint /api/auth pour les routes userRoutes
 module.exports = app;
