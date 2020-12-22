@@ -33,7 +33,7 @@ User.findOne = (email, result) => {
 };
 
 User.modify = (newUser, result) => {
-    db.query("UPDATE INTO users SET ?", newUser, (err, res) => {
+    db.query("UPDATE INTO users WHERE id=" + id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -47,7 +47,7 @@ User.modify = (newUser, result) => {
 };
 
 User.delete = (newUser, result) => {
-    db.query("DELETE INTO users SET ?", newUser, (err, res) => {
+    db.query("DELETE INTO users WHERE id=" + id, (err, res) => {
         if(err) {
             result(err, null);
             return;
