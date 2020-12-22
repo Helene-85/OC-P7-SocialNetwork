@@ -61,7 +61,7 @@ exports.deleteMessage = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-exports.addLikeDislike = (req, res, next) => {
+exports.addReactions = (req, res, next) => {
     Message.findOne({ _id: req.params.id })
     .then(message => {
         const userId = req.body.userId;
