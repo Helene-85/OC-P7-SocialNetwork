@@ -22,6 +22,16 @@ User.create = (newUser, result) => {
     })
 };
 
+User.findOne = (email, result) => {
+    db.query("SELECT * FROM users WHERE email=" + email, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } 
+        result(null, res[0])           // Renvoie un tableau avec un seul élément
+    })
+};
+
 User.modify = (newUser, result) => {
     db.query("UPDATE INTO users SET ?", newUser, (err, res) => {
         if(err) {
