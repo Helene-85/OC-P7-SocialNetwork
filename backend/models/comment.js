@@ -19,7 +19,7 @@ Commentaire.create = (newCommentaire, result) => {
 };
 
 Commentaire.modify = (newCommentaire, result) => {
-    db.query("UPDATE INTO comments SET ?", newCommentaire, (err, res) => {
+    db.query("UPDATE INTO comments WHERE id=" + id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -33,7 +33,7 @@ Commentaire.modify = (newCommentaire, result) => {
 };
 
 Commentaire.delete = (newCommentaire, result) => {
-    db.query("DELETE INTO comments SET ?", newCommentaire, (err, res) => {
+    db.query("DELETE INTO comments WHERE id=" + id, (err, res) => {
         if(err) {
             result(err, null);
             return;

@@ -1,48 +1,31 @@
-const Comment = require('../models/comment');
-const fs = require('fs');
+const Commentaire = require('../models/comment');
 
-// Mise en place CRUD
-exports.createComment = (req, res, next) => {                                       // CREATE
-    const commentObject = JSON.parse(req.body.comment);
-    delete commentObject._id;
-    const comment = new comment({
-        ...commentObject,
-    });
-    comment.save()
-        .then(() => res.status(201).json({ message: 'Nouveau commentaire posté !' }))
-        .catch((error) => res.status(400).json({ error }));
+exports.createComment = (req, res, next) => {
+    Commentaire.create(commentaire, (err, data) => {
+        if(err) {
+            return res.status(400).json({ message: "Échec de la créstion du commentaire" });
+          } 
+          res.send(data);
+    })
+    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
-exports.getAllComments = (req, res, next) => {                                      // READ
-    Comment.find()
-        .then((comments) => res.status(200).json(comments))
-        .catch((error) => res.status(400).json({ error }));
+exports.modifyComment = (req, res, next) => {
+    commentaire.modify(req.body.comment, (err, data) => {
+        if(err) {
+          return res.status(400).json({ message: 'Commentaire non modifié' });
+        } 
+        res.send(data);
+      })
+    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
-exports.getOneComment = (req, res, next) => {
-    Comment.findOne({_id: req.params.id})
-        .then((comment) => {res.status(200).json(comment);
-        })
-        .catch((error) => {res.status(404).json({ error: error});
-        });
-};
-
-exports.modifyComment = (req, res, next) => {                                       // UPDATE
-    const commentObject = req.file ? 
-        {
-        ...JSON.parse(sanitize(req.body.comment)),
-        } : { ...req.body };
-     Comment.updateOne({ _id: req.params.id }, { ...commentObject, _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Le commentaire a été modifié !' }))
-        .catch((error) => res.status(400).json({ error }));
-};
-
-exports.deleteComment = (req, res, next) => {                                       // DELETE
-    comment.findOne({ _id: req.params.id })
-        .then(comment => {
-            comment.deleteOne({ _id: req.params.id })
-            .then(() => res.status(200).json({ message: 'Le commentaire a été supprimé !'}))
-            .catch((error) => res.status(400).json({ error }));
-        })
-        .catch(error => res.status(500).json({ error }));
+exports.deleteComment = (req, res, next) => {
+    commentaire.delete(req.body.comment, (err, data) => {
+        if(err) {
+          return res.status(400).json({ message: 'Commentaire non supprimé' });
+        } 
+        res.send(data);
+      })
+    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
