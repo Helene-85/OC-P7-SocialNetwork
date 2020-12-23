@@ -23,12 +23,12 @@ User.create = (newUser, result) => {
 };
 
 User.findOne = (email, result) => {
-    db.query("SELECT * FROM users WHERE email=" + email, (err, res) => {
+    db.query("SELECT * FROM users WHERE email=?", email, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } 
-        result(null, res[0])           // Renvoie un tableau avec un seul élément
+        result(null, res[0])
     })
 };
 
@@ -38,12 +38,13 @@ User.findAll = (req, result) => {
             result(err, null);
             return;
         } 
-        result(null, res[])           // Renvoie un tableau avec tous les éléments
+        result(null, res)
     })
 };
 
 User.modify = (newUser, result) => {
-    db.query("UPDATE INTO users WHERE id=" + id, (err, res) => {
+    db.query("UPDATE users SET pseudo=?, email=?, password=?, profilPic=?, isAdmin=? WHERE id=?", 
+    [newUser.pseudo, newUser.email, newUser.password, newUser.profilPic, newUser.isAdmin], id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -56,16 +57,13 @@ User.modify = (newUser, result) => {
     })
 };
 
-User.delete = (newUser, result) => {
-    db.query("DELETE INTO users WHERE id=" + id, (err, res) => {
+User.delete = (id, result) => {
+    db.query("DELETE users WHERE id=?", id, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } else {
-            result(null, {
-                id:res.id,
-                ...newUser
-            })
+            result(null, res)
         }
     })
 };

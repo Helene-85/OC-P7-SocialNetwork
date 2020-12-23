@@ -1,18 +1,22 @@
 const Message = require('../models/message');
 const fs = require('fs');
 
+// Créer un message
 exports.createMessage = (req, res, next) => {
-    const messageObject = JSON.parse(req.body.message);
-    delete messageObject._id;
-    const message = new message({
-        ...messageObject,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    const message = ({
+        content: '',
+        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    message.save()
-        .then(() => res.status(201).json({ message: 'Nouveau message créé !' }))
-        .catch((error) => res.status(400).json({ error }));
+    message.create(message, (err, data) => {
+        if(err) {
+          return res.status(400).json({ message: 'Impossible de créer le message' });
+        } 
+        res.send(data);
+      })
+    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
+// Récupérer tous les messages
 exports.getAllMessages = (req, res, next) => {
     Message.findAll(req.body.content)
     if(err) {
@@ -25,6 +29,7 @@ exports.getAllMessages = (req, res, next) => {
     .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
+// Récupérer un message
 exports.getOneMessage = (req, res, next) => {
     Message.findOne(req.params.id)
     if(err) {
@@ -37,17 +42,21 @@ exports.getOneMessage = (req, res, next) => {
     .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
-exports.modifyMessage = (req, res, next) => {
-    const messageObject = req.file ? 
-        {
-        ...JSON.parse(sanitize(req.body.message)),
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        } : { ...req.body };
-     Message.modify(req.params.id, { ...messageObject, _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Le message a été modifié !' }))
-        .catch((error) => res.status(400).json({ error }));
-};
+// Modifier un message
+exports.updateMessage = (req, res, next) => {
+    Message.modify(req.body.content, req.body.image, (err, result) => {
+      if(err) {
+        return res.status(400).json({ message: 'Modification non effectuée' });
+      }
+      res.status(200).json({
+        content: result.content,
+        image: result.image
+      })
+    })
+    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
+  };
 
+  // Supprimer un message
 exports.deleteMessage = (req, res, next) => {
     Message.delete(req.params.id)
         .then(message => {

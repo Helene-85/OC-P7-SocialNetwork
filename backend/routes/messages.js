@@ -8,7 +8,8 @@ router.get('/', auth, messageControllers.getAllMessages);
 router.get('/:id', auth, messageControllers.getOneMessage);
 router.post('/', auth, multer, messageControllers.createMessage);
 router.post('/:id/reactions', auth, messageControllers.addReactions);
-router.put('/:id', auth, multer, messageControllers.modifyMessage);
+router.put('/:id', auth, multer, messageControllers.updateMessage);
 router.delete('/:id', auth, messageControllers.deleteMessage);
+router.post('/:id/reactions', auth, messageControllers.addReactions);
 
 module.exports = router;

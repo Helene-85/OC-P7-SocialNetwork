@@ -19,7 +19,8 @@ Commentaire.create = (newCommentaire, result) => {
 };
 
 Commentaire.modify = (newCommentaire, result) => {
-    db.query("UPDATE INTO comments WHERE id=" + id, (err, res) => {
+    db.query("UPDATE comments SET comment=? WHERE id=?",
+    [newCommentaire=commentaire.comment] ,id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -32,16 +33,13 @@ Commentaire.modify = (newCommentaire, result) => {
     })
 };
 
-Commentaire.delete = (newCommentaire, result) => {
-    db.query("DELETE INTO comments WHERE id=" + id, (err, res) => {
+Commentaire.delete = (id, result) => {
+    db.query("DELETE comments WHERE id=?", id, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } else {
-            result(null, {
-                id:res.id,
-                ...newCommentaire
-            })
+            result(null, res)
         }
     })
 };
