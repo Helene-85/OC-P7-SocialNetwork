@@ -77,3 +77,21 @@ exports.delete = (req, res, next) => {
     .catch(error => res.status(500).json({ error : "Erreur serveur" }));
   })
 };
+
+// Afficher tous les users pour la pages Membres
+
+exports.getAllUsers = (req, res, next) => {
+  User.findAll(req.body.email, (err, result) => {
+    if(err) {
+      return res.status(400).json({ message: 'Utilisateurs non trouvés' });
+    } 
+      res.status(200).json({
+        pseudo: result.pseudo,
+        email: result.email,
+        password: result.password,
+        profilPic: result.profilPic,
+        isAdmin: result.isAdmin
+      })
+    })
+  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
+};

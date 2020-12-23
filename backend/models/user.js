@@ -32,6 +32,16 @@ User.findOne = (email, result) => {
     })
 };
 
+User.findAll = (req, result) => {
+    db.query("SELECT * FROM users", (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } 
+        result(null, res[])           // Renvoie un tableau avec tous les éléments
+    })
+};
+
 User.modify = (newUser, result) => {
     db.query("UPDATE INTO users WHERE id=" + id, (err, res) => {
         if(err) {
