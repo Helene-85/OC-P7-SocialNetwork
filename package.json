@@ -1,0 +1,19 @@
+{
+  "name": "p7-groupomania",
+  "version": "1.0.0",
+  "description": "📌  Créer un réseau social d'entreprise pour les employés de la société (fictive) Groupomania",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Helene-mb/OC-P7-SocialNetwork.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Helene-mb/OC-P7-SocialNetwork/issues"
+  },
+  "homepage": "https://github.com/Helene-mb/OC-P7-SocialNetwork#readme"
+}
