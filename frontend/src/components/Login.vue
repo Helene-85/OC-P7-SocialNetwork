@@ -40,7 +40,9 @@
             </div>
             <router-link to="/feed">
                 <div class="flex w-full">
-                    <button type="submit" class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in">
+                    <button type="submit" class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
+                    @submit.prevent="connect"
+                    >
                         <span class="mr-2 uppercase">Se connecter</span>
                         <span>
                         <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,13 +70,21 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
     name: 'login',
     data() {
         return {
             
         };
+    },
+    methods: {
+        connect() {
+            axios.post('/login', {req.body.email, req.body.password})
+            .then(res => {
+            .catch(error => console.log('Email ou mot de passe incorrect'))
+            })
+        }
     },
 }
 </script>
