@@ -5,22 +5,24 @@ const fs = require('fs');
 
 // Inscription
 exports.signup = (req, res, next) => {
-  console.log(req);
+  console.log('a');
   bcrypt.hash(req.body.password, 10)                                            // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
-    .then(hash => {
+  .then(hash => {
       const user = new User({
         pseudo: req.body.pseudo,
         email: req.body.email,
         password: hash
       });
+      console.log('b');
       user.create(user, (err, data) => {
         if(err) {
           return res.status(400).json({ message: 'Impossible de créer l\'utilisateur' });
         } 
         res.send(data);
       })
+      console.log('c');
     })
-    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
+  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
 // Connexion

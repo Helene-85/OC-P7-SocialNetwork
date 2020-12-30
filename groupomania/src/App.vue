@@ -12,10 +12,7 @@ export default {
   name: 'App',
   components: {
     'header-top': Header
-  },
-  data() {
-
-  },
+  }
 }
 </script>
 
