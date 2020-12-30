@@ -29,6 +29,7 @@
                   id="text"
                   type="text"
                   placeholder="Mon pseudo"
+                  v-model="pseudo"
                 />
               </div>
               <div class="mb-4">
@@ -42,6 +43,7 @@
                   id="email"
                   type="email"
                   placeholder="xxx@yyy.zzz"
+                  v-model="email"
                 />
               </div>
               <div class="mb-4 md:flex md:justify-between">
@@ -56,6 +58,7 @@
                     id="password"
                     type="password"
                     placeholder="******************"
+                    v-model="password"
                   />
                   <p class="text-xs italic text-red-500">
                     Merci de choisir un mot de passe
@@ -72,13 +75,15 @@
                     id="c_password"
                     type="password"
                     placeholder="******************"
+                    v-model="confirm_password"
                   />
                 </div>
               </div>
               <div class="mb-6 text-center">
                 <button
-                  @click="signUp"
-                  type="submit"
+                  :disabled="!isValid"
+                  @click.prevent="signUp"
+                  type="button"
                   class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span class="mr-2 uppercase">S'inscrire</span>
@@ -118,15 +123,36 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
-  name: 'singnup',
+  name: 'signup',
+  data() {
+    return {
+      pseudo: '',
+      email: '',
+      password: '',
+      confirm_password: ''
+    }
+  },
+  computed: {
+    isValid() {
+      if (this.pseudo.length < 3) {
+        return false
+      }
+      if (this.password != this.confirm_password) {
+        return false
+      }
+      return true;
+    }
+  },
   methods: {
     signUp() {
       const payload = {
         pseudo: this.pseudo,
         email: this.email,
-        password: this.password
+        password: this.password,
+        confirm_password: this.confirm_password
       }
       axios
         .post('http://localhost:3000/api/auth/signup', payload)

@@ -1,7 +1,6 @@
 <template>
   <div class="bg-gray-900" id="app">
     <header-top></header-top>
-    <button @click="test">TEST</button>
     <router-view></router-view>
   </div>
 </template>
@@ -15,9 +14,7 @@ export default {
     'header-top': Header
   },
   data() {
-    return {
-      message: 'abdc'
-    }
+
   },
 }
 </script>
