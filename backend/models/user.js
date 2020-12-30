@@ -5,7 +5,7 @@ const User = function(user) {
     this.email=user.email,
     this.password=user.password,
     this.profilPic=user.profilPic,
-    this.isAdmin=user.isAdmin
+    this.isAdmin=!!user.isAdmin // renvoie un boolean deux fois inversé
 }
 
 User.create = (newUser, result) => {

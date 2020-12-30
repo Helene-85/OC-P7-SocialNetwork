@@ -5,14 +5,13 @@ const fs = require('fs');
 
 // Inscription
 exports.signup = (req, res, next) => {
+  console.log(req);
   bcrypt.hash(req.body.password, 10)                                            // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
     .then(hash => {
       const user = new User({
-        pseudo: '',
+        pseudo: req.body.pseudo,
         email: req.body.email,
-        password: hash,
-        profilPic: '',
-        isAdmin: 0
+        password: hash
       });
       user.create(user, (err, data) => {
         if(err) {

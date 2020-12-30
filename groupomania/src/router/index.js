@@ -1,69 +1,75 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Account from "../views/Account.vue";
-import Feed from "../views/Feed.vue";
-import Users from "../views/Users.vue";
-import Header from "../components/Header.vue";
-import Login from "../components/Login.vue";
-import Message from "../components/Message.vue";
-import Signin from "../components/Signin.vue";
-import Welcome from "../components/Welcome.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Account from '../views/Account.vue'
+import Feed from '../views/Feed.vue'
+import Users from '../views/Users.vue'
+import Header from '../components/Header.vue'
+import Login from '../components/Login.vue'
+import Message from '../components/Message.vue'
+import VirginMessage from '../components/VirginMessage.vue'
+import Signup from '../components/Signup.vue'
+import Welcome from '../components/Welcome.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     component: Home
   },
   {
-    path: '/Account', 
-    name: "Account",
+    path: '/Account',
+    name: 'Account',
     component: Account
   },
   {
-    path: '/Users', 
-    name: "Users",
+    path: '/Users',
+    name: 'Users',
     component: Users
   },
   {
     path: '/feed',
-    name: "Feed", 
+    name: 'Feed',
     component: Feed
   },
   {
     path: '/message',
-    name: "Message", 
+    name: 'Message',
     component: Message
   },
   {
+    path: '/virginMessage',
+    name: 'VirginMessage',
+    component: VirginMessage
+  },
+  {
     path: '/login',
-    name: "Login", 
+    name: 'Login',
     component: Login
   },
   {
     path: '/header',
-    name: "Header", 
+    name: 'Header',
     component: Header
   },
   {
-    path: '/signin',
-    name: "Signin", 
-    component: Signin
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
   },
   {
     path: '/welcome',
-    name: "Welcome", 
+    name: 'Welcome',
     component: Welcome
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router
