@@ -8,7 +8,6 @@
 
 <script>
 import Header from './components/Header'
-import axios from 'axios'
 
 export default {
   name: 'App',
@@ -20,14 +19,6 @@ export default {
       message: 'abdc'
     }
   },
-  methods: {
-    test() {
-      axios.get('http://localhost:3000/api/auth/signup').then(res =>{
-      alert('FORMIDABLE!')
-      console.log(res);
-      })
-    }
-  }
 }
 </script>
 

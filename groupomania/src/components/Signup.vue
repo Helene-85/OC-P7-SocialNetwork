@@ -26,8 +26,8 @@
                 >
                 <input
                   class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
-                  id="email"
-                  type="email"
+                  id="text"
+                  type="text"
                   placeholder="Mon pseudo"
                 />
               </div>
@@ -121,25 +121,25 @@
 import axios from 'axios'
 export default {
   name: 'singnup',
-   methods: {
+  methods: {
     signUp() {
       const payload = {
         pseudo: this.pseudo,
         email: this.email,
         password: this.password
       }
-      axios.post('http://localhost:3000/api/auth/signup', payload)
-      .then((res) =>{
-      console.log(response);
-      alert("Inscription réussie !")
-      })
-      .catch(() => {
-        console.log("Échec de l'inscription");
-      })
+      axios
+        .post('http://localhost:3000/api/auth/signup', payload)
+        .then(res => {
+          console.log(res)
+          alert('Inscription réussie !')
+        })
+        .catch(() => {
+          console.log("Échec de l'inscription")
+        })
     }
   }
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

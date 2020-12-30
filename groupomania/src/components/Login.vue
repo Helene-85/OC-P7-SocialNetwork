@@ -97,6 +97,7 @@
         <router-link to="/feed">
           <div class="flex w-full">
             <button
+              @click="login"
               type="submit"
               class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
               @submit.prevent="connect"
@@ -122,7 +123,7 @@
         </router-link>
       </form>
     </div>
-    <router-link to="/signin">
+    <router-link to="/signup">
       <div class="flex justify-center items-center mt-6">
         <a
           href="#"
@@ -152,12 +153,30 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'login',
   data() {
     return {}
   },
-  methods: {}
+  methods: {
+    login() {
+      const payload = {
+        email: this.email,
+        password: this.password
+      }
+      axios
+        .post('http://localhost:3000/api/auth/login', payload)
+        .then(res => {
+          console.log(res)
+          alert("Bienvenue sur Groupo'link !")
+        })
+        .catch(() => {
+          console.log('Échec de la connexion')
+        })
+    }
+  }
 }
 </script>
 
