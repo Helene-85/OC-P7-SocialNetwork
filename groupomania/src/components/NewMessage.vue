@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  name: 'virginMessage',
+  name: 'emptyMessage',
   data() {
     return {
       pseudo: 'Pseudo'

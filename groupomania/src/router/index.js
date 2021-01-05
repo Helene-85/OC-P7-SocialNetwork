@@ -7,7 +7,7 @@ import Users from '../views/Users.vue'
 import Header from '../components/Header.vue'
 import Login from '../components/Login.vue'
 import Message from '../components/Message.vue'
-import VirginMessage from '../components/VirginMessage.vue'
+import NewMessage from '../components/NewMessage.vue'
 import Signup from '../components/Signup.vue'
 import Welcome from '../components/Welcome.vue'
 
@@ -40,9 +40,9 @@ const routes = [
     component: Message
   },
   {
-    path: '/virginMessage',
-    name: 'VirginMessage',
-    component: VirginMessage
+    path: '/NewMessage',
+    name: 'NewMessage',
+    component: NewMessage
   },
   {
     path: '/login',

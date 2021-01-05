@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto px-4 py-8 max-w-xl my-20">
+  <div class="mx-auto px-4 py-8 max-w-xl my-2">
     <div class="bg-white rounded-lg mb-6 tracking-wide">
       <div class="md:flex-shrink-0">
         <img

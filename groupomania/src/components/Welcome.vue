@@ -1,5 +1,6 @@
 <template>
-  <div class="container mx-auto">
+  <div class="min-h-screen flex flex-col items-center mt-24 bg-gray-900">
+    <div class="container mx-auto">
     <div class="flex justify-center px-6 my-12">
       <div class="w-full xl:w-3/4 lg:w-11/12 flex">
         <div
@@ -59,6 +60,7 @@
           </form>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>

@@ -2,18 +2,18 @@
   <div
     class="min-h-screen flex flex-col items-center justify-center bg-gray-900"
   >
-    <virginMessage></virginMessage>
+    <newMessage></newMessage>
     <message></message>
   </div>
 </template>
 
 <script>
-import VirginMessage from '@/components/VirginMessage.vue'
+import NewMessage from '@/components/NewMessage.vue'
 import Message from '@/components/Message.vue'
 export default {
   name: 'feed',
   components: {
-    virginMessage: VirginMessage,
+    newMessage: NewMessage,
     message: Message
   },
   data() {

@@ -2,7 +2,7 @@
   <div class="container mx-auto border-b-2 border-green-400 bg-gray-900">
     <nav class="flex items-center justify-between flex-wrap p-6">
       <div class="flex items-center flex-no-shrink text-white mr-6">
-        <router-link to="/">
+        <router-link to="/welcome">
           <svg
             data-v-5f19e91b=""
             xmlns="http://www.w3.org/2000/svg"

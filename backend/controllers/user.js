@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
       const user = new User({
         pseudo: req.body.pseudo,
         email: req.body.email,
-        password: hash
+        password: hash,
       });
       console.log('b');
       user.create(user, (err, data) => {
@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
       })
       console.log('c');
     })
-  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
+  .catch(error => res.status(500).json({ error }));
 };
 
 // Connexion
