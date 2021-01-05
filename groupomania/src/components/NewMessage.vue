@@ -16,7 +16,6 @@
             </div>
             <h2 class="text-sm tracking-tighter text-gray-900">
               <a href="#">{{ pseudo }}</a>
-              <span class="text-gray-600">{{ date }}</span>
             </h2>
           </div>
           <form class="w-full max-w-xl bg-white rounded-lg px-4 py-1">
@@ -25,6 +24,7 @@
                 class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
                 name="body"
                 placeholder="Écrivez votre message"
+                v-model="content"
                 required
               ></textarea>
             </div>
@@ -39,7 +39,8 @@
             </div>
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
               <button
-                type="submit"
+                type="button"
+                @click.prevent="postMessage"
                 class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
               >
                 <span class="mr-2 uppercase">Envoyer</span>
@@ -68,14 +69,34 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'emptyMessage',
   data() {
     return {
-      pseudo: 'Pseudo'
+      pseudo: '',
+      content: '',
+      image: ''
     }
   },
-  components: {}
+  methods: {
+    postMessage() {
+      const payload = {
+        content: this.content,
+        image: this.image
+      }
+      axios
+        .post('http://localhost:3000/api/auth/messages', payload)
+        .then(res => {
+          console.log(res)
+          alert('Message envoyé !')
+        })
+        .catch(() => {
+          console.log("Échec de l'envoi")
+        })
+    }
+  }
 }
 </script>
 

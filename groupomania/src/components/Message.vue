@@ -48,12 +48,13 @@
               class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
               name="body"
               placeholder="Écrivez un commentaire"
+              v-model="comment"
               required
             ></textarea>
           </div>
           <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
             <button
-              type="submit"
+              type="button"
               class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
             >
               <span class="mr-2 uppercase">Envoyer</span>
@@ -81,14 +82,37 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'message',
   data() {
     return {
-      message:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora reiciendis ad architecto at aut placeat quia, minus dolor praesentium officia maxime deserunt porro amet ab debitis deleniti modi soluta similique...',
-      pseudo: 'Jane Doe',
-      date: '00/00/0000'
+      message:'',
+      profilPic: '',
+      pseudo: '',
+      date: '',
+      comment: ''
+    }
+  },
+  methods: {
+    getMessage() {
+      const payload = {
+        message: this.message,
+        profilPic: this.profilPic,
+        pseudo: this.pseudo,
+        date: this.date,
+        comment: this.comment
+      }
+      axios
+        .get('http://localhost:3000/api/auth/messages/:id', payload)
+        .then(res => {
+          console.log(res)
+          alert('Message bien reçu !')
+        })
+        .catch(() => {
+          console.log("Échec de la réception")
+        })
     }
   }
 }

@@ -5,7 +5,7 @@
       <div class="w-full xl:w-3/4 lg:w-11/12 flex">
         <div
           class="w-full h-auto bg-gray-400 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
-          style="background-image: url('https://cdn.pixabay.com/photo/2016/01/19/17/42/buildings-1149851_960_720.jpg')"
+          style="background-image: url('https://images.unsplash.com/photo-1604882355165-4450cb6155b2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80')"
         ></div>
         <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
           <div
