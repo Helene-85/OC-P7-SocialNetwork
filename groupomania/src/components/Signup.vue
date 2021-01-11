@@ -60,7 +60,7 @@
                     placeholder="******************"
                     v-model="password"
                   />
-                  <p class="text-xs italic text-red-500">
+                  <p class="text-xs italic text-green-400">
                     Merci de choisir un mot de passe
                   </p>
                 </div>
@@ -77,6 +77,9 @@
                     placeholder="******************"
                     v-model="confirm_password"
                   />
+                  <p class="text-xs italic text-green-400">
+                    Le mot de passe doit être identique
+                  </p>
                 </div>
               </div>
               <div class="mb-6 text-center">
@@ -132,7 +135,8 @@ export default {
       pseudo: '',
       email: '',
       password: '',
-      confirm_password: ''
+      confirm_password: '',
+      errors: []
     }
   },
   computed: {
