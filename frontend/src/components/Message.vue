@@ -82,13 +82,13 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
   name: 'message',
   data() {
     return {
-      message:'',
+      message: '',
       profilPic: '',
       pseudo: '',
       date: '',
@@ -111,7 +111,7 @@ export default {
           alert('Message bien reçu !')
         })
         .catch(() => {
-          console.log("Échec de la réception")
+          console.log('Échec de la réception')
         })
     }
   }

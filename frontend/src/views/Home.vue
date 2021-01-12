@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="min-h-screen flex flex-col items-center bg-gray-900"
-  >
+  <div class="min-h-screen flex flex-col items-center bg-gray-900">
     <login></login>
   </div>
 </template>
