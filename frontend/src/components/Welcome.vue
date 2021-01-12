@@ -11,7 +11,7 @@
             class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none"
           >
             <div
-              class="font-medium text-center text-xl sm:text-2xl uppercase text-gray-800 mt-3 mb-14"
+              class="font-medium text-center text-xl sm:text-2xl uppercase text-green-700 mt-3 mb-14"
             >
               Bienvenue sur Groupo'Link
             </div>
@@ -25,7 +25,7 @@
               </div>
             </div>
             <form class="px-8 py-8 mb-4 bg-white rounded">
-              <div class="text-center">
+              <div class="text-center text-green-800">
                 <p class="mb-10">
                   L'admin veille au respect des individus et de l'entreprise.
                 </p>
