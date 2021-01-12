@@ -5,22 +5,22 @@ const fs = require('fs');
 
 // Inscription
 exports.signup = (req, res, next) => {
-  console.log('a');
+  console.log('abc', req.body);
   bcrypt.hash(req.body.password, 10)                                            // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
   .then(hash => {
+    console.log(hash);
       const user = new User({
         pseudo: req.body.pseudo,
         email: req.body.email,
         password: hash,
       });
-      console.log('b');
-      user.create(user, (err, data) => {
+      console.log('user', user);
+      User.create(user, (err, data) => {
         if(err) {
           return res.status(400).json({ message: 'Impossible de créer l\'utilisateur' });
         } 
         res.send(data);
       })
-      console.log('c');
     })
   .catch(error => res.status(500).json({ error }));
 };
@@ -31,6 +31,7 @@ exports.login = (req, res, next) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } 
+    console.log(result, req.body.password);
     bcrypt.compare(req.body.password, result.password)
     .then(valid => {
       if(!valid) {
@@ -58,7 +59,7 @@ exports.login = (req, res, next) => {
 };
 
 // Récupérer tous les utilisateurs
-exports.getAllUsers = (req, res, next) => {
+/* exports.getAllUsers = (req, res, next) => {
   User.findAll(req.body.email, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateurs non trouvés' });
@@ -103,4 +104,4 @@ exports.deleteUser = (req, res, next) => {
       });
     })
     .catch(error => res.status(500).json({ error }));
-};
+}; */

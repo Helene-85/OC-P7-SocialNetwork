@@ -153,8 +153,7 @@ export default {
       const payload = {
         pseudo: this.pseudo,
         email: this.email,
-        password: this.password,
-        confirm_password: this.confirm_password
+        password: this.password
       }
       axios
         .post('http://localhost:3000/api/auth/signup', payload)

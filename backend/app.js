@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());                                                // Définition de la fonction json comme middleware global
+app.use(bodyParser.urlencoded({extended: true}));                           // content-type: application/x-www-form-urlencoded
 app.use('/images', express.static(path.join(__dirname, 'images')));        // Gestiion de la source de manière statique grâce à Express
 app.use(helmet());                                                          // Activation de la protection Helmet : équivaut à 11 protections
 app.use("/api/messages", messageRoutes);                                    // L'application utilise le endpoint /api/messages pour les routes messageRoutes

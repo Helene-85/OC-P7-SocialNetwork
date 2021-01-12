@@ -5,7 +5,7 @@ const User = function(user) {
     this.email=user.email,
     this.password=user.password,
     this.profilPic=user.profilPic,
-    this.isAdmin=!!user.isAdmin // renvoie un boolean deux fois inversé
+    this.isAdmin=!!user.isAdmin
 }
 
 User.create = (newUser, result) => {
@@ -31,7 +31,7 @@ User.findOne = (email, result) => {
         result(null, res[0])
     })
 };
-
+/*
 User.findAll = (req, result) => {
     db.query("SELECT * FROM users", (err, res) => {
         if(err) {
@@ -67,3 +67,6 @@ User.delete = (id, result) => {
         }
     })
 };
+ */
+
+ module.exports = User;
