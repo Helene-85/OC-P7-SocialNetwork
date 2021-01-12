@@ -42,6 +42,7 @@
             </div>
 
             <input
+              v-model="email"
               id="email"
               type="email"
               name="email"
@@ -77,6 +78,7 @@
               </span>
             </div>
             <input
+              v-model="password"
               id="password"
               type="password"
               name="password"
@@ -158,7 +160,10 @@ import axios from 'axios'
 export default {
   name: 'login',
   data() {
-    return {}
+    return {
+      email: '',
+      password: ''
+    }
   },
   methods: {
     login() {

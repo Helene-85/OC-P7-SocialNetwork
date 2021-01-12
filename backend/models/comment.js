@@ -43,3 +43,5 @@ Commentaire.delete = (id, result) => {
         }
     })
 };
+
+module.exports = Commentaire;

@@ -66,3 +66,5 @@ Message.delete = (id, result) => {
         }
     })
 };
+
+module.exports = Message;
