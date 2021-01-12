@@ -62,7 +62,7 @@
               Groupo'Link
             </a>
           </router-link>
-          <router-link to="/Account">
+          <router-link to="/Account/:id">
             <a
               href="#responsive-header"
               class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"

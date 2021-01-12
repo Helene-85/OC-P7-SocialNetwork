@@ -1,8 +1,5 @@
 <template>
   <div class="w-full">
-    <h1 class="mt-12 text-2xl text-center text-white">
-      Bienvenue <span class="text-green-500 uppercase">{{ pseudo }}</span> !
-    </h1>
     <div class="mx-auto px-4 py-8 max-w-xl mt-5 w-full">
       <div class="bg-white rounded-lg tracking-wide">
         <div class="px-4 py-2 mt-2">

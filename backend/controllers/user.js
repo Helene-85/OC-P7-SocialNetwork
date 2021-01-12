@@ -35,7 +35,7 @@ exports.login = (req, res, next) => {
     bcrypt.compare(req.body.password, result.password)
     .then(valid => {
       if(!valid) {
-        return res.status(400).json({ message: 'Mot de passe invalide'})
+        return res.status(401).json({ message: 'Mot de passe invalide'})
       }
       let payload = {
         'userId': result.id,
