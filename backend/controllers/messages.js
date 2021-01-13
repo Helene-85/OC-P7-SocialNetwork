@@ -7,7 +7,7 @@ exports.createMessage = (req, res, next) => {
         content: '',
         image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
-    message.create(message, (err, data) => {
+    Message.create(message, (err, data) => {
         if(err) {
           return res.status(400).json({ message: 'Impossible de créer le message' });
         } 

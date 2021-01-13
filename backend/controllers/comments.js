@@ -14,7 +14,7 @@ exports.createComment = (req, res, next) => {
 };
 
 exports.updateComment = (req, res, next) => {
-    commentaire.modify(req.body.comment, (err, data) => {
+    Commentaire.modify(req.body.comment, (err, data) => {
         if(err) {
           return res.status(400).json({ message: 'Commentaire non modifié' });
         } 
@@ -26,7 +26,7 @@ exports.updateComment = (req, res, next) => {
 };
 
 exports.deleteComment = (req, res, next) => {
-    commentaire.delete(req.body.comment, (err, data) => {
+    Commentaire.delete(req.body.comment, (err, data) => {
         if(err) {
           return res.status(400).json({ message: 'Commentaire non supprimé' });
         } 
