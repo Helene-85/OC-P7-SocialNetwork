@@ -12,9 +12,20 @@
             class="h-24 w-24 object-cover rounded-full"
           />
           <h1 class="text-2xl font-semibold">Pseudonyme</h1>
-          <a href="#" class="text-green-500 text-center hover:text-gray-200"
-            >Modifier ma photo</a
-          >
+          <div class="flex items-center mb-6 -mt-4 mr-3">
+              <div class="flex ml-auto">
+                <input
+                style="display: none"
+                class="mt-2"
+                type="file" 
+                @change="onFileSelected"
+                ref="fileInput">
+                <button 
+                class="flex items-center justify-center mt-6 px-8 focus:outline-none text-white text-sm sm:text-base bg-gray-900 hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
+                @click="$refs.fileInput.click()">Modifier ma photo
+                </button>
+              </div>
+            </div>
         </div>
       </div>
       <div class="flex justify-center bg-gray-900">
@@ -94,7 +105,17 @@
 
 <script>
 export default {
-  name: 'Account'
+  name: 'Account',
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+      onFileSelected(event) {
+      this.image = event.target.image[0]
+    },
+  }
 }
 </script>
 
