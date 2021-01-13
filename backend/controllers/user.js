@@ -28,15 +28,15 @@ exports.signup = (req, res, next) => {
 // Connexion
 exports.login = (req, res, next) => {
   User.findOne(req.body.email, (err, result) => {
-    if(err) {
+    if (err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } 
     console.log(result, req.body.password);
     bcrypt.compare(req.body.password, result.password)
     .then(valid => {
-      if(!valid) {
+      if (!valid) {
         return res.status(401).json({ message: 'Mot de passe invalide'})
-      }
+      } else {
       let payload = {
         'userId': result.id,
         'isAdmin': !!result.isAdmin
@@ -53,10 +53,11 @@ exports.login = (req, res, next) => {
           { expiresIn: '24h' }
         )
       })
-    })
+    }})
+    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
   })
-  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
+
 
 // Récupérer tous les utilisateurs
 /* exports.getAllUsers = (req, res, next) => {
