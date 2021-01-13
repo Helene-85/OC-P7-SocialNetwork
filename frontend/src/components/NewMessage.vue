@@ -27,11 +27,16 @@
             </div>
             <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
-                <a
-                  href="#"
-                  class="inline-flex text-xs sm:text-sm text-green-500 hover:text-green-700"
-                  >Ajouter une image</a
-                >
+                <input
+                style="display: none"
+                class="mt-2"
+                type="file" 
+                @change="onFileSelected"
+                ref="fileInput">
+                <button 
+                class="flex items-center justify-center mt-2 px-8 focus:outline-none text-green-700 text-sm sm:text-base bg-white hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
+                @click="$refs.fileInput.click()">Ajouter une image
+                </button>
               </div>
             </div>
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
@@ -74,10 +79,13 @@ export default {
     return {
       pseudo: '',
       content: '',
-      image: ''
+      image: null
     }
   },
   methods: {
+    onFileSelected(event) {
+      this.image = event.target.image[0]
+    },
     postMessage() {
       const payload = {
         content: this.content,
