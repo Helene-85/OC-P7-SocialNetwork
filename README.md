@@ -23,13 +23,27 @@ En cours de création  🚀
 
 ## Backend
 
-- serveur **Node.js**,
-- base de données **MySQL**,
-- modélisation de la bdd avec **Workbench**,
-- framework **Express**,
-- **API REST**,
+- serveur **Node.js**
+- base de données **MySQL**
+- modélisation de la bdd avec **Workbench**
+- framework **Express**
+- **API REST**
+- sécurité **RGPD** & **OSWAP**
 
 ## Frontend
 
-- **Tailwind**,
+- Design libre réalisé avec **TailwindCSS**
 - **Vue.js**
+- **Vue Router**
+- **Vuex**
+- **Axios**
+
+## Sécurités mises en place
+
+- hashage du mdp user avec **bcrypt**
+- utlisation de variables d'environnement pour les données sensibles avec **dotenv**
+- création d'un fichier **.env**  (voir .env.exemple) pour protéger les codes secrets et chemins vers la BDD MySQL
+- authentification du user par token avec **jsonwentoken**
+- sécurisation de l'application Express en définissant divers en-têtes HTTP avec **helmet** [équivaut à 11 protections](https://www.npmjs.com/package/helmet)
+- création d'un schéma de vérification de mot de passe robuste avec **password-validator**
+- prévention face aux attaques de force brute avec **Express Rate Limit**
