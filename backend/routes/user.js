@@ -19,4 +19,7 @@ router.post("/signup", verifyPassword, userController.signup);
 // Route POST pour la connexion d'un utilisateur
 router.post("/login", limiter, userController.login);
 
+// Route GET pour afficher tous les utilisateurs
+router.get('/user', userController.getAllUsers);
+
 module.exports = router;

@@ -59,11 +59,11 @@ exports.login = (req, res, next) => {
 
 
 // Récupérer tous les utilisateurs
-/* exports.getAllUsers = (req, res, next) => {
+exports.getAllUsers = (req, res, next) => {
   User.findAll(req.body.email, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateurs non trouvés' });
-    } 
+    } else {
       res.status(200).json({
         pseudo: result.pseudo,
         email: result.email,
@@ -71,8 +71,7 @@ exports.login = (req, res, next) => {
         profilPic: result.profilPic,
         isAdmin: result.isAdmin
       })
-    })
-  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
+    }})
 };
 
 // Mofifier un user
@@ -89,7 +88,6 @@ exports.update = (req, res, next) => {
       isAdmin: result.isAdmin
     })
   })
-  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
 // Supprimer un user
@@ -104,4 +102,4 @@ exports.deleteUser = (req, res, next) => {
       });
     })
     .catch(error => res.status(500).json({ error }));
-}; */
+};

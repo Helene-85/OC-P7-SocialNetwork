@@ -31,7 +31,7 @@ User.findOne = (email, result) => {
         result(null, res[0])
     })
 };
-/*
+
 User.findAll = (req, result) => {
     db.query("SELECT * FROM users", (err, res) => {
         if(err) {
@@ -67,6 +67,5 @@ User.delete = (id, result) => {
         }
     })
 };
- */
 
  module.exports = User;

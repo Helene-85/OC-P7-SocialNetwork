@@ -8,29 +8,33 @@
 </template>
 
 <script>
-
 import User from '@/components/User.vue'
 import axios from 'axios'
 
 export default {
   name: 'users',
-  data() {
-    user: "",
-    users: [],
-  },
   components: {
     user: User
   },
-  methods: {
-    login() {
-      const payload = {
-        pseudo:this.pseudo,
-        email: this.email,
-        profilPic: this.profilPic,
-        isAdmin: this.isAdmin
-      }
+  data() {
+    return {
+    user: "",
+    users: [],
+    pseudo: '',
+    email: '',
+    profilPic: '',
+    isAdmin: ''
+    }
+  },
+  created() {
+    const user = {
+      pseudo: this.pseudo,
+      email: this.email,
+      profilPic: this.profilPic,
+      isAdmin: this.isAdmin
+    }
       axios
-        .get('http://localhost:3000/api/users', payload)
+        .get('http://localhost:3000/api/auth/user', user)
         .then(res => {
           (this.users = res.data.users)
         })
@@ -38,8 +42,9 @@ export default {
           console.log('Impossible d\'afficher les users')
         })
     }
-  }
 }
+
+
 </script>
 
 <style scoped></style>
