@@ -56,6 +56,7 @@
         <div class="text-sm lg:flex-grow">
           <router-link to="/feed">
             <a
+              v-if="isConnected"
               href="#responsive-header"
               class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-green-400 hover:text-white mr-4"
             >
@@ -64,6 +65,7 @@
           </router-link>
           <router-link to="/Account/:id">
             <a
+              v-if="isConnected"
               href="#responsive-header"
               class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
             >
@@ -72,6 +74,7 @@
           </router-link>
           <router-link to="/Users">
             <a
+              v-if="isConnected"
               href="#responsive-header"
               class="block ml-4 mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
             >
@@ -81,6 +84,7 @@
         </div>
         <div>
           <a
+            v-if="isConnected"
             href="#"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:text-green-400 mt-4 lg:mt-0"
             >Se déconnecter</a
@@ -93,7 +97,17 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  props: {
+    isConnected: {
+      type: Boolean,
+      default: false
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 

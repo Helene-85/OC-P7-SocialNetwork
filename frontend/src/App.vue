@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-900" id="app">
-    <header-top></header-top>
+    <header-top :is-connected="isConnected"></header-top>
     <router-view></router-view>
   </div>
 </template>
@@ -12,6 +12,20 @@ export default {
   name: 'App',
   components: {
     'header-top': Header
+  },
+  computed: {
+  isConnected() {
+    if(sessionStorage.getItem('token')) {
+      return true;
+    }
+    return false
+    }
+  },
+  isAdmin() {
+    if(sessionStorage.getItem('isAdmin')){
+      return true;
+    }
+    return false
   }
 }
 </script>

@@ -99,10 +99,9 @@
         <router-link to="/feed">
           <div class="flex w-full">
             <button
-              @click="login"
+              @click.prevent="login"
               type="submit"
               class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
-              @submit.prevent="connect"
             >
               <span class="mr-2 uppercase">Se connecter</span>
               <span>
@@ -174,11 +173,18 @@ export default {
       axios
         .post('http://localhost:3000/api/auth/login', payload)
         .then(res => {
-          console.log(res)
-          alert("Bienvenue sur Groupo'link !")
+          sessionStorage.setItem('token', res.data.token)
+          sessionStorage.setItem('pseudo', res.data.pseudo)
+          sessionStorage.setItem('userId', res.data.userId)
+          sessionStorage.setItem('profilPic', res.data.profilPic)
+          sessionStorage.setItem('isAdmin', res.data.isAdmin)
+          axios.defaults.headers.common['Authorization'] = res.data.token // token partout
+          window.location.href='Welcome'
         })
         .catch(() => {
           console.log('Échec de la connexion')
+          sessionStorage.removeItem('token')
+          alert('Mauvaise connexion') // login page
         })
     }
   }

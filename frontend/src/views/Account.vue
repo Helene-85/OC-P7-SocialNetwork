@@ -42,8 +42,8 @@
                 <label class="text-xl text-white">Pseudonyme</label>
                 <input
                   class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
-                  id="email"
-                  type="email"
+                  id="pseudo"
+                  type="text"
                   placeholder="Mon pseudo"
                 />
                 <a
