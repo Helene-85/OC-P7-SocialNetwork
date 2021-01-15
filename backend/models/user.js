@@ -58,7 +58,7 @@ User.modify = (newUser, result) => {
 };
 
 User.delete = (id, result) => {
-    db.query("DELETE users WHERE id=?", id, (err, res) => {
+    db.query("DELETE FROM users WHERE id=?", id, (err, res) => {
         if(err) {
             result(err, null);
             return;

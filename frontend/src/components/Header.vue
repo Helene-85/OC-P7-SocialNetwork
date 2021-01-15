@@ -85,6 +85,7 @@
         <div>
           <a
             v-if="isConnected"
+            @click="logout()"
             href="#"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:text-green-400 mt-4 lg:mt-0"
             >Se déconnecter</a
@@ -106,6 +107,12 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    logout() {
+      sessionStorage.clear();
+      window.location.href='/'
     }
   }
 }
