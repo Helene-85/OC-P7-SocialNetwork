@@ -43,8 +43,7 @@ exports.login = (req, res, next) => {
       };
       res.status(200).json({
         pseudo: result.pseudo,
-        email: result.email,
-        password: result.password,
+        userId: result.id,
         profilPic: result.profilPic,
         isAdmin: result.isAdmin,
         token: jwt.sign(
