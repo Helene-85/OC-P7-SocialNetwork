@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Account from '../views/Account.vue'
 import Feed from '../views/Feed.vue'
 import Users from '../views/Users.vue'
+import User from '../components/User.vue'
 import Header from '../components/Header.vue'
 import Login from '../components/Login.vue'
 import Message from '../components/Message.vue'
@@ -28,6 +29,11 @@ const routes = [
     path: '/Users',
     name: 'Users',
     component: Users
+  },
+  {
+    path: '/User',
+    name: 'User',
+    component: User
   },
   {
     path: '/feed',

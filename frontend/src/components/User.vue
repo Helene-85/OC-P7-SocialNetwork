@@ -1,4 +1,5 @@
 <template>
+ <div class="min-h-screen bg-gray-900 m-6 flex flex-col">
     <div class="-my-2 mt-12 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="flex justify-center py-5 align-middle inline-block min-w-3/4 sm:px-6 lg:px-8">
         <div
@@ -43,13 +44,14 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm text-gray-500">
-                        xxx@yyy.zzz
+                        Email@email.com
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">Pseudo</div>
+                  <div class="text-sm text-gray-900">
+                    Pseudo</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-600">
                   Admin
@@ -67,10 +69,10 @@
         </div>
       </div>
     </div>
+    </div>
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'user',
@@ -80,25 +82,6 @@ export default {
       email: '',
       pseudo: '',
       isAdmin: ''
-    }
-  },
-  methods: {
-    getMessage() {
-      const payload = {
-        profilPic: this.profilPic,
-        email: this.email,
-        pseudo: this.pseudo,
-        isAdmin: this.isAdmin
-      }
-      axios
-        .get('http://localhost:3000/api/auth/users/:id', payload)
-        .then(res => {
-          console.log(res)
-          alert('User trouvé !')
-        })
-        .catch(() => {
-          console.log('Échec de l\'affichage du user')
-        })
     }
   }
 }

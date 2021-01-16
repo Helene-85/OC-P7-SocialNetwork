@@ -32,7 +32,7 @@ User.findOne = (email, result) => {
     })
 };
 
-User.findAll = (req, result) => {
+User.findAll = (result) => {
     db.query("SELECT * FROM users", (err, res) => {
         if(err) {
             result(err, null);

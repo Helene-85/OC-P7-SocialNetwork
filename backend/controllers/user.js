@@ -60,17 +60,17 @@ exports.login = (req, res, next) => {
 
 // Récupérer tous les utilisateurs
 exports.getAllUsers = (req, res, next) => {
-  User.findAll(req.body.email, (err, result) => {
+  User.findAll((err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateurs non trouvés' });
     } else {
-      res.status(200).json({
+      console.log(result);
+/*       res.status(200).json({
         pseudo: result.pseudo,
         email: result.email,
-        password: result.password,
         profilPic: result.profilPic,
         isAdmin: result.isAdmin
-      })
+      }) */
     }})
 };
 

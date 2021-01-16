@@ -20,6 +20,6 @@ router.post("/signup", verifyPassword, userController.signup);
 router.post("/login", limiter, userController.login);
 
 // Route GET pour afficher tous les utilisateurs
-router.get('/user', userController.getAllUsers);
+router.get('/users', userController.getAllUsers);
 
 module.exports = router;
