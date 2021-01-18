@@ -103,10 +103,6 @@ export default {
     isConnected: {
       type: Boolean,
       default: false
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false
     }
   },
   methods: {
