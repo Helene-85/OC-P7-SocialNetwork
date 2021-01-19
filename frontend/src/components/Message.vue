@@ -13,7 +13,7 @@
           <div class="user-logo">
             <img
               class="w-12 h-12 object-cover rounded-full mx-4  shadow"
-              src="../assets/profile_pic.png"
+              src="profile_pic.png"
               alt="avatar"
             />
           </div>

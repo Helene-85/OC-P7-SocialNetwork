@@ -8,7 +8,7 @@
           class="flex flex-col justify-center items-center relative h-full text-white"
         >
           <img
-            src="../assets/profile_pic.png"
+            src="profile_pic.png"
             class="h-24 w-24 object-cover rounded-full"
           />
           <h1 class="text-2xl font-semibold">Pseudonyme</h1>
@@ -31,7 +31,7 @@
       <div class="flex justify-center bg-gray-900">
         <div class="col-span-12 h-full pb-12 md:col-span-10">
           <div class="px-4 pt-4">
-            <form action="#" class="flex flex-col space-y-8">
+            <form enctype="multipart/form-data" action="#" class="flex flex-col space-y-8">
               <div>
                 <h3 class="text-2xl text-white font-semibold">
                   Mes informations

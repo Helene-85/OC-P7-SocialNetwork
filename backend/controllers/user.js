@@ -65,12 +65,7 @@ exports.getAllUsers = (req, res, next) => {
       return res.status(400).json({ message: 'Utilisateurs non trouvés' });
     } else {
       console.log(result);
-/*       res.status(200).json({
-        pseudo: result.pseudo,
-        email: result.email,
-        profilPic: result.profilPic,
-        isAdmin: result.isAdmin
-      }) */
+      res.status(200).json(result)
     }})
 };
 
