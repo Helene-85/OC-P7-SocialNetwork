@@ -51,7 +51,7 @@ export default {
         this.users = res.data
       })
       .catch(() => {
-        console.log('Impossible d\'afficher les users')
+        console.log('Impossible d\'afficher les users');
       })
   }
 }

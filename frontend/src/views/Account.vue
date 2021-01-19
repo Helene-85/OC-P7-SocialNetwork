@@ -8,7 +8,8 @@
           class="flex flex-col justify-center items-center relative h-full text-white"
         >
           <img
-            src="profile_pic.png"
+            :src="profilPic"
+            alt="profil-pic"
             class="h-24 w-24 object-cover rounded-full"
           />
           <h1 class="text-2xl font-semibold">Pseudonyme</h1>
@@ -41,10 +42,11 @@
               <div class="form-item">
                 <label class="text-xl text-white">Pseudonyme</label>
                 <input
+                  v-model="pseudo"
                   class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
                   id="pseudo"
                   type="text"
-                  placeholder="Mon pseudo"
+                  placeholder=""
                 />
                 <a
                   class="inline-block text-sm text-green-500 align-baseline hover:text-green-700"
@@ -59,17 +61,12 @@
                 <div class="form-item w-full">
                   <label class="text-xl text-white">Adresse email</label>
                   <input
+                    v-model="email"
                     class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
                     id="email"
                     type="email"
-                    placeholder="xxx@yyy.zzz"
+                    placeholder=""
                   />
-                  <a
-                    class="inline-block text-sm text-green-500 align-baseline hover:text-green-700"
-                    href="./index.html"
-                  >
-                    Modifier mon adresse email</a
-                  >
                 </div>
                 <div class="form-item w-full">
                   <label class="text-xl text-white">Mot de passe</label>
@@ -104,17 +101,48 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Account',
   data() {
     return {
-
+      user: '',
+      email: '',
+      pseudo: ''
+    }
+  },
+  created() {
+      axios
+      .get('http://localhost:3000/api/auth')
+      .then((res) => {
+        console.log(res.data)
+        this.users = res.data
+      })
+      .catch(() => {
+        console.log('Impossible d\'afficher le user')
+      })
+  },
+  computed: {
+     profilPic() {
+    if (this.user.profilPic) {
+      return this.user.profilPic
+    }
+    return 'profile_pic.png'
     }
   },
   methods: {
       onFileSelected(event) {
       this.image = event.target.image[0]
     },
+    deleteOneUser(user) {
+      axios
+        .delete("http://localhost:3000/api/auth/users/" + user.id)
+        .then((res) => console.log(res))
+        .catch(() => console.log('Impossible de suprimer le user'));
+        localStorage.clear();
+        this.$router.push("/signup");
+    }
   }
 }
 </script>

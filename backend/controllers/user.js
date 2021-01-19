@@ -69,6 +69,17 @@ exports.getAllUsers = (req, res, next) => {
     }})
 };
 
+// Réupérer un seul user
+exports.getOneUser = (req, res, next) => {
+  User.findOne((err, result) => {
+    if(err) {
+      return res.status(400).json({ message: 'Utilisateur non trouvé' });
+    } else {
+      console.log(result);
+      res.status(200).json(result)
+    }})
+};
+
 // Mofifier un user
 exports.update = (req, res, next) => {
   User.modify(req.body.pseudo, req.body.email, req.body.password, req.body.profilPic, req.body.isAdmin, (err, result) => {

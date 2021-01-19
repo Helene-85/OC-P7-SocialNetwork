@@ -16,6 +16,7 @@
             {{ role }}
           </div>
           <a
+            @click="deleteOneUser"
             v-if="isTheAdmin"
             href="#" class="text-green-500 hover:text-green-700"
             >Supprimer</a
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   name: 'user',
@@ -49,7 +51,20 @@ export default {
       return 'Administrateur'
     }
     return 'Membre'
-  }
+    }
+  },
+  methods: {
+      onFileSelected(event) {
+      this.image = event.target.image[0]
+    },
+    deleteOneUser(user) {
+      axios
+        .delete("http://localhost:3000/api/auth/users/" + user.id)
+        .then((res) => console.log(res))
+        .catch(() => console.log('Impossible de suprimer le user'));
+        localStorage.clear();
+        this.$router.push("/signup");
+    }
   }
 }
 </script>

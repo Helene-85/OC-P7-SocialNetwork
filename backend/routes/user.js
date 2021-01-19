@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const rateLimit = require("express-rate-limit"); // Contre les attaques de force brute
 
+const auth = require('../middleware/auth');
+
 // Importation des logiques métier pour les routes
 const userController = require("../controllers/user");
 
@@ -21,5 +23,11 @@ router.post("/login", limiter, userController.login);
 
 // Route GET pour afficher tous les utilisateurs
 router.get('/users', userController.getAllUsers);
+
+// Route GET pour afficher un user
+router.get('/', auth, userController.getOneUser);
+
+// DELETE un user
+router.delete('/users/:id', auth, userController.deleteUser);
 
 module.exports = router;
