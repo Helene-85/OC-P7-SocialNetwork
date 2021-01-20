@@ -184,7 +184,7 @@ export default {
         .catch(() => {
           console.log('Échec de la connexion')
           sessionStorage.removeItem('token')
-          alert('Mauvaise connexion') // login page
+          alert('Adresse email ou mot de passe incorrect') // login page
         })
     }
   }

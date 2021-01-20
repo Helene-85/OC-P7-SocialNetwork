@@ -22,8 +22,18 @@ User.create = (newUser, result) => {
     })
 };
 
-User.findOne = (email, result) => {
+User.findOneByEmail = (email, result) => {
     db.query("SELECT * FROM users WHERE email=?", email, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } 
+        result(null, res[0])
+    })
+};
+
+User.findOneById = (id, result) => {
+    db.query("SELECT * FROM users WHERE id=?", id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -42,17 +52,14 @@ User.findAll = (result) => {
     })
 };
 
-User.modify = (newUser, result) => {
-    db.query("UPDATE users SET pseudo=?, email=?, password=?, profilPic=?, isAdmin=? WHERE id=?", 
-    [newUser.pseudo, newUser.email, newUser.password, newUser.profilPic, newUser.isAdmin], id, (err, res) => {
+User.modify = (user, result) => {
+    db.query("UPDATE users SET pseudo=? WHERE id=?", 
+    [user.pseudo, user.id], id, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } else {
-            result(null, {
-                id:res.id,
-                ...newUser
-            })
+            alert('Modifcation réussie !')
         }
     })
 };

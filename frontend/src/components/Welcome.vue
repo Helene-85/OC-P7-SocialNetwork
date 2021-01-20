@@ -25,7 +25,7 @@
               </div>
             </div>
             <form class="px-8 py-8 mb-4 bg-white rounded">
-              <div class="text-center text-green-800">
+              <div class="text-center text-gray-800">
                 <p class="mb-10">
                   L'admin veille au respect des individus et de l'entreprise.
                 </p>

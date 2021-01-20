@@ -27,11 +27,10 @@ exports.signup = (req, res, next) => {
 
 // Connexion
 exports.login = (req, res, next) => {
-  User.findOne(req.body.email, (err, result) => {
+  User.findOneByEmail(req.body.email, (err, result) => {
     if (err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } 
-    console.log(result, req.body.password);
     bcrypt.compare(req.body.password, result.password)
     .then(valid => {
       if (!valid) {
@@ -71,7 +70,7 @@ exports.getAllUsers = (req, res, next) => {
 
 // Réupérer un seul user
 exports.getOneUser = (req, res, next) => {
-  User.findOne((err, result) => {
+  User.findOneById((err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } else {
@@ -82,23 +81,23 @@ exports.getOneUser = (req, res, next) => {
 
 // Mofifier un user
 exports.update = (req, res, next) => {
-  User.modify(req.body.pseudo, req.body.email, req.body.password, req.body.profilPic, req.body.isAdmin, (err, result) => {
+  let user = {
+    'id': userId,
+    'pseudo': req.body.pseudo
+  }
+  User.modify(user, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Modification non effectuée' });
     }
     res.status(200).json({
-      pseudo: result.pseudo,
-      email: result.email,
-      password: result.password,
-      profilPic: result.profilPic,
-      isAdmin: result.isAdmin
+      pseudo: result.pseudo
     })
   })
 };
 
 // Supprimer un user
 exports.deleteUser = (req, res, next) => {
-  User.findOne({ _id: req.params.id })
+  User.findOneById({ _id: req.params.id })
     .then(user => {
       const filename = user.profilPic.split('/images/')[1];
       fs.unlink(`images/${filename}`, () => {

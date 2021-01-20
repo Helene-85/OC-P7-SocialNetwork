@@ -48,12 +48,9 @@
                   type="text"
                   placeholder=""
                 />
-                <a
-                  class="inline-block text-sm text-green-500 align-baseline hover:text-green-700"
-                  href="./index.html"
-                >
-                  Modifier mon pseudo</a
-                >
+                <p class="inline-block text-sm text-green-500 align-baseline">
+                  Modifier mon pseudo
+                </p>
               </div>
               <div
                 class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4"
@@ -65,23 +62,9 @@
                     class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
                     id="email"
                     type="email"
-                    placeholder=""
+                    placeholder="Email du user"
+                    disabled="disabled"
                   />
-                </div>
-                <div class="form-item w-full">
-                  <label class="text-xl text-white">Mot de passe</label>
-                  <input
-                    class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
-                    id="c_password"
-                    type="password"
-                    placeholder="******************"
-                  />
-                  <a
-                    class="inline-block text-sm text-green-500 align-baseline hover:text-green-700"
-                    href="./index.html"
-                  >
-                    Modifier mon mot de passe</a
-                  >
                 </div>
               </div>
             </form>
@@ -89,10 +72,18 @@
           <div class="m-4 flex justify-center">
             <button
               type="submit"
-              class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-red-300 hover:bg-red-700 rounded py-2 w-full transition duration-150 ease-in"
+              class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
             >
-              <span class="mr-2 uppercase">Supprimer mon compte</span>
+              <span class="mr-2 uppercase">Modifier mon compte</span>
             </button>
+          </div>
+          <div class="flex justify-center">
+          <a
+            class="text-sm text-green-800 hover:text-green-300"
+            href="./index.html"
+          >
+            Supprimer mon compte</a
+          >
           </div>
         </div>
       </div>
@@ -107,30 +98,35 @@ export default {
   name: 'Account',
   data() {
     return {
-      user: '',
-      email: '',
-      pseudo: ''
+      profilPic: '',
+      pseudo: '',
+      email: ''
+
     }
   },
   created() {
       axios
       .get('http://localhost:3000/api/auth')
       .then((res) => {
-        console.log(res.data)
-        this.users = res.data
+        sessionStorage.getItem('token', res.data.token)
+        sessionStorage.getItem('userId', res.data.userId)
+        sessionStorage.getItem('profilPic', res.data.profilPic)
+        sessionStorage.getItem('pseudo', res.data.pseudo)
+        sessionStorage.getItem('email', res.data.email)
+        
       })
       .catch(() => {
         console.log('Impossible d\'afficher le user')
       })
   },
-  computed: {
-     profilPic() {
+/*   computed: {
+    profilPic() {
     if (this.user.profilPic) {
       return this.user.profilPic
     }
     return 'profile_pic.png'
     }
-  },
+  }, */
   methods: {
       onFileSelected(event) {
       this.image = event.target.image[0]
