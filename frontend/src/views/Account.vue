@@ -12,7 +12,7 @@
             alt="profil-pic"
             class="h-24 w-24 object-cover rounded-full"
           />
-          <h1 class="text-2xl font-semibold">Pseudonyme</h1>
+          <h1 class="text-2xl text-green-500 font-semibold"> user.pseudo </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
                 <input
@@ -46,7 +46,7 @@
                   class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
                   id="pseudo"
                   type="text"
-                  placeholder=""
+                  placeholder="Nouveau pseudo"
                 />
                 <p class="inline-block text-sm text-green-500 align-baseline">
                   Modifier mon pseudo
@@ -98,6 +98,7 @@ export default {
   name: 'Account',
   data() {
     return {
+      userId: '',
       profilPic: '',
       pseudo: '',
       email: ''
@@ -119,14 +120,14 @@ export default {
         console.log('Impossible d\'afficher le user')
       })
   },
-/*   computed: {
+  computed: {
     profilPic() {
     if (this.user.profilPic) {
       return this.user.profilPic
     }
     return 'profile_pic.png'
     }
-  }, */
+  },
   methods: {
       onFileSelected(event) {
       this.image = event.target.image[0]

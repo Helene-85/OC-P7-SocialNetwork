@@ -77,8 +77,7 @@ export default {
     return {
       pseudo: 'Welcome'
     }
-  },
-  components: {}
+  }
 }
 </script>
 
