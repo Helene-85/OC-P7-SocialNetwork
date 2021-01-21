@@ -1,6 +1,9 @@
 <template>
   <div class="mx-auto px-4 py-8 max-w-xl my-2">
-    <div class="bg-white rounded-lg mb-6 tracking-wide">
+    <div class="bg-white rounded-lg mb-6 relative tracking-wide">
+       <a v-if="isTheAdmin" class="text-red-600 absolute top-5 right-5"href="#"
+            ><i class="fas fa-trash-alt"></i></a
+          >
       <div class="md:flex-shrink-0">
         <img
           src="https://ik.imagekit.io/q5edmtudmz/post1_fOFO9VDzENE.jpg"
@@ -103,12 +106,17 @@ export default {
     this.profilPic = sessionStorage.getItem('profilPic');
     this.email = sessionStorage.getItem('email');
   },
+  computed: {
+  isTheAdmin() {
+    if(sessionStorage.getItem('isAdmin') == 1) {
+      return true;
+    }
+    return false
+  },
   methods: {
     getMessage() {
       const payload = {
         message: this.message,
-        profilPic: this.profilPic,
-        pseudo: this.pseudo,
         date: this.date,
         comment: this.comment
       }
@@ -123,6 +131,7 @@ export default {
         })
     }
   }
+}
 }
 </script>
 
