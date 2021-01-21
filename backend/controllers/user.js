@@ -68,30 +68,25 @@ exports.getAllUsers = (req, res, next) => {
     }})
 };
 
-/* Piste de réflexion
-exports.getOneUser = (req, res, next) => {
-  User.findOneById({
-    where: { id: userId
-    },
-  })
-  .then((user) => res.status(200).json({
-    user
-  }))
-  .catch((error) => res.status.(401).json({
-    console.log('Affichage du user impossible');
-    error
-  }))
-}
-*/
-
 // Réupérer un seul user
 exports.getOneUser = (req, res, next) => {
-  User.findOneById((err, result) => {
+  let user = {
+    'id': userId,
+  }
+  User.findOneById(user, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } else {
-      console.log(result);
-      res.status(200).json(result)
+      res.status(200).json({
+        pseudo: result.pseudo,
+        email: result.email,
+        userId: result.id,
+        profilPic: result.profilPic,
+        token: jwt.sign(
+          `${process.env.JWT_KEY}`,
+          { expiresIn: '24h' }
+        )
+      })
     }})
 };
 

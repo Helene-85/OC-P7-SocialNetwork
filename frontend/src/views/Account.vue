@@ -12,7 +12,7 @@
             alt="profil-pic"
             class="h-24 w-24 object-cover rounded-full"
           />
-          <h1 class="text-2xl text-green-500 font-semibold"> user.pseudo </h1>
+          <h1 class="text-2xl text-green-500 font-semibold"> {{ pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
                 <input
@@ -109,28 +109,33 @@ export default {
       axios
       .get('http://localhost:3000/api/auth')
       .then((res) => {
-        sessionStorage.getItem('token', res.data.token)
-        sessionStorage.getItem('userId', res.data.userId)
-        sessionStorage.getItem('profilPic', res.data.profilPic)
+        sessionStorage.setItem('userId', res.data.userId)
+        sessionStorage.setItem('profilPic', res.data.profilPic)
         sessionStorage.getItem('pseudo', res.data.pseudo)
         sessionStorage.getItem('email', res.data.email)
-        
+        this.userId = res.data.userId,
+        this.profilPic = res.data.profilPic,
+        this.pseudo = res.data.pseudo,
+        this.email = res.data.email
       })
       .catch(() => {
         console.log('Impossible d\'afficher le user')
       })
   },
-  computed: {
+  /* computed: {
     profilPic() {
     if (this.user.profilPic) {
       return this.user.profilPic
     }
     return 'profile_pic.png'
     }
-  },
+  }, */
   methods: {
-      onFileSelected(event) {
-      this.image = event.target.image[0]
+    onFileSelected(event) {
+    this.image = event.target.image[0]
+    },
+    modifyOneUser(){
+
     },
     deleteOneUser(user) {
       axios
