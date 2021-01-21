@@ -24,7 +24,11 @@ export default {
       pseudo: 'Pseudo',
       messages: []
     }
-  }
+  },
+  created() {
+    this.token = sessionStorage.getItem('token');
+    this.pseudo = sessionStorage.getItem('pseudo');
+  },
 }
 </script>
 

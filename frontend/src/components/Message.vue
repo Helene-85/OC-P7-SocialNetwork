@@ -18,7 +18,7 @@
             />
           </div>
           <p class="text-sm tracking-tighter text-gray-900">
-            <a href="#">By {{ pseudo }}</a>
+            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By</span> {{ pseudo }}</a>
             <span class="text-gray-600">{{ date }}</span>
           </p>
         </div>
@@ -92,8 +92,16 @@ export default {
       profilPic: '',
       pseudo: '',
       date: '',
-      comment: ''
+      comment: '',
+      token: null
     }
+  },
+   created() {
+    this.token = sessionStorage.getItem('token');
+    this.userId = sessionStorage.getItem('userId');
+    this.pseudo = sessionStorage.getItem('pseudo');
+    this.profilPic = sessionStorage.getItem('profilPic');
+    this.email = sessionStorage.getItem('email');
   },
   methods: {
     getMessage() {
