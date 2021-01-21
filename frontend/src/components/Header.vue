@@ -63,7 +63,7 @@
               Groupo'Link
             </a>
           </router-link>
-          <router-link to="/Account">
+          <router-link to="/profile/:id">
             <a
               v-if="isConnected"
               href="#responsive-header"
