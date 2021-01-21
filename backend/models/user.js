@@ -54,7 +54,7 @@ User.findAll = (result) => {
 
 User.modify = (user, result) => {
     db.query("UPDATE users SET pseudo=? WHERE id=?", 
-    [user.pseudo, user.id], id, (err, res) => {
+    [user.pseudo, user.id], (err, res) => {
         if(err) {
             result(err, null);
             return;

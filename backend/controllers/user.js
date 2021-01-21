@@ -56,7 +56,6 @@ exports.login = (req, res, next) => {
   })
 };
 
-
 // Récupérer tous les utilisateurs
 exports.getAllUsers = (req, res, next) => {
   User.findAll((err, result) => {
@@ -70,30 +69,20 @@ exports.getAllUsers = (req, res, next) => {
 
 // Réupérer un seul user
 exports.getOneUser = (req, res, next) => {
-  let user = {
-    'id': userId,
-  }
-  User.findOneById(user, (err, result) => {
+  let id = req.body.userId
+  User.findOneById(id, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } else {
-      res.status(200).json({
-        pseudo: result.pseudo,
-        email: result.email,
-        userId: result.id,
-        profilPic: result.profilPic,
-        token: jwt.sign(
-          `${process.env.JWT_KEY}`,
-          { expiresIn: '24h' }
-        )
-      })
+      console.log(result);
+      res.status(200).json(result)
     }})
 };
 
 // Mofifier un user
 exports.update = (req, res, next) => {
   let user = {
-    'id': userId,
+    'id': req.body.bodyuserId,
     'pseudo': req.body.pseudo
   }
   User.modify(user, (err, result) => {

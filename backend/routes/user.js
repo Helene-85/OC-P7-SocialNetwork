@@ -25,7 +25,7 @@ router.post("/login", limiter, userController.login);
 router.get('/users', userController.getAllUsers);
 
 // Route GET pour afficher un user
-router.get('/', auth, userController.getOneUser);
+router.get('/profile/:id', auth, userController.getOneUser);
 
 // DELETE un user
 router.delete('/users/:id', auth, userController.deleteUser);
