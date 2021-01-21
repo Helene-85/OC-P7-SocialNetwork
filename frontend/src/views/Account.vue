@@ -12,7 +12,7 @@
             alt="profil-pic"
             class="h-24 w-24 object-cover rounded-full"
           />
-          <h1 class="text-2xl text-green-500 font-semibold"> {{ pseudo }} </h1>
+          <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
                 <input
@@ -40,9 +40,8 @@
                 <hr class="mt-2 border-green-500" />
               </div>
               <div class="form-item">
-                <label class="text-xl text-white">Pseudonyme</label>
+                <label class="text-xl text-white">Pseudonyme : <span class="text-green-500">{{ pseudo }}</span></label>
                 <input
-                  v-model="pseudo"
                   class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
                   id="pseudo"
                   type="text"
@@ -52,26 +51,11 @@
                   Modifier mon pseudo
                 </p>
               </div>
-              <div
-                class="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4"
-              >
-                <div class="form-item w-full">
-                  <label class="text-xl text-white">Adresse email</label>
-                  <input
-                    v-model="email"
-                    class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
-                    id="email"
-                    type="email"
-                    placeholder="Email du user"
-                    disabled="disabled"
-                  />
-                </div>
-              </div>
             </form>
           </div>
           <div class="m-4 flex justify-center">
             <button
-              type="submit"
+              @click="update()"
               class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
             >
               <span class="mr-2 uppercase">Modifier mon compte</span>
@@ -101,26 +85,16 @@ export default {
       userId: '',
       profilPic: '',
       pseudo: '',
-      email: ''
-
+      email: '',
+      token: null
     }
   },
   created() {
-      axios
-      .get('http://localhost:3000/api/auth')
-      .then((res) => {
-        sessionStorage.setItem('userId', res.data.userId)
-        sessionStorage.setItem('profilPic', res.data.profilPic)
-        sessionStorage.getItem('pseudo', res.data.pseudo)
-        sessionStorage.getItem('email', res.data.email)
-        this.userId = res.data.userId,
-        this.profilPic = res.data.profilPic,
-        this.pseudo = res.data.pseudo,
-        this.email = res.data.email
-      })
-      .catch(() => {
-        console.log('Impossible d\'afficher le user')
-      })
+    this.token = sessionStorage.getItem('token');
+    this.userId = sessionStorage.getItem('userId');
+    this.pseudo = sessionStorage.getItem('pseudo');
+    this.profilPic = sessionStorage.getItem('profilPic');
+    this.email = sessionStorage.getItem('email');
   },
   /* computed: {
     profilPic() {
@@ -144,9 +118,25 @@ export default {
         .catch(() => console.log('Impossible de suprimer le user'));
         localStorage.clear();
         this.$router.push("/signup");
+    },
+    update() {
+      axios
+      .put('http://localhost:3000/api/auth/profile' + this.userId, {
+        pseudo: this.pseudo
+        },
+        {
+        headers: {
+          'Authorization': `Bearer ${this.token}`
+        }
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch(() => console.log('Mise à jour impossible'));
+      }
     }
   }
-}
+
 </script>
 
 <style scoped></style>
