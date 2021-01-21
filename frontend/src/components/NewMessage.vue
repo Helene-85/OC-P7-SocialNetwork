@@ -12,7 +12,7 @@
               />
             </div>
             <h2 class="text-sm tracking-tighter text-gray-900">
-              <a href="#">{{ pseudo }}</a>
+              <a class="text-green-700" href="/profile/:id">{{ pseudo }}</a>
             </h2>
           </div>
           <form class="w-full max-w-xl bg-white rounded-lg px-4 py-1">
@@ -76,30 +76,22 @@ import axios from 'axios'
 
 export default {
   name: 'emptyMessage',
-  data() {
+   data() {
     return {
+      userId: '',
+      profilPic: '',
       pseudo: '',
-      content: '',
-      image: null
+      email: '',
+      token: null
     }
   },
-  methods: {
-    postMessage() {
-      const payload = {
-        content: this.content,
-        image: this.image
-      }
-      axios
-        .post('http://localhost:3000/api/auth/messages', payload)
-        .then(res => {
-          console.log(res)
-          alert('Message envoyé !')
-        })
-        .catch(() => {
-          console.log("Échec de l'envoi")
-        })
-    }
-  }
+  created() {
+    this.token = sessionStorage.getItem('token');
+    this.userId = sessionStorage.getItem('userId');
+    this.pseudo = sessionStorage.getItem('pseudo');
+    this.profilPic = sessionStorage.getItem('profilPic');
+    this.email = sessionStorage.getItem('email');
+  },
 }
 </script>
 
