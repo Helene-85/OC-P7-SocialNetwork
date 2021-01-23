@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const rateLimit = require("express-rate-limit"); // Contre les attaques de force brute
+const express = require("express");                 // Importation framework express
+const router = express.Router();                    // Création routeur avec la méthode router() d'express
+const rateLimit = require("express-rate-limit");    // Contre les attaques de force brute
 
 const auth = require('../middleware/auth');
 

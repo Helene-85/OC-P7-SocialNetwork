@@ -1,6 +1,6 @@
-const multer = require('multer');
+const multer = require('multer');                                       // Importation du package multer
 
-const MIME_TYPES = {
+const MIME_TYPES = {                                                    // Definition des formats d'images acceptés
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
   'image/png': 'png',
@@ -8,11 +8,11 @@ const MIME_TYPES = {
   'image/webp' : 'webp',
 };
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({                                    // Destination du fichier sur le disque
   destination: (req, file, callback) => {
     callback(null, 'images');
   },
-  filename: (req, file, callback) => {
+  filename: (req, file, callback) => {                                  // Configuration du nom du fichier (nom + extension + date)
     const name = file.originalname.split(' ').join('_');
     const extension = MIME_TYPES[file.mimetype];
     callback(null, name + Date.now() + '.' + extension);

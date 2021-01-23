@@ -1,4 +1,4 @@
-const passwordValidator = require('password-validator');       // Importation du package password-validator
+const passwordValidator = require('password-validator');                      // Importation du package password-validator
 
 const passwordSchema = new passwordValidator();
 
@@ -9,6 +9,6 @@ passwordSchema
 .has().lowercase()                                                            // Le mdp doit contenir au moins une minuscule
 .has().digits()                                                               // Le mdp doit contenir au moins un chiffre
 .has().not().spaces()                                                         // Le mdp ne doit pas contenir d'espace
-.is().not().oneOf(['Passw0rd', 'Password123', '123456', 'Azerty123']);        // Exclusion de mdp trop simples
+.is().not().oneOf(['Groupomania2021', 'Motdepasse2021', 'Password123']);      // Exclusion de mdp trop simples
 
 module.exports = passwordSchema;

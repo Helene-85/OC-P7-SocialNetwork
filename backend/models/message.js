@@ -1,3 +1,4 @@
+// Création des modèles Message
 const db = require('./db');
 
 const Message = function(message) {
@@ -5,6 +6,7 @@ const Message = function(message) {
     this.image=message.image
 }
 
+// Créer un message
 Message.create = (newMessage, result) => {
     db.query("INSERT INTO messages SET ?", newMessage, (err, res) => {
         if(err) {
@@ -19,6 +21,7 @@ Message.create = (newMessage, result) => {
     })
 };
 
+// Trouver un message
 Message.findOne = (id, result) => {
     db.query("SELECT * FROM messages WHERE id=?", id, (err, res) => {
         if(err) {
@@ -30,7 +33,8 @@ Message.findOne = (id, result) => {
     })
 };
 
-Message.findAll = (newMessage, result) => {
+// Trouver tous les message
+Message.findAll = (result) => {
     db.query("SELECT * FROM messages", (err, res) => {
         if(err) {
             result(err, null);
@@ -41,6 +45,7 @@ Message.findAll = (newMessage, result) => {
     })
 };
 
+// Modifier un message
 Message.modify = (newMessage, result) => {
     db.query("UPDATE messages SET content=?, image=? WHERE id=",
     [newMessage.content, newMessage.image], id, (err, res) => {
@@ -56,6 +61,7 @@ Message.modify = (newMessage, result) => {
     })
 };
 
+// Supprimer un message
 Message.delete = (id, result) => {
     db.query("DELETE messages WHERE id=?", id, (err, res) => {
         if(err) {

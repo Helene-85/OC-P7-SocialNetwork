@@ -1,3 +1,4 @@
+// Création des modèles User
 const db = require('./db');
 
 const User = function(user) {
@@ -8,6 +9,7 @@ const User = function(user) {
     this.isAdmin=!!user.isAdmin
 }
 
+// Création d'un user
 User.create = (newUser, result) => {
     db.query("INSERT INTO users SET ?", newUser, (err, res) => {
         if(err) {
@@ -22,6 +24,7 @@ User.create = (newUser, result) => {
     })
 };
 
+// Trouver un user via son email
 User.findOneByEmail = (email, result) => {
     db.query("SELECT * FROM users WHERE email=?", email, (err, res) => {
         if(err) {
@@ -32,6 +35,7 @@ User.findOneByEmail = (email, result) => {
     })
 };
 
+// Trouver un user via son id
 User.findOneById = (id, result) => {
     db.query("SELECT * FROM users WHERE id=?", id, (err, res) => {
         if(err) {
@@ -42,6 +46,7 @@ User.findOneById = (id, result) => {
     })
 };
 
+// Trouver tous les users dans la BDD
 User.findAll = (result) => {
     db.query("SELECT * FROM users", (err, res) => {
         if(err) {
@@ -52,6 +57,7 @@ User.findAll = (result) => {
     })
 };
 
+// Modifier un user
 User.modify = (user, result) => {
     db.query("UPDATE users SET pseudo=? WHERE id=?", 
     [user.pseudo, user.id], (err, res) => {
@@ -64,6 +70,7 @@ User.modify = (user, result) => {
     })
 };
 
+// Supprimer un user
 User.delete = (id, result) => {
     db.query("DELETE FROM users WHERE id=?", id, (err, res) => {
         if(err) {

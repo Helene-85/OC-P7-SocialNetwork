@@ -1,3 +1,4 @@
+// Connexion à la bade de données MySQL
 const mysql = require('mysql');
 
 require('dotenv').config()

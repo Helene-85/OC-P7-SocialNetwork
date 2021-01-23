@@ -20,7 +20,7 @@ exports.createMessage = (req, res, next) => {
 exports.getAllMessages = (req, res, next) => {
     Message.findAll(req.body.content)
     if(err) {
-        return res.status(400).json({ message: 'Messages non trouvés' });
+        return res.status(404).json({ message: 'Messages non trouvés' });
     }
     res.status(200).json({
         content: result.content,
@@ -33,7 +33,7 @@ exports.getAllMessages = (req, res, next) => {
 exports.getOneMessage = (req, res, next) => {
     Message.findOne(req.params.id)
     if(err) {
-        return res.status(400).json({ message: 'Message non trouvé' });
+        return res.status(404).json({ message: 'Message non trouvé' });
     }
     res.status(200).json({
         content: result.content,
@@ -48,7 +48,7 @@ exports.updateMessage = (req, res, next) => {
       if(err) {
         return res.status(400).json({ message: 'Modification non effectuée' });
       }
-      res.status(200).json({
+      res.status(201).json({
         content: result.content,
         image: result.image
       })

@@ -1,12 +1,12 @@
-const bcrypt = require('bcrypt');                                               // Importation du package bcrytp
-const jwt = require('jsonwebtoken');                                            // Importation du package jasonwebtoken
-const User = require('../models/user');                                         // Importation modèle User
-const fs = require('fs');
+const bcrypt = require('bcrypt');                                           // Importation du package de chiffrement bcrytp
+const jwt = require('jsonwebtoken');                                        // Importation du package jsonwebtoken
+const User = require('../models/user');                                     // Importation modèle User
+const fs = require('fs');                                                   // 
 
 // Inscription
 exports.signup = (req, res, next) => {
   console.log('abc', req.body);
-  bcrypt.hash(req.body.password, 10)                                            // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
+  bcrypt.hash(req.body.password, 10)                                        // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
   .then(hash => {
     console.log(hash);
       const user = new User({
@@ -60,7 +60,7 @@ exports.login = (req, res, next) => {
 exports.getAllUsers = (req, res, next) => {
   User.findAll((err, result) => {
     if(err) {
-      return res.status(400).json({ message: 'Utilisateurs non trouvés' });
+      return res.status(404).json({ message: 'Utilisateurs non trouvés' });
     } else {
       console.log(result);
       res.status(200).json(result)
@@ -72,7 +72,7 @@ exports.getOneUser = (req, res, next) => {
   let id = req.body.userId
   User.findOneById(id, (err, result) => {
     if(err) {
-      return res.status(400).json({ message: 'Utilisateur non trouvé' });
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
     } else {
       console.log(result);
       res.status(200).json(result)
@@ -89,7 +89,7 @@ exports.update = (req, res, next) => {
     if(err) {
       return res.status(400).json({ message: 'Modification non effectuée' });
     }
-    res.status(200).json({
+    res.status(201).json({
       pseudo: result.pseudo
     })
   })
