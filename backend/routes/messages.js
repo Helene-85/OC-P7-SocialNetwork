@@ -5,12 +5,11 @@ const multer = require('../middleware/multer-config');                  // Impor
 const messageControllers = require('../controllers/messages');          // Importation du controlleur Message
 
 // CRUD
-router.get('/', auth, messageControllers.getAllMessages);
-router.get('/:id', auth, messageControllers.getOneMessage);
-router.post('/', auth, multer, messageControllers.createMessage);
+router.post('/post', auth, multer, messageControllers.createMessage);
+router.get('/messages', auth, messageControllers.getAllMessages);
+router.get('/message/:id', auth, messageControllers.getOneMessage);
 router.post('/:id/reactions', auth, messageControllers.addReactions);
-router.put('/:id', auth, multer, messageControllers.updateMessage);
-router.post('/:id/reactions', auth, messageControllers.addReactions);
-router.delete('/:id', auth, messageControllers.deleteMessage);
+router.put('/update/:id', auth, multer, messageControllers.updateMessage);
+router.delete('/messages/:id', auth, messageControllers.deleteMessage);
 
 module.exports = router;

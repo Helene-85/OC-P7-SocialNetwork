@@ -79,19 +79,38 @@ export default {
    data() {
     return {
       userId: '',
-      profilPic: '',
-      pseudo: '',
-      email: '',
+      content: '',
+      image: '',
       token: null
     }
   },
   created() {
-    this.token = sessionStorage.getItem('token');
-    this.userId = sessionStorage.getItem('userId');
-    this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
-    this.email = sessionStorage.getItem('email');
+  this.token = sessionStorage.getItem('token');
+  this.userId = sessionStorage.getItem('userId');
   },
+  methods: {
+    postMessage() {
+      const payload = {
+        content: this.content,
+        image: this.image
+      }
+      axios
+      .post('http://localhost:3000/api/messages/post', {
+        headers: {
+          'Authorization': `Bearer ${this.token}`
+        },
+        payload
+      })
+      .then(res => {
+        sessionStorage.setItem('content', res.data.content)
+        sessionStorage.setItem('image', res.data.image)
+      })
+      .catch(() => {
+        console.log('Impossible de poster le message');
+        alert('Impossible de poster le message :/')
+      })
+    }
+  }
 }
 </script>
 

@@ -4,9 +4,10 @@ const fs = require('fs');
 // Créer un message
 exports.createMessage = (req, res, next) => {
     const message = ({
-        content: '',
+        content: req.body.content,
         image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
+    console.log('message', message);
     Message.create(message, (err, data) => {
         if(err) {
           return res.status(400).json({ message: 'Impossible de créer le message' });
