@@ -43,7 +43,7 @@
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
               <button
                 type="button"
-                @click.prevent="postMessage"
+                @click.prevent="postMessage()"
                 class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
               >
                 <span class="mr-2 uppercase">Envoyer</span>
@@ -79,6 +79,7 @@ export default {
    data() {
     return {
       userId: '',
+      pseudo: '',
       content: '',
       image: '',
       token: null
@@ -87,6 +88,7 @@ export default {
   created() {
   this.token = sessionStorage.getItem('token');
   this.userId = sessionStorage.getItem('userId');
+  this.pseudo = sessionStorage.getItem('pseudo');
   },
   methods: {
     postMessage() {

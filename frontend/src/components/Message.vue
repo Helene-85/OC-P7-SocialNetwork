@@ -26,7 +26,7 @@
           </p>
         </div>
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
-          {{ message }}
+          {{ content }}
         </p>
         <div class="flex ml-3 mt-4 mb-4 space-x-3 text-green-700">
           <a href="#"
@@ -91,7 +91,7 @@ export default {
   name: 'message',
   data() {
     return {
-      message: '',
+      content: '',
       profilPic: '',
       pseudo: '',
       date: '',
@@ -105,6 +105,7 @@ export default {
     this.pseudo = sessionStorage.getItem('pseudo');
     this.profilPic = sessionStorage.getItem('profilPic');
     this.email = sessionStorage.getItem('email');
+    this.content = sessionStorage.getItem('content');
   },
   computed: {
   isTheAdmin() {
