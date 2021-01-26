@@ -76,14 +76,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+import http from '../http'
 
 export default {
   name: 'Account',
   data() {
     return {
       userId: '',
-      profilPic: '',
+      newProfilPic: '',
       pseudo: '',
       email: '',
       token: null
@@ -96,14 +96,14 @@ export default {
     this.profilPic = sessionStorage.getItem('profilPic');
     this.email = sessionStorage.getItem('email');
   },
-  /* computed: {
+  computed: {
     profilPic() {
     if (this.user.profilPic) {
       return this.user.profilPic
     }
     return 'profile_pic.png'
     }
-  }, */
+  },
   methods: {
     onFileSelected(event) {
     this.image = event.target.image[0]
@@ -120,14 +120,9 @@ export default {
         this.$router.push("/signup");
     },
     update() {
-      axios
-      .put('http://localhost:3000/api/auth/profile' + this.userId, {
+      http
+      .put('/auth/profile' + this.userId, {
         pseudo: this.pseudo
-        },
-        {
-        headers: {
-          'Authorization': `Bearer ${this.token}`
-        }
         })
         .then((res) => {
           console.log(res)

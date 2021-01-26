@@ -40,7 +40,7 @@ export default {
   },
   profilPic() {
     if (this.user.profilPic) {
-      return this.user.profilPic
+      return 'http://localhost:3000/images/' + this.user.profilPic
     }
     return 'profile_pic.png'
   },
