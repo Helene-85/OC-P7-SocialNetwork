@@ -10,7 +10,7 @@
           <img
             :src="profilPic"
             alt="profil-pic"
-            class="h-24 w-24 object-cover rounded-full"
+            class="h-24 w-24 object-cover rounded-full object-cover"
           />
           <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       userId: '',
-      newProfilPic: '',
+      profilPic: '',
       pseudo: '',
       email: '',
       token: null
@@ -112,8 +112,8 @@ export default {
 
     },
     deleteOneUser(user) {
-      axios
-        .delete("http://localhost:3000/api/auth/users/" + user.id)
+      http
+        .delete("/auth/users/" + user.id)
         .then((res) => console.log(res))
         .catch(() => console.log('Impossible de suprimer le user'));
         localStorage.clear();

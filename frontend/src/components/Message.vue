@@ -8,7 +8,7 @@
         <img
           src="https://ik.imagekit.io/q5edmtudmz/post1_fOFO9VDzENE.jpg"
           alt="mountains"
-          class="w-full h-64 rounded-lg rounded-b-none"
+          class="w-full h-64 rounded-lg rounded-b-none object-cover"
         />
       </div>
       <div class="px-4 py-2 mt-2">

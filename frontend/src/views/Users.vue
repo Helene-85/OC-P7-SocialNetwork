@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import User from '@/components/User.vue'
+import http from '../http'
 
 export default {
   name: 'users',
@@ -44,8 +44,8 @@ export default {
     },
   },
   created() {
-    axios
-      .get('http://localhost:3000/api/auth/users')
+    http
+      .get('/auth/users')
       .then((res) => {
         console.log(res.data)
         this.users = res.data

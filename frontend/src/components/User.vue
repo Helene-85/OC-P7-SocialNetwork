@@ -5,7 +5,7 @@
         <img
           :src="profilPic"
           alt="profil-pic"
-          class="w-16 h-16 rounded-full"
+          class="w-16 h-16 rounded-full object-cover"
           />
       </div>
       <div class="flex-grow p-3">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import http from '../http';
 
 export default {
   name: 'user',
@@ -56,8 +56,8 @@ export default {
     this.image = event.target.image[0]
     },
     deleteOneUser(user) {
-      axios
-        .delete("http://localhost:3000/api/auth/users/" + user.id)
+      http
+        .delete("/auth/users/" + user.id)
         .then((res) => console.log(res))
         .catch(() => console.log('Impossible de suprimer le user'));
         localStorage.clear();

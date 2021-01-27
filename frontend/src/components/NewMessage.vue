@@ -6,8 +6,8 @@
           <div class="author flex items-center -ml-3 my-3">
             <div class="user-logo">
               <img
-                class="w-12 h-12 object-cover rounded-full mx-4  shadow"
-                src="profile_pic.png"
+                class="w-12 h-12 object-cover rounded-full mx-4 object-cover shadow"
+                :src="profilPic"
                 alt="avatar"
               />
             </div>
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import http from '../http';
 
 export default {
   name: 'emptyMessage',
@@ -90,17 +90,22 @@ export default {
   this.userId = sessionStorage.getItem('userId');
   this.pseudo = sessionStorage.getItem('pseudo');
   },
+/*   computed: {
+  profilPic() {
+    if (this.user.profilPic) {
+      return 'http://localhost:3000/images/' + this.user.profilPic
+    }
+    return 'profile_pic.png'
+  }
+  }, */
   methods: {
     postMessage() {
       const payload = {
         content: this.content,
         image: this.image
       }
-      axios
-      .post('http://localhost:3000/api/messages/post', {
-        headers: {
-          'Authorization': `Bearer ${this.token}`
-        },
+      http     
+      .post('/messages/post', {
         payload
       })
       .then(res => {
