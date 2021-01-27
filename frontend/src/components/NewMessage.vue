@@ -35,7 +35,7 @@
                 ref="fileInput">
                 <button 
                 class="flex items-center justify-center mt-2 px-8 focus:outline-none text-green-700 text-sm sm:text-base bg-white hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
-                @click="onUpload">
+                @click="$refs.fileInput.click()">
                 Ajouter une image
                 </button>
               </div>
@@ -75,7 +75,7 @@
 import http from '../http';
 
 export default {
-  name: 'emptyMessage',
+  name: 'NewMessage',
    data() {
     return {
       userId: '',
@@ -99,6 +99,9 @@ export default {
   }
   }, */
   methods: {
+    onFileSelected(event) {
+      this.image = event.target.image[0]
+    },
     postMessage() {
       const payload = {
         content: this.content,

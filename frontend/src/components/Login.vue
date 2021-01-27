@@ -154,7 +154,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+
+import http from '../http'
 
 export default {
   name: 'login',
@@ -170,15 +171,14 @@ export default {
         email: this.email,
         password: this.password
       }
-      axios
-        .post('http://localhost:3000/api/auth/login', payload)
+      http
+        .post('/auth/login', payload)
         .then(res => {
           sessionStorage.setItem('token', res.data.token)
           sessionStorage.setItem('pseudo', res.data.pseudo)
           sessionStorage.setItem('userId', res.data.userId)
           sessionStorage.setItem('profilPic', res.data.profilPic)
           sessionStorage.setItem('isAdmin', res.data.isAdmin)
-          axios.defaults.headers.common['Authorization'] = res.data.token // token partout
           window.location.href='Welcome'
         })
         .catch(() => {
