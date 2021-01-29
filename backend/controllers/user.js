@@ -98,14 +98,12 @@ exports.update = (req, res, next) => {
 
 // Supprimer un user
 exports.deleteUser = (req, res, next) => {
-  User.findOneById({ _id: req.params.id })
-    .then(user => {
-      const filename = user.profilPic.split('/images/')[1];
-      fs.unlink(`images/${filename}`, () => {
-        User.delete({ _id: req.params.id })
-        .then(() => res.status(204).json({ message: 'L\'utilisateur a été supprimé !'}))
-        .catch((error) => res.status(400).json({ error }));
-      });
+  User.delete(req.params.id, (err, result) => {
+    if(err) {
+      return res.status(400).json({ message: 'Impossible de supprimer l\'utilisateur'});
+    }
+    res.status(204).json({
+      message: 'Utilisateur correctement supprimé'
     })
-    .catch(error => res.status(500).json({ error }));
+  })
 };

@@ -27,7 +27,10 @@ router.get('/users', userController.getAllUsers);
 // Route GET pour afficher un user
 router.get('/profile/:id', auth, userController.getOneUser);
 
-// DELETE un user
+// Route PUT pour modifier un user
+router.put('/profile/:id', auth, userController.update);
+
+// Route DELETE pour supprimer un user
 router.delete('/users/:id', auth, userController.deleteUser);
 
 module.exports = router;

@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       userId: '',
-      profilPic: '',
+      newProfilPic: '',
       pseudo: '',
       email: '',
       token: null
@@ -93,7 +93,7 @@ export default {
     this.token = sessionStorage.getItem('token');
     this.userId = sessionStorage.getItem('userId');
     this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
+    this.newProfilPic = sessionStorage.getItem('profilPic');
     this.email = sessionStorage.getItem('email');
   },
   computed: {
@@ -121,7 +121,7 @@ export default {
     },
     update() {
       http
-      .put('/auth/profile' + this.userId, {
+      .put('/auth/profile/' + this.userId, {
         pseudo: this.pseudo
         })
         .then((res) => {
