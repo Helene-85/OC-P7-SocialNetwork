@@ -6,13 +6,13 @@
           <div class="author flex items-center -ml-3 my-3">
             <div class="user-logo">
               <img
-                class="w-12 h-12 object-cover rounded-full mx-4 object-cover shadow"
                 :src="profilPic"
-                alt="avatar"
+                alt="profil-pic"
+                class="w-12 h-12 object-cover rounded-full mx-4 object-cover shadow"
               />
             </div>
             <h2 class="text-sm tracking-tighter text-gray-900">
-              <a class="text-green-700" href="/profile/:id">{{ pseudo }}</a>
+              <a class="text-gray-900" href="/profile/:id">{{ pseudo }}</a>
             </h2>
           </div>
           <form class="w-full max-w-xl bg-white rounded-lg px-4 py-1">
@@ -83,7 +83,7 @@ export default {
       userId: '',
       pseudo: '',
       content: '',
-      image: '',
+      profilPic: '',
       token: null
     }
   },
@@ -91,15 +91,16 @@ export default {
   this.token = sessionStorage.getItem('token');
   this.userId = sessionStorage.getItem('userId');
   this.pseudo = sessionStorage.getItem('pseudo');
+  this.profilPic = sessionStorage.getItem('profilPic');
   },
-/*   computed: {
+  computed: {
   profilPic() {
     if (this.user.profilPic) {
       return 'http://localhost:3000/images/' + this.user.profilPic
     }
     return 'profile_pic.png'
   }
-  }, */
+  },
   methods: {
     onFileSelected() {
       this.image = this.$refs.image.images[0];

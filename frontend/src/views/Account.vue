@@ -98,8 +98,8 @@ export default {
   },
   computed: {
     profilPic() {
-    if (this.user.profilPic) {
-      return this.user.profilPic
+    if (this.newProfilPic) {
+      return this.newProfilPic
     }
     return 'profile_pic.png'
     }
