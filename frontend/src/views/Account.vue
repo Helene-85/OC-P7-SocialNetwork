@@ -8,7 +8,7 @@
           class="flex flex-col justify-center items-center relative h-full text-white"
         >
           <img
-            :src="profilPic"
+            :src="avatar"
             alt="profil-pic"
             class="h-24 w-24 object-cover rounded-full object-cover"
           />
@@ -83,26 +83,27 @@ export default {
   data() {
     return {
       userId: '',
-      newProfilPic: '',
+      profilPic: '',
       pseudo: '',
       email: '',
       token: null
+    }
+  },
+  props: ['user'],
+  computed: {
+    avatar() {
+    if (this.profilPic) {
+      return this.profilPic
+    }
+    return 'profile_pic.png'
     }
   },
   created() {
     this.token = sessionStorage.getItem('token');
     this.userId = sessionStorage.getItem('userId');
     this.pseudo = sessionStorage.getItem('pseudo');
-    this.newProfilPic = sessionStorage.getItem('profilPic');
+    this.profilPic = sessionStorage.getItem('profilPic');
     this.email = sessionStorage.getItem('email');
-  },
-  computed: {
-    profilPic() {
-    if (this.newProfilPic) {
-      return this.newProfilPic
-    }
-    return 'profile_pic.png'
-    }
   },
   methods: {
     onFileSelected(event) {

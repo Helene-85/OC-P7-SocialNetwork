@@ -3,8 +3,8 @@
     <div class="bg-white w-full flex items-center p-2 rounded-xl shadow border">
       <div class="flex items-center space-x-4">
         <img
-          :src="profilPic"
-          alt="profil-pic"
+          :src="avatar"
+          alt="avatar"
           class="w-16 h-16 rounded-full object-cover"
           />
       </div>
@@ -38,7 +38,7 @@ export default {
     }
     return false
   },
-  profilPic() {
+  avatar() {
     if (this.user.profilPic) {
       return 'http://localhost:3000/images/' + this.user.profilPic
     }
