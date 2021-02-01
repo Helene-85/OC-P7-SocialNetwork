@@ -12,7 +12,7 @@
               />
             </div>
             <h2 class="text-sm tracking-tighter text-gray-900">
-              <a class="text-gray-900" href="/profile/:id">{{ pseudo }}</a>
+              <a class="text-gray-900 uppercase" href="/profile/:id">{{ pseudo }}</a>
             </h2>
           </div>
           <form class="w-full max-w-xl bg-white rounded-lg px-4 py-1">
