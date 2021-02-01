@@ -6,8 +6,8 @@
           <div class="author flex items-center -ml-3 my-3">
             <div class="user-logo">
               <img
-                :src="profilPic"
-                alt="profil-pic"
+                :src="avatar"
+                alt="avatar"
                 class="w-12 h-12 object-cover rounded-full mx-4 object-cover shadow"
               />
             </div>
@@ -94,12 +94,12 @@ export default {
   this.profilPic = sessionStorage.getItem('profilPic');
   },
   computed: {
-  profilPic() {
-    if (this.user.profilPic) {
-      return 'http://localhost:3000/images/' + this.user.profilPic
+  avatar() {
+    if (this.profilPic) {
+      return 'http://localhost:3000/images/' + this.profilPic
     }
     return 'profile_pic.png'
-  }
+    }
   },
   methods: {
     onFileSelected() {

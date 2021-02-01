@@ -9,8 +9,8 @@
         >
           <img
             :src="avatar"
-            alt="profil-pic"
-            class="h-24 w-24 object-cover rounded-full object-cover"
+            alt="avatar"
+            class="h-24 w-24 mb-4 object-cover rounded-full object-cover"
           />
           <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
@@ -89,6 +89,13 @@ export default {
       token: null
     }
   },
+   created() {
+    this.token = sessionStorage.getItem('token');
+    this.userId = sessionStorage.getItem('userId');
+    this.pseudo = sessionStorage.getItem('pseudo');
+    this.profilPic = sessionStorage.getItem('profilPic');
+    this.email = sessionStorage.getItem('email');
+  },
   computed: {
     avatar() {
     if (this.profilPic) {
@@ -97,13 +104,7 @@ export default {
     return 'profile_pic.png'
     }
   },
-  created() {
-    this.token = sessionStorage.getItem('token');
-    this.userId = sessionStorage.getItem('userId');
-    this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
-    this.email = sessionStorage.getItem('email');
-  },
+
   methods: {
     onFileSelected(event) {
     this.image = event.target.image[0]
