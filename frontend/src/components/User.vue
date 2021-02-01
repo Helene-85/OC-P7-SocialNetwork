@@ -52,16 +52,11 @@ export default {
     }
   },
   methods: {
-    onFileSelected(event) {
-    this.image = event.target.image[0]
-    },
     deleteOneUser(user) {
       http
         .delete("/auth/users/" + user.id)
         .then((res) => console.log(res))
         .catch(() => console.log('Impossible de suprimer le user'));
-        localStorage.clear();
-        this.$router.push("/signup");
     }
   }
 }

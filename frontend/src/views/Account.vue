@@ -19,13 +19,12 @@
                 style="display: none"
                 class="mt-2"
                 type="file" 
-                @change="onFileSelected"
+                @change=""
                 ref="fileInput">
                 <button 
                 class="flex items-center justify-center mt-6 px-8 focus:outline-none text-white text-sm sm:text-base bg-gray-900 hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
                 @click="$refs.fileInput.click()">Modifier ma photo
                 </button>
-                <button @click="onUpload">Upload</button>
               </div>
             </div>
         </div>
@@ -88,7 +87,6 @@ export default {
       pseudo: '',
       email: '',
       token: null,
-/*       selectedFile: null */
     }
   },
    created() {
@@ -106,24 +104,13 @@ export default {
     return 'profile_pic.png'
     }
   },
-
   methods: {
-/*     onFileSelected(event) {
-    this.selectedFile = event.target.files[0]
-    },
-    onUpload() {
-      http
-      .put('http://localhost:3000/images/' + this.selectedFile)
-      .then(res => {
-        console/log(res);
-      })
-    }, */
     deleteOneUser(user) {
       http
         .delete("/auth/users/" + user.id)
         .then((res) => console.log(res))
         .catch(() => console.log('Impossible de suprimer le user'));
-        localStorage.clear();
+        sessionStorage.clear();
         this.$router.push("/signup");
     },
     update() {
