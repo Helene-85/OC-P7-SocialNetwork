@@ -18,7 +18,7 @@
         <a
           @click="deleteOneUser"
           v-if="isTheAdmin"
-          href="#" class="text-green-500 hover:text-green-700"
+          href="#" class="text-green-700 hover:text-green-700"
           >Supprimer</a>
       </div>
     </div>

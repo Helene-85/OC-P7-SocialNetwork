@@ -56,14 +56,14 @@
           <div class="m-4 flex justify-center">
             <button
               @click="update()"
-              class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
+              class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
             >
               <span class="mr-2 uppercase">Modifier mon compte</span>
             </button>
           </div>
           <div class="flex justify-center">
           <a
-            class="text-sm text-green-800 hover:text-green-300"
+            class="text-sm text-white hover:text-green-300"
             href="./index.html"
           >
             Supprimer mon compte</a

@@ -46,7 +46,7 @@
               <button
                 type="button"
                 @click.prevent="postMessage()"
-                class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
+                class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
               >
                 <span class="mr-2 uppercase">Envoyer</span>
                 <span>
