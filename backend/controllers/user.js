@@ -81,7 +81,7 @@ exports.getOneUser = (req, res, next) => {
 };
 
 // Mofifier un user
-exports.update = (req, res, next) => {
+exports.updateOneUser = (req, res, next) => {
   let user = {
     'id': req.body.bodyuserId,
     'pseudo': req.body.pseudo

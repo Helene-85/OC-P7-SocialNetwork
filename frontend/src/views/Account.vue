@@ -89,11 +89,10 @@ export default {
       token: null
     }
   },
-  props: ['user'],
   computed: {
     avatar() {
     if (this.profilPic) {
-      return this.profilPic
+      return 'http://localhost:3000/images/' + this.profilPic
     }
     return 'profile_pic.png'
     }
@@ -108,9 +107,6 @@ export default {
   methods: {
     onFileSelected(event) {
     this.image = event.target.image[0]
-    },
-    modifyOneUser(){
-
     },
     deleteOneUser(user) {
       http

@@ -28,7 +28,7 @@ router.get('/users', userController.getAllUsers);
 router.get('/profile/:id', auth, userController.getOneUser);
 
 // Route PUT pour modifier un user
-router.put('/profile/:id', auth, userController.update);
+router.put('/profile/:id', auth, userController.updateOneUser);
 
 // Route DELETE pour supprimer un user
 router.delete('/users/:id', auth, userController.deleteUser);
