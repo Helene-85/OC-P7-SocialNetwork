@@ -102,17 +102,17 @@ export default {
     }
   },
   methods: {
-    onFileSelected() {
+/*     onFileSelected() {
       this.image = this.$refs.image.images[0];
-    },
-    sendImage() {
+    }, */
+  /*   sendImage() {
       const formData = new FormData();
       formData.append('image', this.image);
-    },
+    }, */
     postMessage() {
       const payload = {
         content: this.content,
-        image: formData
+        /* image: formData */
       }
       http     
       .post('/messages/post', {
@@ -120,7 +120,7 @@ export default {
       })
       .then(res => {
         sessionStorage.setItem('content', res.data.content)
-        sessionStorage.setItem('image', res.data.image)
+       /*  sessionStorage.setItem('image', res.data.image) */
       })
       .catch(() => {
         console.log('Impossible de poster le message');

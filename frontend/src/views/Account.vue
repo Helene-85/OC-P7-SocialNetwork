@@ -25,6 +25,7 @@
                 class="flex items-center justify-center mt-6 px-8 focus:outline-none text-white text-sm sm:text-base bg-gray-900 hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
                 @click="$refs.fileInput.click()">Modifier ma photo
                 </button>
+                <button @click="onUpload">Upload</button>
               </div>
             </div>
         </div>
@@ -86,7 +87,8 @@ export default {
       profilPic: '',
       pseudo: '',
       email: '',
-      token: null
+      token: null,
+/*       selectedFile: null */
     }
   },
    created() {
@@ -106,9 +108,16 @@ export default {
   },
 
   methods: {
-    onFileSelected(event) {
-    this.image = event.target.image[0]
+/*     onFileSelected(event) {
+    this.selectedFile = event.target.files[0]
     },
+    onUpload() {
+      http
+      .put('http://localhost:3000/images/' + this.selectedFile)
+      .then(res => {
+        console/log(res);
+      })
+    }, */
     deleteOneUser(user) {
       http
         .delete("/auth/users/" + user.id)

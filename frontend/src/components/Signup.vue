@@ -160,11 +160,6 @@ export default {
         .then(res => {
           console.log(res)
           alert('Inscription réussie !')
-          sessionStorage.setItem('token', res.data.token)
-          sessionStorage.setItem('pseudo', res.data.pseudo)
-          sessionStorage.setItem('userId', res.data.userId)
-          sessionStorage.setItem('profilPic', res.data.profilPic)
-          sessionStorage.setItem('isAdmin', res.data.isAdmin)
           window.location.href='Welcome'
         })
         .catch(() => {
