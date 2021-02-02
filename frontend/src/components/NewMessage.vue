@@ -32,11 +32,10 @@
                   style="display: none"
                   class="mt-2"
                   type="file" 
-                  @change="onFileSelected"
                   ref="image"/>
                   <button 
                   class="flex items-center justify-center mt-2 px-8 focus:outline-none text-green-700 text-sm sm:text-base bg-white hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
-                  @click.prevent="$refs.image.click()">
+                  >
                   Ajouter une image<span class="ml-2"><i class="fas fa-upload"></i></span>
                   </button>
                 </div>
@@ -78,6 +77,12 @@ import http from '../http';
 
 export default {
   name: 'NewMessage',
+  created() {
+    this.token = sessionStorage.getItem('token');
+    this.userId = sessionStorage.getItem('userId');
+    this.pseudo = sessionStorage.getItem('pseudo');
+    this.profilPic = JSON.parse(sessionStorage.getItem('profilPic'));
+  },
    data() {
     return {
       userId: '',
@@ -87,40 +92,23 @@ export default {
       token: null
     }
   },
-  created() {
-  this.token = sessionStorage.getItem('token');
-  this.userId = sessionStorage.getItem('userId');
-  this.pseudo = sessionStorage.getItem('pseudo');
-  this.profilPic = sessionStorage.getItem('profilPic');
-  },
   computed: {
   avatar() {
     if (this.profilPic) {
       return 'http://localhost:3000/images/' + this.profilPic
     }
-    return 'profile_pic.png'
+    return '/profile_pic.png'
     }
   },
   methods: {
-/*     onFileSelected() {
-      this.image = this.$refs.image.images[0];
-    }, */
-  /*   sendImage() {
-      const formData = new FormData();
-      formData.append('image', this.image);
-    }, */
     postMessage() {
       const payload = {
         content: this.content,
-        /* image: formData */
       }
       http     
-      .post('/messages/post', {
-        payload
-      })
+      .post('/messages/post', payload)
       .then(res => {
-        sessionStorage.setItem('content', res.data.content)
-       /*  sessionStorage.setItem('image', res.data.image) */
+        this$emit('added', payload)
       })
       .catch(() => {
         console.log('Impossible de poster le message');

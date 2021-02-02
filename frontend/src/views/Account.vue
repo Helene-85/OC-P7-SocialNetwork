@@ -90,18 +90,18 @@ export default {
     }
   },
    created() {
-    this.token = sessionStorage.getItem('token');
-    this.userId = sessionStorage.getItem('userId');
-    this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
-    this.email = sessionStorage.getItem('email');
+    this.token = JSON.parse(sessionStorage.getItem('token'));
+    this.userId = JSON.parse(sessionStorage.getItem('userId'));
+    this.pseudo = JSON.parse(sessionStorage.getItem('pseudo'));
+    this.profilPic = JSON.parse(sessionStorage.getItem('profilPic'));
+    this.email = JSON.parse(sessionStorage.getItem('email'));
   },
   computed: {
     avatar() {
     if (this.profilPic) {
       return 'http://localhost:3000/images/' + this.profilPic
     }
-    return 'profile_pic.png'
+    return '/profile_pic.png'
     }
   },
   methods: {

@@ -160,7 +160,7 @@ export default {
         .then(res => {
           console.log(res)
           alert('Inscription réussie !')
-          window.location.href='Welcome'
+          window.location.href='/'
         })
         .catch(() => {
           console.log("Échec de l'inscription")

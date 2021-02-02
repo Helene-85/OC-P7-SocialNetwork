@@ -52,10 +52,13 @@ export default {
     }
   },
   methods: {
-    deleteOneUser(user) {
+    deleteOneUser() {
       http
-        .delete("/auth/users/" + user.id)
-        .then((res) => console.log(res))
+        .delete("/auth/users/" + this.user.id)
+        .then((res) => {
+          this.$emit('deleted', this.user.id)
+          console.log(res)
+        }) 
         .catch(() => console.log('Impossible de suprimer le user'));
     }
   }
