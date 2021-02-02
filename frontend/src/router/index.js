@@ -10,6 +10,7 @@ import Message from '../components/Message.vue'
 import NewMessage from '../components/NewMessage.vue'
 import Signup from '../components/Signup.vue'
 import Welcome from '../components/Welcome.vue'
+import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,17 @@ const routes = [
     path: '/welcome',
     name: 'Welcome',
     component: Welcome
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
+  },
+  {
+    path: '/404/:resource',
+    name: '404Resource',
+    component: NotFound,
+    props: true
   }
 ]
 

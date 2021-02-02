@@ -52,6 +52,11 @@ export default {
       })
       .catch(() => {
         console.log('Impossible d\'afficher les users');
+
+        this.$router.push({
+          name: '404Resource',
+          params: { resource: 'source' }
+        })
       })
   }
 }
