@@ -25,7 +25,7 @@
                 required
               ></textarea>
             </div>
-            <form  enctype="multipart/form-data">
+<!--             <form  enctype="multipart/form-data">
               <div class="flex items-center mb-6 -mt-4 mr-3">
                 <div class="flex ml-auto">
                   <input
@@ -40,7 +40,7 @@
                   </button>
                 </div>
               </div>
-            </form>
+            </form> -->
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
               <button
                 type="button"

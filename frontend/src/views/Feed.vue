@@ -32,8 +32,8 @@ export default {
   },
   methods: {
     add() {
-
-}
+      message.push(this.messages)
+    }
   }
 }
 </script>

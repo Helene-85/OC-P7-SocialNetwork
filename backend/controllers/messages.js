@@ -5,7 +5,6 @@ const fs = require('fs');
 exports.createMessage = (req, res, next) => {
     const message = ({
         content: req.body.content,
-        image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     console.log('message', message);
     Message.create(message, (err, data) => {

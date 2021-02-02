@@ -100,15 +100,16 @@ exports.updateOneUser = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
   User.findOneById(req.params.id, (err, result) => {
     if (!result.isAdmin) {
-      return res.status(403).json({ message: 'Eh non ! Tu n\'es pas autorisé à faire ça !'});     // sécurité pas admin peut pas supprimer
+      return res.status(403).json({ message: 'Eh non ! Tu n\'es pas autorisé à faire ça !'});
+    } else {
+      User.delete(req.params.id, (err, result) => {
+        if(err) {
+        return res.status(400).json({ message: 'Impossible de supprimer l\'utilisateur'});
+        }
+        res.status(204).json({
+            message: 'Utilisateur correctement supprimé'
+        })
+      })
     }
-  })
-  User.delete(req.params.id, (err, result) => {
-    if(err) {
-      return res.status(400).json({ message: 'Impossible de supprimer l\'utilisateur'});
-    }
-    res.status(204).json({
-      message: 'Utilisateur correctement supprimé'
-    })
   })
 };
