@@ -26,7 +26,7 @@
           </p>
         </div>
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
-          {{ content }}
+          {{ content }} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit nemo, aut ad quaerat consectetur, ex sapiente corporis repellat iste earum velit blanditiis iusto, at id officiis deserunt molestiae? Fugit, eos!
         </p>
         <div class="flex ml-3 mt-4 mb-4 space-x-3 text-green-700">
           <a href="#"

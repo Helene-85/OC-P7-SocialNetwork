@@ -8,7 +8,9 @@ const Message = function(message) {
 
 // Créer un message
 Message.create = (newMessage, result) => {
-    db.query("INSERT INTO messages SET ?", newMessage, (err, res) => {
+    let statment = `INSERT INTO messages(content, image)
+    VALUES(?,?)`;
+    db.query(statment, newMessage, (err, res) => {
         if(err) {
             result(err, null);
             return;

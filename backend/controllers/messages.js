@@ -5,6 +5,7 @@ const fs = require('fs');
 exports.createMessage = (req, res, next) => {
     const message = ({
         content: req.body.content,
+        image: null
     });
     console.log('message', message);
     Message.create(message, (err, data) => {
@@ -12,7 +13,7 @@ exports.createMessage = (req, res, next) => {
           return res.status(400).json({ message: 'Impossible de créer le message' });
         } 
         res.send(data);
-      })
+    })
     .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 

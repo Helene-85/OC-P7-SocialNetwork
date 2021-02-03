@@ -1,7 +1,7 @@
 <template>
   <div
     :is-admin="isAdmin"
-    class="min-h-screen pb-20 bg-gray-900 m-6 flex flex-col">
+    class="min-h-screen pb-20 -mb-20 bg-gray-900 m-6 flex flex-col">
     <h1 class="mt-12 text-2xl text-center text-white">
     Découvrez les membres de <span class="uppercase text-green-500">Groupo'link</span>
     </h1>

@@ -18,8 +18,10 @@
                 <input
                 style="display: none"
                 class="mt-2"
-                type="file" 
-                @change=""
+                type="file"
+                accept="image/*" 
+                @change="uploadImage($event)"
+                id="file-input"
                 ref="fileInput">
                 <button 
                 class="flex items-center justify-center mt-6 px-8 focus:outline-none text-white text-sm sm:text-base bg-gray-900 hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
@@ -80,6 +82,13 @@ import http from '../http'
 
 export default {
   name: 'Account',
+  created() {
+    this.token = JSON.parse(sessionStorage.getItem('token'));
+    this.userId = JSON.parse(sessionStorage.getItem('userId'));
+    this.pseudo = JSON.parse(sessionStorage.getItem('pseudo'));
+    this.profilPic = JSON.parse(sessionStorage.getItem('profilPic'));
+    this.email = JSON.parse(sessionStorage.getItem('email'));
+  },
   data() {
     return {
       userId: '',
@@ -88,13 +97,6 @@ export default {
       email: '',
       token: null,
     }
-  },
-   created() {
-    this.token = JSON.parse(sessionStorage.getItem('token'));
-    this.userId = JSON.parse(sessionStorage.getItem('userId'));
-    this.pseudo = JSON.parse(sessionStorage.getItem('pseudo'));
-    this.profilPic = JSON.parse(sessionStorage.getItem('profilPic'));
-    this.email = JSON.parse(sessionStorage.getItem('email'));
   },
   computed: {
     avatar() {
@@ -112,6 +114,23 @@ export default {
         .catch(() => console.log('Impossible de suprimer le user'));
         sessionStorage.clear();
         this.$router.push("/signup");
+    },
+    uploadImage(event) {
+      let data = new FormData();
+      data.append('name', 'my-picture');
+      data.append('file', event.target.files[0]);
+      let config = {
+        header : {
+          'Content-Type' : 'image/png'
+        }
+      }
+      http
+      .put('/profile/:id', data,config
+      ).then(
+        response => {
+          console.log('image upload response > ', response)
+        }
+      )
     },
     update() {
       http

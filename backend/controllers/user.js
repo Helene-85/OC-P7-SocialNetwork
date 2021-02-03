@@ -99,6 +99,7 @@ exports.updateOneUser = (req, res, next) => {
 // Supprimer un user
 exports.deleteUser = (req, res, next) => {
   User.findOneById(req.params.id, (err, result) => {
+    console.log(result);
     if (!result.isAdmin) {
       return res.status(403).json({ message: 'Eh non ! Tu n\'es pas autorisé à faire ça !'});
     } else {
