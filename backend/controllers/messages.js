@@ -71,81 +71,45 @@ exports.deleteMessage = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+// Ajout des réactions aux messages
 exports.addReactions = (req, res, next) => {
     Message.findOne({ _id: req.params.id })
     .then(message => {
         const userId = req.body.userId;
         let userWantsToLike = (req.body.like === 1);
-        let userWantsToLove = (req.body.love === 1);
-        let userWantsToLaught = (req.body.laught === 1);
-        let userWantsToBeSurprised = (req.body.beSurprised === 1);
-        let userWantsToBeImpressed = (req.body.beImpressed === 1);
+        let userWantsToDislike = (req.body.like === -1);
         let userWantsToCancel = (req.body.like === 0);
         const userCanLike = (!message.usersLiked.includes(userId));
-        const userCanLove = (!message.usersLoved.includes(userId));
-        const userCanLaught = (!message.usersLaught.includes(userId));
-        const userCanBeSurprised = (!message.usersBeSurprised.includes(userId));
-        const userCanBeImpressed = (!message.usersBeImpressed.includes(userId));
-        const notTheFirstVote = 
-        (message.usersLiked.includes(userId) || 
-        message.usersDisliked.includes(userId) || 
-        message.usersLoved.includes(userId) || 
-        message.usersLaught.includes(userId) || 
-        message.usersBeSurprised.includes(userId) || 
-        message.usersBeImpressed.includes(userId));
+        const userCanDislike = (!message.usersDisliked.includes(userId));
+        const notTheFirstVote = (message.usersLiked.includes(userId) || message.usersDisliked.includes(userId));
 
-        // Ajout des réactions
         if (userWantsToLike && userCanLike) {
-          message.usersLiked.push(userId)
-        }
-        if (userWantsToLove && userCanLove) {
-            message.usersLoved.push(userId)
-        }
-        if (userWantsToLaught && userCanLaught) {
-            message.usersLaught.push(userId)
-        }
-        if (userWantsToBeSurprised && userCanBeSurprised) {
-            message.usersBeSurprised.push(userId)
-        }
-        if (userWantsToBeImpressed && userCanBeImpressed) {
-            message.usersBeImpressed.push(userId)
-        }
-
-        // Supression des réactions
-        if (userWantsToCancel && notTheFirstVote) {
-            let index = message.usersLiked.indexOf(userId)
-            message.usersLiked.splice(index, 1)
-        }
-        if (userWantsToCancel && notTheFirstVote) {                                   
-              let index = message.usersLoved.indexOf(userId)
-              message.usersLoved.splice(index, 1)
-        }
-        if (userWantsToCancel && notTheFirstVote) {                                               
-              let index = message.usersLaught.indexOf(userId)
-              message.usersLaught.splice(index, 1)
-        }
-        if (userWantsToCancel && notTheFirstVote) {                                                     
-              let index = message.usersBeSurprised.indexOf(userId)
-              message.usersBeSurprised.splice(index, 1)
-        }
-        if (userWantsToCancel && notTheFirstVote) {                                                      
-              let index = message.usersBeImpressed.indexOf(userId)
-              message.usersBeImpressed.splice(index, 1)
-        }
-
-        // Calculer le nombre de réactions
-        message.likes = message.usersLiked.length                     
-        message.loves = message.usersLoved.length
-        message.laught = message.usersLaught.length
-        message.beSurprised = message.usersBeSurprised.length
-        message.beImpressed = message.usersBeImpressed.lenght
-
-        // Mettre à jour le message avec les nouvelles valeurs
-        let newmessage = message;
-        newmessage.save();
-  
-        return newmessage;
-    })
-    .then(message => res.status(200).json(message))
-    .catch(error => res.status(400).json({error}));
-  };
+            message.usersLiked.push(userId)                             // Ajouter le like
+          }
+    
+          if (userWantsToCancel && notTheFirstVote) {
+            if (userCanLike) {
+                                                                        // Annuler le like de l'utlisateur
+              let index = message.usersDisliked.indexOf(userId)
+              message.usersDisliked.splice(index, 1)
+            }
+            if (userCanDislike) {
+                                                                        // Annuler le dislike de l'utilisateur
+              let index = message.usersLiked.indexOf(userId)
+              message.usersLiked.splice(index, 1)
+            }
+          }
+    
+          if (userWantsToDislike && userCanDislike) {                    // Ajouter le dislike
+            message.usersDisliked.push(userId)
+          }
+          message.likes = message.usersLiked.length                      // Calculer le nombre de like et dislike
+          message.dislikes = message.usersDisliked.length
+          let newMessage = message;
+          newMessage.save();                                            // Mettre à jour le message avec les nouvelles valeurs
+    
+          return newMessage;
+      })
+      .then(message => res.status(200).json(message))
+      .catch(error => res.status(400).json({error}));
+};

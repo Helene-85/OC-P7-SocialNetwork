@@ -88,6 +88,7 @@ export default {
       userId: '',
       pseudo: '',
       content: '',
+      image: '',
       profilPic: '',
       token: null
     }
@@ -104,6 +105,7 @@ export default {
     postMessage() {
       const payload = {
         content: this.content,
+        image: this.image
       }
       http     
       .post('/post', payload)

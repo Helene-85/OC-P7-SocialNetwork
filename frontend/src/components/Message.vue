@@ -28,21 +28,12 @@
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
           {{ content }} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit nemo, aut ad quaerat consectetur, ex sapiente corporis repellat iste earum velit blanditiis iusto, at id officiis deserunt molestiae? Fugit, eos!
         </p>
-        <div class="flex ml-3 mt-4 mb-4 space-x-3 text-green-700">
+        <div class="flex ml-3 mt-4 mb-4 space-x-3">
           <a href="#"
-            ><span><i class="far fa-thumbs-up"></i> 0</span></a
+            ><span><i class="far fa-thumbs-up  text-green-700"></i> 0</span></a
           >
           <a href="#"
-            ><span><i class="far fa-heart"></i> 0</span></a
-          >
-          <a href="#"
-            ><span><i class="far fa-grin-squint-tears"></i> 0</span></a
-          >
-          <a href="#"
-            ><span><i class="far fa-surprise"></i> 0</span></a
-          >
-          <a href="#"
-            ><span><i class="far fa-grin-stars"></i> 0</span></a
+            ><span><i class="far fa-thumbs-down text-red-600"></i></i> 0</span></a
           >
         </div>
         <form class="w-full max-w-xl bg-white rounded-lg px-4">
