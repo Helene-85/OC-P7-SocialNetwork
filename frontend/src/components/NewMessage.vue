@@ -106,9 +106,9 @@ export default {
         content: this.content,
       }
       http     
-      .post('/messages/post', payload)
+      .post('/post', payload)
       .then(res => {
-        this$emit('added', payload)
+        this.$emit('added', payload)
       })
       .catch(() => {
         console.log('Impossible de poster le message');

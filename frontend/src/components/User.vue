@@ -42,7 +42,7 @@ export default {
     if (this.user.profilPic) {
       return 'http://localhost:3000/images/' + this.user.profilPic
     }
-    return 'profile_pic.png'
+    return '/profile_pic.png'
   },
   role() {
     if (this.user.isAdmin) {

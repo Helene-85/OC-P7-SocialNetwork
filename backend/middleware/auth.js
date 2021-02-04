@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');            // Importation du package jsonwe
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];                    // Extraction du token du header authorization
-    console.log(token);
     const decodedToken = jwt.verify(token, `${process.env.JWT_KEY}`);         // Décodage du token
     const userId = decodedToken.userId;
     if (req.body.userId && req.body.userId !== userId) {

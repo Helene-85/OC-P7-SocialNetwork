@@ -3,12 +3,14 @@ const router = express.Router();                    // Création routeur avec la
 const rateLimit = require("express-rate-limit");    // Contre les attaques de force brute
 
 const auth = require('../middleware/auth');
+const admin = require('../middleware/adminControl')
 
 // Importation des logiques métier pour les routes
 const userController = require("../controllers/user");
 
 // Importation du middleware verifyPassword pour contrôler la complexité du mot de passe
 const verifyPassword = require("../middleware/verifyPassword");
+const adminControl = require("../middleware/adminControl");
 
 const limiter = rateLimit({
     windowMs: 5 * 60 * 1000, // 5 minutes de test
@@ -31,6 +33,6 @@ router.get('/profile/:id', auth, userController.getOneUser);
 router.put('/profile/:id', auth, userController.updateOneUser);
 
 // Route DELETE pour supprimer un user
-router.delete('/users/:id', auth, userController.deleteUser);
+router.delete('/users/:id', auth, admin, userController.deleteUser);
 
 module.exports = router;

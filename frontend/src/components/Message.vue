@@ -113,7 +113,8 @@ export default {
       return true;
     }
     return false
-  },
+  }
+},
   methods: {
     getMessage() {
       const payload = {
@@ -132,7 +133,6 @@ export default {
         })
     }
   }
-}
 }
 </script>
 
