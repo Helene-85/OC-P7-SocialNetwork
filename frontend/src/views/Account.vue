@@ -83,24 +83,22 @@ import http from '../http'
 export default {
   name: 'Account',
   created() {
-    this.token = JSON.parse(sessionStorage.getItem('token'));
-    this.userId = JSON.parse(sessionStorage.getItem('userId'));
-    this.pseudo = JSON.parse(sessionStorage.getItem('pseudo'));
-    this.profilPic = JSON.parse(sessionStorage.getItem('profilPic'));
-    this.email = JSON.parse(sessionStorage.getItem('email'));
+    this.userId = sessionStorage.getItem('userId');
+    this.profilPic = sessionStorage.getItem('profilPic');
+    this.pseudo = sessionStorage.getItem('pseudo');
+    this.token = sessionStorage.getItem('token');
   },
   data() {
     return {
       userId: '',
       profilPic: '',
       pseudo: '',
-      email: '',
       token: null,
     }
   },
   computed: {
     avatar() {
-    if (this.profilPic) {
+    if (this.profilPic != 'null') {
       return 'http://localhost:3000/images/' + this.profilPic
     }
     return '/profile_pic.png'

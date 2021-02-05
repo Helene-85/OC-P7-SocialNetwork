@@ -81,7 +81,7 @@ export default {
     this.token = sessionStorage.getItem('token');
     this.userId = sessionStorage.getItem('userId');
     this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = JSON.parse(sessionStorage.getItem('profilPic'));
+    this.profilPic = sessionStorage.getItem('profilPic');
   },
    data() {
     return {
@@ -95,10 +95,10 @@ export default {
   },
   computed: {
   avatar() {
-    if (this.profilPic) {
+    if (this.profilPic != 'null') {
       return 'http://localhost:3000/images/' + this.profilPic
     }
-    return '/profile_pic.png'
+      return '/profile_pic.png'
     }
   },
   methods: {
