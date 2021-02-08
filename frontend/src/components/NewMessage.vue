@@ -4,13 +4,7 @@
       <div class="bg-white rounded-lg tracking-wide">
         <div class="px-4 py-2 mt-2">
           <div class="author flex items-center -ml-3 my-3">
-            <div class="user-logo">
-              <img
-                :src="avatar"
-                alt="avatar"
-                class="w-12 h-12 object-cover rounded-full mx-4 object-cover shadow"
-              />
-            </div>
+            <avatar/>
             <h2 class="text-sm tracking-tighter text-gray-900">
               <a class="text-gray-900 uppercase" href="/profile/:id">{{ pseudo }}</a>
             </h2>
@@ -74,6 +68,7 @@
 
 <script>
 import http from '../http';
+import Avatar from '@/components/Avatar.vue';
 
 export default {
   name: 'NewMessage',
@@ -93,13 +88,8 @@ export default {
       token: null
     }
   },
-  computed: {
-  avatar() {
-    if (this.profilPic != 'null') {
-      return 'http://localhost:3000/images/' + this.profilPic
-    }
-      return '/profile_pic.png'
-    }
+  components: {
+    'avatar': Avatar
   },
   methods: {
     postMessage() {
@@ -108,7 +98,7 @@ export default {
         image: this.image
       }
       http     
-      .post('/post', payload)
+      .post('/', payload)
       .then(res => {
         this.$emit('added', payload)
       })

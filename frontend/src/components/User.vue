@@ -27,10 +27,14 @@
 
 <script>
 import http from '../http';
+import Avatar from '@/components/Avatar.vue'
 
 export default {
   name: 'user',
   props: ['user'],
+   components: {
+    'avatar': Avatar
+  },
   computed: {
   isTheAdmin() {
     if(sessionStorage.getItem('isAdmin') == 1) {

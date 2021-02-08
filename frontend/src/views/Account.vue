@@ -7,11 +7,7 @@
         <div
           class="flex flex-col justify-center items-center relative h-full text-white"
         >
-          <img
-            :src="avatar"
-            alt="avatar"
-            class="h-24 w-24 mb-4 object-cover rounded-full object-cover"
-          />
+          <avatar/>
           <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
@@ -78,30 +74,22 @@
 </template>
 
 <script>
+import Avatar from '../components/Avatar.vue';
 import http from '../http'
 
 export default {
+  components: { Avatar },
   name: 'Account',
   created() {
-    this.userId = sessionStorage.getItem('userId');
-    this.profilPic = sessionStorage.getItem('profilPic');
+    this.userId = JSON.parse(sessionStorage.getItem('userId'));
     this.pseudo = sessionStorage.getItem('pseudo');
     this.token = sessionStorage.getItem('token');
   },
   data() {
     return {
       userId: '',
-      profilPic: '',
       pseudo: '',
       token: null,
-    }
-  },
-  computed: {
-    avatar() {
-    if (this.profilPic != 'null') {
-      return 'http://localhost:3000/images/' + this.profilPic
-    }
-    return '/profile_pic.png'
     }
   },
   methods: {
