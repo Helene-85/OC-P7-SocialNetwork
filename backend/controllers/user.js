@@ -41,10 +41,14 @@ exports.login = (req, res, next) => {
         'userId': result.id,
         'isAdmin': !!result.isAdmin
       };
+      let profile = result.profilPic;
+      if (!result.profilPic) {
+        profile = ''
+      }
       res.status(200).json({
         pseudo: result.pseudo,
         userId: result.id,
-        profilPic: result.profilPic,
+        profilPic: profile,
         isAdmin: result.isAdmin,
         token: jwt.sign(
           payload,
