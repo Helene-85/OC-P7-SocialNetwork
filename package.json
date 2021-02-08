@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/Helene-mb/OC-P7-SocialNetwork/issues"
   },
-  "homepage": "https://github.com/Helene-mb/OC-P7-SocialNetwork#readme"
+  "homepage": "https://github.com/Helene-mb/OC-P7-SocialNetwork#readme",
+  "dependencies": {}
 }
