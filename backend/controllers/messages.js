@@ -10,7 +10,7 @@ exports.createMessage = (req, res, next) => {
         createdAt: '2021-01-09',
         updateAt: '2021-02-09',
     });
-    console.log('message', message);
+    console.log('message', message)
     Message.create(message, (err, data) => {
       console.log(err);
         if(err) {

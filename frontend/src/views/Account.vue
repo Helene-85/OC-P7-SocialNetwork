@@ -7,7 +7,7 @@
         <div
           class="flex flex-col justify-center items-center relative h-full text-white"
         >
-          <avatar :user = "user"/>
+          <avatar class="h-24 w-24 mb-4 object-cover rounded-full object-cover" :user = "user"/>
           <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import Avatar from '../components/Avatar.vue';
+import Avatar from '@/components/Avatar.vue';
 import http from '../http'
 
 export default {

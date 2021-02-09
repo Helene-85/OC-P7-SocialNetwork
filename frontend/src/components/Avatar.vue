@@ -1,11 +1,8 @@
 <template>
-        <div class="user-logo">
-            <img
-            :src="avatar"
-            alt="avatar"
-            class="w-12 h-12 object-cover rounded-full mx-4 object-cover shadow"
-            />
-        </div>
+  <img
+  :src="avatar"
+  alt="avatar"
+  />
 </template>
 
 <script>

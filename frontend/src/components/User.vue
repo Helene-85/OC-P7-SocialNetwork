@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto max-w-sm flex flex-col space-y-4 justify-center items-center">
     <div class="bg-white w-full flex items-center p-2 rounded-xl shadow border">
-      <avatar :user = "user"/>
+      <avatar class="h-14 w-14 object-cover rounded-full" :user = "user"/>
       <div class="flex-grow p-3">
         <div class="font-semibold text-gray-700">
           {{ user.pseudo }} 
@@ -24,23 +24,15 @@ import http from '../http';
 import Avatar from '@/components/Avatar.vue'
 
 export default {
+  components: { Avatar },
   name: 'user',
   props: ['user'],
-   components: {
-    'avatar': Avatar
-  },
   computed: {
   isTheAdmin() {
     if(sessionStorage.getItem('isAdmin') == 1) {
       return true;
     }
     return false
-  },
-  avatar() {
-    if (this.user.profilPic) {
-      return 'http://localhost:3000/images/' + this.user.profilPic
-    }
-    return '/profile_pic.png'
   },
   role() {
     if (this.user.isAdmin) {
