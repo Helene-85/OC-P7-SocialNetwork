@@ -3,18 +3,21 @@ const fs = require('fs');
 
 // Créer un message
 exports.createMessage = (req, res, next) => {
-    const message = ({
+    const message = new Message ({
+        user_id: 1,
         content: req.body.content,
-        image: null
+        image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+        createdAt: '2021-01-09',
+        updateAt: '2021-02-09',
     });
     console.log('message', message);
     Message.create(message, (err, data) => {
+      console.log(err);
         if(err) {
           return res.status(400).json({ message: 'Impossible de créer le message' });
         } 
         res.send(data);
     })
-    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
 // Récupérer tous les messages

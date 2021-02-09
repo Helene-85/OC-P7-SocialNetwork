@@ -2,16 +2,19 @@
 const db = require('./db');
 
 const Message = function(message) {
+    this.user_id=message.user_id,
     this.content=message.content,
-    this.image=message.image
+    this.image=message.image,
+    this.createdAt=message.createdAt,
+    this.updatedAt=message.updatedAt
 }
 
 // Créer un message
 Message.create = (newMessage, result) => {
-    let statment = `INSERT INTO messages(content, image)
-    VALUES(?,?)`;
+    let statment = `INSERT INTO messages SET ?`;
     db.query(statment, newMessage, (err, res) => {
-        if(err) {
+        console.log(res);
+            if(err) {
             result(err, null);
             return;
         } else {

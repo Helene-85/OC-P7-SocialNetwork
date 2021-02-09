@@ -7,7 +7,7 @@
         <div
           class="flex flex-col justify-center items-center relative h-full text-white"
         >
-          <avatar/>
+          <avatar :user = "user"/>
           <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
@@ -83,13 +83,23 @@ export default {
   created() {
     this.userId = JSON.parse(sessionStorage.getItem('userId'));
     this.pseudo = sessionStorage.getItem('pseudo');
+    this.profilPic = sessionStorage.getItem('profilPic');
     this.token = sessionStorage.getItem('token');
   },
   data() {
     return {
       userId: '',
       pseudo: '',
+      profilPic: '',
       token: null,
+    }
+  },
+  computed: {
+    user() {
+      return {
+        userId: this.userId,
+        profilPic : this.profilPic
+      }
     }
   },
   methods: {

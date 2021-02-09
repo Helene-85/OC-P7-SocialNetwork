@@ -4,10 +4,7 @@ import Home from '../views/Home.vue'
 import Account from '../views/Account.vue'
 import Feed from '../views/Feed.vue'
 import Users from '../views/Users.vue'
-import Header from '../components/Header.vue'
 import Login from '../components/Login.vue'
-import Message from '../components/Message.vue'
-import NewMessage from '../components/NewMessage.vue'
 import Signup from '../components/Signup.vue'
 import Welcome from '../components/Welcome.vue'
 import NotFound from '../views/NotFound.vue'
@@ -23,7 +20,7 @@ const routes = [
   {
     path: '/profile/:id',
     name: 'Account',
-    component: Account
+    component: Account,
   },
   {
     path: '/Users',
@@ -36,24 +33,9 @@ const routes = [
     component: Feed
   },
   {
-    path: '/message',
-    name: 'Message',
-    component: Message
-  },
-  {
-    path: '/NewMessage',
-    name: 'NewMessage',
-    component: NewMessage
-  },
-  {
     path: '/login',
     name: 'Login',
     component: Login
-  },
-  {
-    path: '/header',
-    name: 'Header',
-    component: Header
   },
   {
     path: '/signup',

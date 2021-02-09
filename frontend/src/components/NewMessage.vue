@@ -4,7 +4,7 @@
       <div class="bg-white rounded-lg tracking-wide">
         <div class="px-4 py-2 mt-2">
           <div class="author flex items-center -ml-3 my-3">
-            <avatar/>
+            <avatar :user = "user"/>
             <h2 class="text-sm tracking-tighter text-gray-900">
               <a class="text-gray-900 uppercase" href="/profile/:id">{{ pseudo }}</a>
             </h2>
@@ -71,6 +71,7 @@ import http from '../http';
 import Avatar from '@/components/Avatar.vue';
 
 export default {
+  components: { Avatar },
   name: 'NewMessage',
   created() {
     this.token = sessionStorage.getItem('token');
@@ -88,8 +89,13 @@ export default {
       token: null
     }
   },
-  components: {
-    'avatar': Avatar
+  computed: {
+    user() {
+      return {
+        userId: this.userId,
+        profilPic : this.profilPic
+      }
+    }
   },
   methods: {
     postMessage() {
@@ -98,7 +104,7 @@ export default {
         image: this.image
       }
       http     
-      .post('/', payload)
+      .post('/messages/', payload)
       .then(res => {
         this.$emit('added', payload)
       })

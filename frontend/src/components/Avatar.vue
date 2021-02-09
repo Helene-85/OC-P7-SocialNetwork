@@ -10,21 +10,18 @@
 
 <script>
 export default {
-    name: 'Avatar',
-    created() {
-    this.profilPic = sessionStorage.getItem('profilPic');
-  },
-  data() {
-    return {
-      profilPic: '',
+  name: 'Avatar',
+  props: {
+    user: {
+      type: Object
     }
   },
-    computed: {
+  computed: {
     avatar() {
-    if (this.profilPic == '') {
+    if (this.user.profilPic == '') {
       return '/profile_pic.png'
       }
-      return 'http://localhost:3000/images/' + this.profilPic
+      return 'http://localhost:3000/images/' + this.user.profilPic
     }
   },
 }
