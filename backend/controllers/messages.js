@@ -8,7 +8,7 @@ exports.createMessage = (req, res, next) => {
         content: req.body.content,
         image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
         createdAt: '2021-01-09',
-        updateAt: '2021-02-09',
+        updatedAt: '2021-02-09',
     });
     console.log('message', message)
     Message.create(message, (err, data) => {
