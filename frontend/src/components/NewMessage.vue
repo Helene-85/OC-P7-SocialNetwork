@@ -6,7 +6,7 @@
           <div class="author flex items-center -ml-3 my-3">
             <avatar class="w-12 h-12 object-cover rounded-full mx-4 object-cover shadow" :user = "user"/>
             <h2 class="text-sm tracking-tighter text-gray-900">
-              <a class="text-gray-900 uppercase" href="/profile/:id">{{ pseudo }}</a>
+              <a class="text-gray-900 uppercase" href="/profile/:id">{{ user.pseudo }}</a>
             </h2>
           </div>
           <form class="w-full max-w-xl bg-white rounded-lg px-4 py-1">
@@ -69,33 +69,19 @@
 <script>
 import http from '../http';
 import Avatar from '@/components/Avatar.vue';
+import {mapState} from 'vuex';
 
 export default {
   components: { Avatar },
   name: 'NewMessage',
-  created() {
-    this.token = sessionStorage.getItem('token');
-    this.userId = sessionStorage.getItem('userId');
-    this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
-  },
    data() {
     return {
-      userId: '',
-      pseudo: '',
       content: '',
-      image: '',
-      profilPic: '',
-      token: null
+      image: ''
     }
   },
   computed: {
-    user() {
-      return {
-        userId: this.userId,
-        profilPic : this.profilPic
-      }
-    }
+    ...mapState({ user }),
   },
   methods: {
     postMessage() {

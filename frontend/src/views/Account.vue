@@ -8,7 +8,7 @@
           class="flex flex-col justify-center items-center relative h-full text-white"
         >
           <avatar class="h-24 w-24 mb-4 object-cover rounded-full object-cover" :user = "user"/>
-          <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ pseudo }} </h1>
+          <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ user.pseudo }} </h1>
           <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
                 <input
@@ -38,7 +38,7 @@
                 <hr class="mt-2 border-green-500" />
               </div>
               <div class="form-item">
-                <label class="text-xl text-white">Pseudonyme : <span class="text-green-500">{{ pseudo }}</span></label>
+                <label class="text-xl text-white">Pseudonyme : <span class="text-green-500">{{ user.pseudo }}</span></label>
                 <input
                   class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
                   id="pseudo"
@@ -63,6 +63,7 @@
           <a
             class="text-sm text-white hover:text-green-300"
             href="./index.html"
+            @click.prevent="deleteUser"
           >
             Supprimer mon compte</a
           >
@@ -75,37 +76,25 @@
 
 <script>
 import Avatar from '@/components/Avatar.vue';
-import http from '../http'
+import http from '../http';
+import {mapState} from 'vuex';
 
 export default {
   components: { Avatar },
   name: 'Account',
-  created() {
+/*   created() {
     this.userId = JSON.parse(sessionStorage.getItem('userId'));
     this.pseudo = sessionStorage.getItem('pseudo');
     this.profilPic = sessionStorage.getItem('profilPic');
     this.token = sessionStorage.getItem('token');
-  },
-  data() {
-    return {
-      userId: '',
-      pseudo: '',
-      profilPic: '',
-      token: null,
-    }
-  },
+  }, */
   computed: {
-    user() {
-      return {
-        userId: this.userId,
-        profilPic : this.profilPic
-      }
-    }
+    ...mapState({ user }),
   },
   methods: {
-    deleteOneUser(user) {
+    deleteUser() {
       http
-        .delete("/auth/users/" + user.id)
+        .delete("/auth/users/" + this.user.id)
         .then((res) => console.log(res))
         .catch(() => console.log('Impossible de suprimer le user'));
         sessionStorage.clear();

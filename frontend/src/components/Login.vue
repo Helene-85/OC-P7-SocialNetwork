@@ -155,6 +155,7 @@
 
 <script>
 import http from '../http'
+import {mapMutations} from 'vuex';
 
 export default {
   name: 'login',
@@ -165,6 +166,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({ initUser }),
     login() {
       const payload = {
         email: this.email,
@@ -173,11 +175,7 @@ export default {
       http
         .post('/auth/login', payload)
         .then(res => {
-          sessionStorage.setItem('token', res.data.token)
-          sessionStorage.setItem('pseudo', res.data.pseudo)
-          sessionStorage.setItem('userId', res.data.userId)
-          sessionStorage.setItem('profilPic', res.data.profilPic)
-          sessionStorage.setItem('isAdmin', res.data.isAdmin)
+          this.initUser(res.data)
           window.location.href='Welcome'
         })
         .catch(() => {
