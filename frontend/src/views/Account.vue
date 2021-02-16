@@ -82,14 +82,8 @@ import {mapState} from 'vuex';
 export default {
   components: { Avatar },
   name: 'Account',
-/*   created() {
-    this.userId = JSON.parse(sessionStorage.getItem('userId'));
-    this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
-    this.token = sessionStorage.getItem('token');
-  }, */
   computed: {
-    ...mapState({ user }),
+    ...mapState(['user']),
   },
   methods: {
     deleteUser() {

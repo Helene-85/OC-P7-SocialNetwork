@@ -6,11 +6,14 @@
     Bienvenue <span class="text-green-500 uppercase">{{ pseudo }}</span> !
     </h1>
     <newMessage @added="add"></newMessage>
-    <message></message>
+    <div v-for="message in messages" :key="message.id">
+      <message :item="message"></message>>
+    </div>
   </div>
 </template>
 
 <script>
+import http from '../http';
 import NewMessage from '@/components/NewMessage.vue'
 import Message from '@/components/Message.vue'
 
@@ -30,9 +33,16 @@ export default {
       messages: []
     }
   },
+  mounted() {
+    http
+      .get('/messages/')
+      .then(res => {
+        this.messages = res.data
+      })
+    },
   methods: {
-    add() {
-      message.push(this.messages)
+    add(message) {
+      this.messages.push(message)
     }
   }
 }

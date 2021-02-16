@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Header from './components/Header'
 
 export default {
@@ -15,33 +16,22 @@ export default {
   components: {
     'header-top': Header
   },
-/*    created() {
-    this.userId = JSON.parse(sessionStorage.getItem('userId'));
-    this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
-    this.token = sessionStorage.getItem('token');
+  mounted() {
+    this.check();
   },
-  data() {
-    return {
-      userId: '',
-      pseudo: '',
-      profilPic: '',
-      token: null,
-    }
-  }, */
-  computed: {
-    isConnected() {
-    if(sessionStorage.getItem('token')) {
-      return true;
-    }
-    return false
-    },
-    /* user() {
-      return {
-        userId: this.userId,
-        profilPic : this.profilPic
+  methods: {
+    check() {
+      if (this.user.id == 0) {
+        this.$router.push('/');
       }
-    } */
+    }
+  },
+  computed: {
+    ...mapState(['user']),
+
+    isConnected() {
+      return (this.user.id > 0);
+    }
   }
 }
 </script>

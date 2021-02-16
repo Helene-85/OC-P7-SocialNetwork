@@ -26,7 +26,7 @@
           </p>
         </div>
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
-          {{ content }} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Impedit nemo, aut ad quaerat consectetur, ex sapiente corporis repellat iste earum velit blanditiis iusto, at id officiis deserunt molestiae? Fugit, eos!
+          {{ item.content }}
         </p>
         <div class="flex ml-3 mt-4 mb-4 space-x-3">
           <a href="#"
@@ -76,27 +76,14 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'message',
-  data() {
-    return {
-      content: '',
-      profilPic: '',
-      pseudo: '',
-      date: '',
-      comment: '',
-      token: null
+  props: {
+    item: {
+      type: Object,
+      required: true,
+      default: () => {}
     }
-  },
-   created() {
-    this.token = sessionStorage.getItem('token');
-    this.userId = sessionStorage.getItem('userId');
-    this.pseudo = sessionStorage.getItem('pseudo');
-    this.profilPic = sessionStorage.getItem('profilPic');
-    this.email = sessionStorage.getItem('email');
-    this.content = sessionStorage.getItem('content');
   },
   computed: {
   isTheAdmin() {
@@ -104,26 +91,8 @@ export default {
       return true;
     }
     return false
-  }
-},
-  methods: {
-    getMessage() {
-      const payload = {
-        message: this.message,
-        date: this.date,
-        comment: this.comment
-      }
-      axios
-        .get('http://localhost:3000/api/auth/messages/:id', payload)
-        .then(res => {
-          console.log(res)
-          alert('Message bien reçu !')
-        })
-        .catch(() => {
-          console.log('Échec de la réception')
-        })
     }
-  }
+  },
 }
 </script>
 

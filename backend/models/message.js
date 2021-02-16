@@ -14,21 +14,32 @@ Message.create = (newMessage, result) => {
     let statment = `INSERT INTO messages SET ?`;
     db.query(statment, newMessage, (err, res) => {
         console.log(res);
-            if(err) {
+        if(err) {
             result(err, null);
             return;
-        } else {
-            result(null, {
-                id:res.id,
-                ...newMessage
-            })
         }
+        result(null, {
+            id:res.id,
+            ...newMessage
+        })
     })
 };
 
 // Trouver un message
 Message.findOne = (id, result) => {
     db.query("SELECT * FROM messages WHERE id=?", id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, res[0])
+        }
+    })
+};
+
+// Récupérer le dernier message
+Message.getLatest = (id, result) => {
+    db.query("SELECT * FROM messages ORDER BY id DESC LIMIT 0,1", (err, res) => {
         if(err) {
             result(err, null);
             return;

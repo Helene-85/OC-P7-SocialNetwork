@@ -3,21 +3,24 @@ const fs = require('fs');
 
 // Créer un message
 exports.createMessage = (req, res, next) => {
-    const message = new Message ({
+    const newMessage = new Message ({
         user_id: 1,
         content: req.body.content,
         image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
-        createdAt: '2021-01-09',
-        updatedAt: '2021-02-09',
+        createdAt: '2021-02-16',
+        updatedAt: '2021-02-16',
     });
-    console.log('message', message)
-    Message.create(message, (err, data) => {
-      console.log(err);
+    Message.create(newMessage, (err, data) => {
         if(err) {
           return res.status(400).json({ message: 'Impossible de créer le message' });
         } 
-        res.send(data);
-    })
+        Message.getLatest('', (err, result) => {
+          if (err) {
+            return res.status(400).json({message: 'Message non trouvé' });
+          }
+          res.status(200).json(result)
+        });
+    });
 };
 
 // Récupérer tous les messages

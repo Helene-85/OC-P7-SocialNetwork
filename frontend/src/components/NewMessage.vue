@@ -81,7 +81,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({ user }),
+    ...mapState(['user']),
   },
   methods: {
     postMessage() {
@@ -92,7 +92,9 @@ export default {
       http     
       .post('/messages/', payload)
       .then(res => {
-        this.$emit('added', payload)
+        this.$emit('added', res.data)
+        this.content = ''
+        this.image = ''
       })
       .catch(() => {
         console.log('Impossible de poster le message');

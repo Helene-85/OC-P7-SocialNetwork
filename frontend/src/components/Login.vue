@@ -166,7 +166,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({ initUser }),
+    ...mapMutations(['initUser']),
     login() {
       const payload = {
         email: this.email,
@@ -176,7 +176,8 @@ export default {
         .post('/auth/login', payload)
         .then(res => {
           this.initUser(res.data)
-          window.location.href='Welcome'
+          sessionStorage.setItem('token', res.data.token)
+          this.$router.push('welcome');
         })
         .catch(() => {
           console.log('Échec de la connexion')
