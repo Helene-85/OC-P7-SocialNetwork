@@ -21,7 +21,7 @@
             />
           </div>
           <p class="text-sm tracking-tighter text-gray-900">
-            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By</span> {{ pseudo }}</a>
+            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By</span> {{ user.pseudo }}</a>
             <span class="text-gray-600">{{ date }}</span>
           </p>
         </div>
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: 'message',
   props: {
@@ -86,6 +87,7 @@ export default {
     }
   },
   computed: {
+  ...mapState(['user']),
   isTheAdmin() {
     if(sessionStorage.getItem('isAdmin') == 1) {
       return true;

@@ -6,7 +6,7 @@
     Bienvenue <span class="text-green-500 uppercase">{{ pseudo }}</span> !
     </h1>
     <newMessage @added="add"></newMessage>
-    <div v-for="message in messages" :key="message.id">
+    <div v-for="message in messages" :key="message">
       <message :item="message"></message>>
     </div>
   </div>

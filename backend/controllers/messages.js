@@ -25,15 +25,17 @@ exports.createMessage = (req, res, next) => {
 
 // Récupérer tous les messages
 exports.getAllMessages = (req, res, next) => {
-    Message.findAll(req.body.content)
+  Message.findAll ((err, data) => {
     if(err) {
-        return res.status(404).json({ message: 'Messages non trouvés' });
-    }
-    res.status(200).json({
-        content: result.content,
-        image: result.image
-    })
-    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
+      return res.status(400).json({ message: 'Impossible de créer le message' });
+    } 
+    Message.getLatest('', (err, result) => {
+      if (err) {
+        return res.status(400).json({message: 'Message non trouvé' });
+      }
+      res.status(200).json(result)
+    });
+  });
 };
 
 // Récupérer un message
@@ -46,7 +48,6 @@ exports.getOneMessage = (req, res, next) => {
         content: result.content,
         image: result.image
     })
-    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };
 
 // Modifier un message
@@ -60,7 +61,6 @@ exports.updateMessage = (req, res, next) => {
         image: result.image
       })
     })
-    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
   };
 
   // Supprimer un message
