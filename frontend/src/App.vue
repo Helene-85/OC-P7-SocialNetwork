@@ -21,14 +21,15 @@ export default {
   },
   methods: {
     check() {
-      if (this.user.id == 0) {
-        this.$router.push('/');
+      if (this.user.id == 0 &&
+      this.$router.currentRoute.path != '/') {
+      this.$router.push('/');
       }
     }
   },
   computed: {
     ...mapState(['user']),
-
+git 
     isConnected() {
       return (this.user.id > 0);
     }
