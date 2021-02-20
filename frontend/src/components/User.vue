@@ -22,14 +22,15 @@
 <script>
 import http from '../http';
 import Avatar from '@/components/Avatar.vue'
+import { mapState } from 'vuex';
 
 export default {
   components: { Avatar },
   name: 'user',
-  props: ['user'],
   computed: {
+  ...mapState(['user']),
   isTheAdmin() {
-    if(sessionStorage.getItem('isAdmin') == 1) {
+    if (this.user.isAdmin) {
       return true;
     }
     return false

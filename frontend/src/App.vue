@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     ...mapState(['user']),
-git 
+
     isConnected() {
       return (this.user.id > 0);
     }
