@@ -6,12 +6,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 export default {
   name: 'Avatar',
+  props: {
+    user: {
+      type: Object
+    }
+  },
   computed: {
-    ...mapState(['user']),
     avatar() {
     if (this.user.profilPic == '' || this.user.profilPic == null) {
       return '/profile_pic.png'

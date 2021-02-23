@@ -51,7 +51,8 @@ Message.getLatest = (id, result) => {
 
 // Trouver tous les message
 Message.findAll = (result) => {
-    db.query("SELECT * FROM messages", (err, res) => {
+    db.query("SELECT messages.*, users.pseudo, users.profilPic FROM messages JOIN users ON users.id = messages.user_id ORDER BY messages.id DESC", (err, res) => {
+        console.log(res);
         if(err) {
             result(err, null);
             return;

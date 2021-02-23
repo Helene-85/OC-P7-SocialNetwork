@@ -9,7 +9,7 @@
       v-for="user of users"
       :key="user.id"
       class="-my-2 mt-12 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <user :user="user" @deleted="removeUser"></user>
+      <user :member="user" @deleted="removeUser"></user>
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     isTheAdmin() {
-      if(sessionStorage.getItem('isAdmin') == 1) {
+      if(this.user.isAdmin) {
         return true;
       }
       return false

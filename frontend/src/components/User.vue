@@ -1,16 +1,16 @@
 <template>
   <div class="container mx-auto max-w-sm flex flex-col space-y-4 justify-center items-center">
     <div class="bg-white w-full flex items-center p-2 rounded-xl shadow border">
-      <avatar class="h-14 w-14 object-cover rounded-full" :user = "user"/>
+      <avatar class="h-14 w-14 object-cover rounded-full" :user = "member"/>
       <div class="flex-grow p-3">
         <div class="font-semibold text-gray-700">
-          {{ user.pseudo }} 
+          {{ member.pseudo }} 
         </div>
         <div class="text-sm text-gray-500">
           {{ role }}
         </div>
         <a
-          @click="deleteOneUser"
+
           v-if="isTheAdmin"
           href="#" class="text-green-700 hover:text-green-700"
           >Supprimer</a>
@@ -27,6 +27,11 @@ import { mapState } from 'vuex';
 export default {
   components: { Avatar },
   name: 'user',
+  props: {
+    member: {
+      type: Object
+    }
+  },
   computed: {
   ...mapState(['user']),
   isTheAdmin() {
@@ -36,14 +41,14 @@ export default {
     return false
   },
   role() {
-    if (this.user.isAdmin) {
+    if (this.member.isAdmin) {
       return 'Administrateur'
     }
     return 'Membre'
     }
   },
   methods: {
-    deleteOneUser() {
+/*     deleteOneUser() {
       http
         .delete("/auth/users/" + this.user.id)
         .then((res) => {
@@ -51,7 +56,7 @@ export default {
           console.log(res)
         }) 
         .catch(() => console.log('Impossible de suprimer le user'));
-    }
+    } */
   }
 }
 </script>

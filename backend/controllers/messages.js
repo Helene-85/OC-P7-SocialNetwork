@@ -29,13 +29,8 @@ exports.getAllMessages = (req, res, next) => {
     if(err) {
       return res.status(400).json({ message: 'Impossible de créer le message' });
     } 
-    Message.getLatest('', (err, result) => {
-      if (err) {
-        return res.status(400).json({message: 'Message non trouvé' });
-      }
-      res.status(200).json(result)
+      res.status(200).json(data)
     });
-  });
 };
 
 // Récupérer un message

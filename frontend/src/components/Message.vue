@@ -21,8 +21,8 @@
             />
           </div>
           <p class="text-sm tracking-tighter text-gray-900">
-            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By</span> {{ user.pseudo }}</a>
-            <span class="text-gray-600">{{ date }}</span>
+            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By</span> {{ item.pseudo }}</a>
+            <span class="text-gray-600">{{ item.createdAt }}</span>
           </p>
         </div>
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
@@ -89,7 +89,7 @@ export default {
   computed: {
   ...mapState(['user']),
   isTheAdmin() {
-    if(sessionStorage.getItem('isAdmin') == 1) {
+    if(this.user.isAdmin) {
       return true;
     }
     return false
