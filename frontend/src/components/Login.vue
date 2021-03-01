@@ -40,7 +40,6 @@
                 />
               </svg>
             </div>
-
             <input
               v-model="email"
               id="email"
@@ -80,7 +79,7 @@
             <input
               v-model="password"
               id="password"
-              type="password"
+              :type="show ? 'text' : 'password'"
               name="password"
               class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
               placeholder="******************"
@@ -89,11 +88,10 @@
         </div>
         <div class="flex items-center mb-6 -mt-4">
           <div class="flex ml-auto">
-            <a
-              href="#"
-              class="inline-flex text-xs sm:text-sm text-green-500 hover:text-green-700"
-              >Mot de passe oublié ?</a
-            >
+            <span class="text-sm text-color-gray-500">
+            <input type="checkbox" v-model="show">
+            Voir mon mot de passe
+            </span>
           </div>
         </div>
         <router-link to="/feed">
@@ -162,7 +160,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      show: false
     }
   },
   methods: {
