@@ -10,8 +10,8 @@
           {{ role }}
         </div>
         <a
-
           v-if="isTheAdmin"
+          @click="deleteOneUser"
           href="#" class="text-green-700 hover:text-green-700"
           >Supprimer</a>
       </div>
@@ -48,15 +48,15 @@ export default {
     }
   },
   methods: {
-/*     deleteOneUser() {
+    deleteOneUser() {
       http
-        .delete("/auth/users/" + this.user.id)
+        .delete("/auth/users/" + this.member.id)
         .then((res) => {
-          this.$emit('deleted', this.user.id)
+          this.$emit('deleted', this.member.id)
           console.log(res)
         }) 
         .catch(() => console.log('Impossible de suprimer le user'));
-    } */
+    }
   }
 }
 </script>
