@@ -19,22 +19,22 @@
                 required
               ></textarea>
             </div>
-<!--             <form  enctype="multipart/form-data">
-              <div class="flex items-center mb-6 -mt-4 mr-3">
-                <div class="flex ml-auto">
-                  <input
-                  style="display: none"
-                  class="mt-2"
-                  type="file" 
-                  ref="image"/>
-                  <button 
-                  class="flex items-center justify-center mt-2 px-8 focus:outline-none text-green-700 text-sm sm:text-base bg-white hover:bg-green-500 hover:text-white rounded w-full transition duration-250 ease-in"
-                  >
-                  Ajouter une image<span class="ml-2"><i class="fas fa-upload"></i></span>
-                  </button>
-                </div>
+            <div class="flex items-center mb-6 -mt-4 mr-3">
+              <div class="flex ml-auto">
+                <input
+                style="display: none"
+                class="mt-2"
+                type="file"
+                accept="image/*" 
+                @change="uploadImage($event)"
+                id="file-input"
+                ref="fileInput">
+                <button 
+                class="flex items-center justify-center mt-6 px-8 focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 hover:text-white rounded w-full transition duration-250 ease-in"
+                @click="$refs.fileInput.click()">Ajouter une image
+                </button>
               </div>
-            </form> -->
+            </div>
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
               <button
                 type="button"

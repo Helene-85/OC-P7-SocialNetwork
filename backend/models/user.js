@@ -65,7 +65,7 @@ User.modify = (user, result) => {
             result(err, null);
             return;
         } else {
-            alert('Modifcation réussie !')
+            result(null, res)
         }
     })
 };

@@ -48,4 +48,17 @@ Commentaire.delete = (id, result) => {
     })
 };
 
+// Supprimer tous les commentaire d\'un user précis
+/* 
+Commentaire.deleteAllBy = (id, result) => {
+    db.query("DELETE * FROM comments WHERE id=?", id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, res)
+        }
+    })
+*/
+
 module.exports = Commentaire;

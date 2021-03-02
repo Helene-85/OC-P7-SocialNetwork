@@ -62,22 +62,6 @@ Message.findAll = (result) => {
     })
 };
 
-// Modifier un message
-Message.modify = (newMessage, result) => {
-    db.query("UPDATE messages SET content=?, image=? WHERE id=",
-    [newMessage.content, newMessage.image], id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            result(null, {
-                id:res.id,
-                ...newMessage
-            })
-        }
-    })
-};
-
 // Supprimer un message
 Message.delete = (id, result) => {
     db.query("DELETE messages WHERE id=?", id, (err, res) => {
@@ -89,5 +73,19 @@ Message.delete = (id, result) => {
         }
     })
 };
+
+// Supprimer tous les messages d\'un user précis
+
+Message.deleteAllBy = (id, result) => {
+    db.query("DELETE * FROM comments WHERE id=?", id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, res)
+        }
+    })
+};
+
 
 module.exports = Message;

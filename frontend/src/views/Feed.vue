@@ -20,8 +20,8 @@ import Message from '@/components/Message.vue'
 export default {
   name: 'feed',
   created() {
-  this.token = sessionStorage.getItem('token');
-  this.pseudo = sessionStorage.getItem('pseudo');
+  this.token = localStorage.getItem('token');
+  this.pseudo = localStorage.getItem('pseudo');
   },
   components: {
     newMessage: NewMessage,

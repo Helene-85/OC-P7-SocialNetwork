@@ -7,7 +7,7 @@ const http = axios.create({
 // Attribue le header Authorization avec le token à toutes les requêtes axios
 http.interceptors.request.use(function (config)
 {
-  const token = sessionStorage.getItem('token');
+  const token = localStorage.getItem('token');
   config.headers.Authorization = token ? `Bearer ${token}` : 'abc';
   return config;
 });

@@ -175,12 +175,12 @@ export default {
         .post('/auth/login', payload)
         .then(res => {
           this.initUser(res.data)
-          sessionStorage.setItem('token', res.data.token)
+          localStorage.setItem('token', res.data.token)
           this.$router.push('welcome');
         })
         .catch(() => {
           console.log('Échec de la connexion')
-          sessionStorage.removeItem('token')
+          localStorage.removeItem('token')
           alert('Adresse email ou mot de passe incorrect') // login page
         })
     }

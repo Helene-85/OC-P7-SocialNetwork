@@ -87,9 +87,10 @@ exports.getOneUser = (req, res, next) => {
 // Mofifier un user
 exports.updateOneUser = (req, res, next) => {
   let user = {
-    'id': req.body.bodyuserId,
-    'pseudo': req.body.pseudo
+    'id': req.params.id,
+    'pseudo': req.body.pseudo,
   }
+  console.log(user);
   User.modify(user, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Modification non effectuée' });
@@ -111,3 +112,31 @@ exports.deleteUser = (req, res, next) => {
         })
       })
 };
+
+//  ALTERNATIVE Supprimer un user
+/* exports.deleteUser = (req, res, next) => {
+  Commentaire.deleteAllBy(req.params.id, (err, result) => {
+    if(err) {
+    return res.status(400).json({ message: 'Impossible de supprimer les commentaires de ce user'});
+    }
+    res.status(204).json({
+        message: 'Commentaires correctement supprimés'
+    })
+  })
+  Message.deleteAllBy(req.params.id, (err, result) => {
+    if(err) {
+    return res.status(400).json({ message: 'Impossible de supprimer les messages de ce user'});
+    }
+    res.status(204).json({
+        message: 'Messages correctement supprimé'
+    })
+  })
+  User.delete(req.params.id, (err, result) => {
+    if(err) {
+    return res.status(400).json({ message: 'Impossible de supprimer l\'utilisateur'});
+    }
+    res.status(204).json({
+        message: 'Utilisateur correctement supprimé'
+    })
+  })
+}; */

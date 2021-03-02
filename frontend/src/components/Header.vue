@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     logout() {
-      sessionStorage.clear();
+      localStorage.clear();
       window.location.href='/'
     }
   }
