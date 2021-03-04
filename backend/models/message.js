@@ -13,8 +13,8 @@ const Message = function(message) {
 Message.create = (newMessage, result) => {
     let statment = `INSERT INTO messages SET ?`;
     db.query(statment, newMessage, (err, res) => {
-        console.log(res);
         if(err) {
+            console.log(err);
             result(err, null);
             return;
         }

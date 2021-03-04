@@ -1,14 +1,26 @@
 const Message = require('../models/message');
 const fs = require('fs');
 
+function getSqlDate() {
+  let date = new Date();
+  const dateStr =
+    date.getFullYear() + "-" +
+    ("00" + (date.getMonth() + 1)).slice(-2) + "-" +
+    ("00" + date.getDate()).slice(-2) + " " +
+    ("00" + date.getHours()).slice(-2) + ":" +
+    ("00" + date.getMinutes()).slice(-2) + ":" +
+    ("00" + date.getSeconds()).slice(-2);
+    return dateStr;
+};
 // Créer un message
 exports.createMessage = (req, res, next) => {
+  console.log(req.body.userId);
     const newMessage = new Message ({
-        user_id: 1,
+        user_id: req.body.userId,
         content: req.body.content,
         image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
-        createdAt: '2021-02-16',
-        updatedAt: '2021-02-16',
+        createdAt: getSqlDate(),
+        updatedAt: getSqlDate(),
     });
     Message.create(newMessage, (err, data) => {
         if(err) {

@@ -82,4 +82,40 @@ User.delete = (id, result) => {
     })
 };
 
+// Supprimer un user
+User.deleteAll = (id, result) => {
+    db.query("DELETE FROM message_reaction_user WHERE user_id=?", id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            // result(null, res);
+        }
+    });
+    db.query("DELETE FROM comments WHERE user_id=?", id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            // result(null, res);
+        }
+    });
+    db.query("DELETE FROM messages WHERE user_id=?", id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            // result(null, res);
+        }
+    });
+    db.query("DELETE FROM users WHERE id=?", id, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, res);
+        }
+    });
+};
+
  module.exports = User;
