@@ -52,7 +52,17 @@ Message.getLatest = (id, result) => {
 // Trouver tous les message
 Message.findAll = (result) => {
     db.query("SELECT messages.*, users.pseudo, users.profilPic FROM messages JOIN users ON users.id = messages.user_id ORDER BY messages.id DESC", (err, res) => {
-        console.log(res);
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, res)
+        }
+    })
+};
+
+Message.getAllComments = (id, result) => {
+    db.query("SELECT * FROM comments WHERE message_id=? ORDER BY comments.id DESC", id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -86,6 +96,5 @@ Message.deleteAllBy = (id, result) => {
         }
     })
 };
-
 
 module.exports = Message;

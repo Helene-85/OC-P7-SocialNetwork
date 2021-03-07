@@ -34,15 +34,20 @@ export default {
     }
   },
   mounted() {
-    http
-      .get('/messages/')
-      .then(res => {
-        this.messages = res.data
-      })
+    this.refresh()
     },
   methods: {
     add(message) {
-      this.messages.push(message)
+      //this.messages.push(message)
+      this.refresh()
+    },
+    refresh() {
+      http
+      .get('/messages/')
+      .then(res => {
+        this.messages = res.data
+        console.log(this.messages);
+      })
     }
   }
 }

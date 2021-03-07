@@ -1,43 +1,44 @@
 // Création des modèles Comment
 const db = require('./db');
 
-const Commentaire = function(commentaire) {
-    this.comment=commentaire.comment
+const Comment = function(comment) {
+    this.user_id=comment.user_id,
+    this.message_id=comment.message_id,
+    this.comment=comment.comment,
+    this.createdAt=comment.createdAt,
+    this.updatedAt=comment.updatedAt
 }
 
-// Créer un commentaire
-Commentaire.create = (newCommentaire, result) => {
-    db.query("INSERT INTO comments SET ?", newCommentaire, (err, res) => {
+// Créer un comment
+Comment.create = (newComment, result) => {
+    console.log('toto', newComment);
+    db.query("INSERT INTO comments SET ?", newComment, (err, res) => {
+        if(err) {
+            console.log('tata', err);
+            result(err, null);
+            return;
+        }
+            result(null, {
+                id:res.id,
+                ...newComment
+            })
+    })
+};
+
+// Récupérer les commentaires par message
+Comment.findAllMessageComment = (id, result) => {
+    db.query("SELECT * FROM comments WHERE message_id=?", id, (err, res) => {
         if(err) {
             result(err, null);
             return;
         } else {
-            result(null, {
-                id:res.id,
-                ...newCommentaire
-            })
+            result(null, res[0])
         }
     })
 };
 
-// Modifier un commentaire
-Commentaire.modify = (newCommentaire, result) => {
-    db.query("UPDATE comments SET comment=? WHERE id=?",
-    [newCommentaire=commentaire.comment] ,id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            result(null, {
-                id:res.id,
-                ...newCommentaire
-            })
-        }
-    })
-};
-
-// Supprimer un commentaire
-Commentaire.delete = (id, result) => {
+// Supprimer un comment
+Comment.delete = (id, result) => {
     db.query("DELETE comments WHERE id=?", id, (err, res) => {
         if(err) {
             result(err, null);
@@ -48,9 +49,9 @@ Commentaire.delete = (id, result) => {
     })
 };
 
-// Supprimer tous les commentaire d\'un user précis
+// Supprimer tous les comment d\'un user précis
 /* 
-Commentaire.deleteAllBy = (id, result) => {
+Comment.deleteAllBy = (id, result) => {
     db.query("DELETE * FROM comments WHERE id=?", id, (err, res) => {
         if(err) {
             result(err, null);
@@ -61,4 +62,4 @@ Commentaire.deleteAllBy = (id, result) => {
     })
 */
 
-module.exports = Commentaire;
+module.exports = Comment;

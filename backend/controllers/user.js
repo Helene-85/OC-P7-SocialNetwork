@@ -45,6 +45,7 @@ exports.login = (req, res, next) => {
       if (!result.profilPic) {
         profile = ''
       }
+      console.log('take', result);
       res.status(200).json({
         pseudo: result.pseudo,
         userId: result.id,

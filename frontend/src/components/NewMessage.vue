@@ -22,17 +22,12 @@
             <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
                 <input
-                style="display: none"
                 class="mt-2"
                 type="file"
                 accept="image/*" 
                 @change="uploadImage($event)"
                 id="file-input"
                 ref="fileInput">
-                <button 
-                class="flex items-center justify-center mt-6 px-8 focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 hover:text-white rounded w-full transition duration-250 ease-in"
-                @click="$refs.fileInput.click()">Ajouter une image
-                </button>
               </div>
             </div>
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
@@ -77,7 +72,7 @@ export default {
    data() {
     return {
       content: '',
-      image: ''
+      file: ''
     }
   },
   computed: {
@@ -85,21 +80,42 @@ export default {
   },
   methods: {
     postMessage() {
-      const payload = {
-        content: this.content,
-        image: this.image
-      }
-      http     
-      .post('/messages/', payload)
-      .then(res => {
+      if(this.file) {
+        const formData = new FormData();
+        formData.append('content', this.content);
+        formData.append('user_id', this.user.id);
+        formData.append('file', this.file, this.file.name);
+
+        http
+        .post('/messages/', formData)
+        .then(res => {
         this.$emit('added', res.data)
         this.content = ''
-        this.image = ''
-      })
-      .catch(() => {
-        console.log('Impossible de poster le message');
-        alert('Impossible de poster le message :/')
-      })
+        this.file = ''
+        })
+        .catch(() => {
+          console.log('Impossible de poster le message');
+          alert('Impossible de poster le message :/')
+        })
+      }  else {
+        const payload = {
+          content: this.content,
+          user_id: this.user.id
+        }
+        http     
+        .post('/messages/', payload)
+        .then(res => {
+          this.$emit('added', res.data)
+          this.content = ''
+        })
+        .catch(() => {
+          console.log('Impossible de poster le message');
+          alert('Impossible de poster le message :/')
+        })
+      } 
+    },
+    uploadImage(e) {
+      this.file = e.target.files[0];
     }
   }
 }

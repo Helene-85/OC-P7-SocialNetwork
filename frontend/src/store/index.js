@@ -11,7 +11,6 @@ export default new Vuex.Store({
       isAdmin: false,
       pseudo: '',
       profilPic: '',
-      token: '',
     },
   },
   mutations: {
@@ -20,7 +19,6 @@ export default new Vuex.Store({
       state.user.isAdmin = data.isAdmin;
       state.user.pseudo = data.pseudo;
       state.user.profilPic = data.profilPic;
-      state.user.token = data.token;
     }
   },
   actions: {},

@@ -1,13 +1,13 @@
 <template>
   <div class="mx-auto px-4 py-8 max-w-xl my-2">
     <div class="bg-white rounded-lg mb-6 relative tracking-wide">
-       <a v-if="isTheAdmin" class="text-red-600 absolute top-5 right-5"href="#"
+       <a v-if="isTheAdmin" class="text-red-600 absolute top-5 right-5" href="#"
             ><i class="fas fa-trash-alt"></i></a
           >
       <div class="md:flex-shrink-0">
-        <img
-          src="https://ik.imagekit.io/q5edmtudmz/post1_fOFO9VDzENE.jpg"
-          alt="mountains"
+        <img v-if="(item.image != null)"
+          :src="item.image"
+          alt="image"
           class="w-full h-64 rounded-lg rounded-b-none object-cover"
         />
       </div>
@@ -21,7 +21,7 @@
             />
           </div>
           <p class="text-sm tracking-tighter text-gray-900">
-            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By</span> {{ item.pseudo }}</a>
+            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By </span> {{ item.pseudo }}</a>
             <span class="text-gray-600">{{ item.createdAt }}</span>
           </p>
         </div>
@@ -39,6 +39,7 @@
         <form class="w-full max-w-xl bg-white rounded-lg px-4">
           <div class="w-full md:w-full px-3 mb-2 mt-2">
             <textarea
+              v-model="commentInput"
               class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
               name="body"
               placeholder="Écrivez un commentaire"
@@ -47,6 +48,7 @@
           </div>
           <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
             <button
+              @click="postComment"
               type="button"
               class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
             >
@@ -70,13 +72,21 @@
           </div>
         </form>
       </div>
+      <div class="px-4 py-2 mt-2">
+        <p class="text-green-700">{{ item.pseudo }}</p>
+        <p class="w-full md:w-full flex items-start md:w-full px-3 mb-2 rounded py-2 bg-gray-100">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis aliquam eligendi eveniet ratione! Possimus, soluta. Odit quia, ea deserunt saepe consectetur laudantium asperiores vero, debitis repudiandae sit eaque ipsum praesentium?</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import http from '../http';
+import Avatar from './Avatar.vue';
+
 export default {
+  components: { Avatar },
   name: 'message',
   props: {
     item: {
@@ -85,16 +95,42 @@ export default {
       default: () => {}
     }
   },
-  computed: {
-  ...mapState(['user']),
-  isTheAdmin() {
-    if(this.user.isAdmin) {
-      return true;
-    }
-    return false
+  data() {
+    return {
+      commentInput: '',
     }
   },
-}
+  computed: {
+    ...mapState(['user']),
+    isTheAdmin() {
+      if(this.user.isAdmin) {
+        return true;
+      }
+      return false
+      }
+  },
+  methods: {
+    postComment() {
+      if(this.commentInput.trim() == '') {
+        alert('Merci de remplir le champs commentaire')
+        return
+      }
+      const payload = {
+        commentInput: this.commentInput,
+        user_id: this.user.id,
+        message_id: this.item.id,
+      }
+      http     
+        .post('/comments/', payload)
+        .then(res => {
+          this.$emit('added', res.data)
+          this.commentInput = ''
+        })
+        .catch(() => {
+          alert('Impossible de poster le message :/')
+        })
+    }
+  }}
 </script>
 
 <style scoped></style>

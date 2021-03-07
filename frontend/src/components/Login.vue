@@ -175,12 +175,14 @@ export default {
         .post('/auth/login', payload)
         .then(res => {
           this.initUser(res.data)
+          localStorage.setItem('token', res.data.token);
           this.$router.push('welcome');
         })
         .catch(() => {
           console.log('Échec de la connexion')
           localStorage.removeItem('vuex')
-          alert('Adresse email ou mot de passe incorrect') // login page
+          localStorage.removeItem('token')
+          alert('Adresse email ou mot de passe incorrect')
         })
     }
   }

@@ -13,37 +13,48 @@ function getSqlDate() {
     return dateStr;
 };
 // Créer un message
-exports.createMessage = (req, res, next) => {
-  console.log(req.body.userId);
-    const newMessage = new Message ({
-        user_id: req.body.userId,
-        content: req.body.content,
-        image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
-        createdAt: getSqlDate(),
-        updatedAt: getSqlDate(),
-    });
-    Message.create(newMessage, (err, data) => {
-        if(err) {
-          return res.status(400).json({ message: 'Impossible de créer le message' });
-        } 
-        Message.getLatest('', (err, result) => {
-          if (err) {
-            return res.status(400).json({message: 'Message non trouvé' });
-          }
-          res.status(200).json(result)
-        });
-    });
+exports.createMessage = (req, res, next) => 
+{
+  const newMessage = new Message ({
+      user_id: req.body.user_id,
+      content: req.body.content,
+      image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+      createdAt: getSqlDate(),
+      updatedAt: getSqlDate(),
+  });
+  
+  Message.create(newMessage, (err, data) => {
+      if(err) {
+        return res.status(400).json({ message: 'Impossible de créer le message' });
+      } 
+      Message.getLatest('', (err, result) => {
+        if (err) {
+          return res.status(400).json({message: 'Message non trouvé' });
+        }
+        res.status(200).json(result)
+      });
+  });
 };
 
 // Récupérer tous les messages
 exports.getAllMessages = (req, res, next) => {
   Message.findAll ((err, data) => {
     if(err) {
-      return res.status(400).json({ message: 'Impossible de créer le message' });
+      return res.status(400).json({ message: 'Impossible de récupérer les messages' });
     } 
-      res.status(200).json(data)
-    });
-};
+  let i = 0;
+  data.forEach(element => {
+    Message.getAllComments (element.id, (err, comments) => {
+      if(err) {
+        return res.status(400).json({ message: 'Impossible de récupérer les messages' });
+      }
+      data[i].tabComments = comments;
+      i++;
+    }) 
+  });
+    res.status(200).json(data)
+    })
+  };
 
 // Récupérer un message
 exports.getOneMessage = (req, res, next) => {
