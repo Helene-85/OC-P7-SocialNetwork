@@ -1,5 +1,6 @@
 const Message = require('../models/message');
 const fs = require('fs');
+const { CONNREFUSED } = require('dns');
 
 function getSqlDate() {
   let date = new Date();
@@ -38,21 +39,32 @@ exports.createMessage = (req, res, next) =>
 
 // Récupérer tous les messages
 exports.getAllMessages = (req, res, next) => {
-  Message.findAll ((err, data) => {
+  Message.findAllWithComments ((err, data) => {
     if(err) {
       return res.status(400).json({ message: 'Impossible de récupérer les messages' });
     } 
-  let i = 0;
-  data.forEach(element => {
-    Message.getAllComments (element.id, (err, comments) => {
-      if(err) {
-        return res.status(400).json({ message: 'Impossible de récupérer les messages' });
+    let newData = [];
+    let currentId = -1;
+    let i = -1;
+
+    data.forEach(message => {
+      if(currentId != message.id){
+        i++;
+        currentId = message.id;
+        newData[i] = {...message};
+        newData[i].tabComments = [];
       }
-      data[i].tabComments = comments;
-      i++;
-    }) 
-  });
-    res.status(200).json(data)
+
+      if(message.comment_id != null){
+        newData[i].tabComments.push({
+          comment_id: message.comment_id, 
+          comment_pseudo: message.comment_pseudo, 
+          comment_content: message.comment_content
+        });
+      }
+    });
+    console.log(newData);
+    res.status(200).json(newData)
     })
   };
 
@@ -68,32 +80,23 @@ exports.getOneMessage = (req, res, next) => {
     })
 };
 
-// Modifier un message
-exports.updateMessage = (req, res, next) => {
-    Message.modify(req.body.content, req.body.image, (err, result) => {
-      if(err) {
-        return res.status(400).json({ message: 'Modification non effectuée' });
-      }
-      res.status(201).json({
-        content: result.content,
-        image: result.image
-      })
-    })
-  };
-
   // Supprimer un message
-exports.deleteMessage = (req, res, next) => {
-    Message.delete(req.params.id)
-        .then(message => {
-        const filename = message.imageUrl.split('/images/')[1];
+  exports.deleteMessage = (req, res, next) => {
+    Message.delete (req.params.id, (err, data) => {
+      if(err) {
+        return res.status(400).json({ message: 'Impossible de supprimer le message' });
+      }
+      res.status(204).json({
+        message: 'Utilisateur correctement supprimé'
+      })
+      /* const filename = message.imageUrl.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => {
             message.deleteOne(req.params.id)
             .then(() => res.status(200).json({ message: 'Le message a été supprimé !'}))
             .catch((error) => res.status(400).json({ error }));
-        });
-        })
-        .catch(error => res.status(500).json({ error }));
-};
+        }); */
+    })
+  };
 
 // Ajout des réactions aux messages
 exports.addReactions = (req, res, next) => {

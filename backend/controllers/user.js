@@ -104,12 +104,12 @@ exports.updateOneUser = (req, res, next) => {
 
 // Supprimer un user
 exports.deleteUser = (req, res, next) => {
-      User.deleteAll(req.params.id, (err, result) => {
-        if(err) {
-        return res.status(400).json({ message: 'Impossible de supprimer l\'utilisateur'});
-        }
-        res.status(204).json({
-            message: 'Utilisateur correctement supprimé'
-        })
-      })
+  User.deleteAll(req.params.id, (err, result) => {
+    if(err) {
+    return res.status(400).json({ message: 'Impossible de supprimer l\'utilisateur'});
+    }
+    res.status(204).json({
+        message: 'Utilisateur correctement supprimé'
+    })
+  })
 };

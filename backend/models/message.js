@@ -60,6 +60,22 @@ Message.findAll = (result) => {
         }
     })
 };
+// Trouver tous les messages avec commentaires
+Message.findAllWithComments = (result) => {
+    db.query(`SELECT messages.*, users.pseudo, users.profilPic, comments.id AS comment_id, user_comment.pseudo AS comment_pseudo, comments.comment AS comment_content
+              FROM messages 
+              LEFT JOIN users ON messages.user_id = users.id
+              LEFT JOIN comments ON messages.id = comments.message_id
+              LEFT JOIN users AS user_comment ON comments.user_id = user_comment.id
+              ORDER BY messages.id DESC;`, (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, res)
+        }
+    })
+};
 
 Message.getAllComments = (id, result) => {
     db.query("SELECT * FROM comments WHERE message_id=? ORDER BY comments.id DESC", id, (err, res) => {
@@ -74,7 +90,8 @@ Message.getAllComments = (id, result) => {
 
 // Supprimer un message
 Message.delete = (id, result) => {
-    db.query("DELETE messages WHERE id=?", id, (err, res) => {
+    console.log('je veux supprimer ce fucking message: ', id);
+    db.query("DELETE FROM messages WHERE id=?", id, (err, res) => {
         if(err) {
             result(err, null);
             return;

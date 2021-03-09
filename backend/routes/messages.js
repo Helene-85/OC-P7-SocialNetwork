@@ -3,13 +3,13 @@ const router = express.Router();                                        // Méth
 const auth = require('../middleware/auth');                             // Importation du middleware d'authentification
 const multer = require('../middleware/multer-config');                  // Importation du middleware multer pour les images
 const messageControllers = require('../controllers/messages');          // Importation du controlleur Message
+const admin = require('../middleware/adminControl');
 
 // CRUD
 router.post('/', auth, multer, messageControllers.createMessage);
 router.get('/', auth, messageControllers.getAllMessages);
 router.get('/:id', auth, messageControllers.getOneMessage);
 router.post('/:id/reactions', auth, messageControllers.addReactions);
-router.put('/:id', auth, multer, messageControllers.updateMessage);
-router.delete('/:id', auth, messageControllers.deleteMessage);
+router.delete('/:id', auth, admin, messageControllers.deleteMessage);
 
 module.exports = router;

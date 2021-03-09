@@ -1,9 +1,13 @@
 <template>
   <div class="mx-auto px-4 py-8 max-w-xl my-2">
     <div class="bg-white rounded-lg mb-6 relative tracking-wide">
-       <a v-if="isTheAdmin" class="text-red-600 absolute top-5 right-5" href="#"
-            ><i class="fas fa-trash-alt"></i></a
-          >
+       <a 
+        v-if="isTheAdmin" 
+        class="text-red-600 absolute top-5 right-5" 
+        href="#"
+        @click.prevent="deleteMessage()"
+        ><i class="fas fa-trash-alt"></i>
+        </a>
       <div class="md:flex-shrink-0">
         <img v-if="(item.image != null)"
           :src="item.image"
@@ -30,10 +34,12 @@
         </p>
         <div class="flex ml-3 mt-4 mb-4 space-x-3">
           <a href="#"
-            ><span><i class="far fa-thumbs-up  text-green-700"></i> 0</span></a
+            @click.prevent="react('like')"
+            ><span><i class="far fa-thumbs-up  text-green-700"></i></span></a
           >
           <a href="#"
-            ><span><i class="far fa-thumbs-down text-red-600"></i></i> 0</span></a
+            @click.prevent="react('dislike')"
+            ><span><i class="far fa-thumbs-down text-red-600"></i></span></a
           >
         </div>
         <form class="w-full max-w-xl bg-white rounded-lg px-4">
@@ -72,9 +78,12 @@
           </div>
         </form>
       </div>
-      <div class="px-4 py-2 mt-2">
-        <p class="text-green-700">{{ item.pseudo }}</p>
-        <p class="w-full md:w-full flex items-start md:w-full px-3 mb-2 rounded py-2 bg-gray-100">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis aliquam eligendi eveniet ratione! Possimus, soluta. Odit quia, ea deserunt saepe consectetur laudantium asperiores vero, debitis repudiandae sit eaque ipsum praesentium?</p>
+      <div
+        v-for="commentaire in item.tabComments"
+        :key="commentaire.comment_id"
+        class="px-4 py-2 mt-2">
+        <p class="text-green-700">{{ commentaire.comment_pseudo }}</p>
+        <p class="w-full md:w-full flex items-start md:w-full px-3 mb-2 rounded py-2 bg-gray-100">{{ commentaire.comment_content }}</p>
       </div>
     </div>
   </div>
@@ -129,8 +138,28 @@ export default {
         .catch(() => {
           alert('Impossible de poster le message :/')
         })
+    },
+    react(reaction) {
+      const payload = {
+        user_id: this.user.id,
+        message_id: this.item.id,
+        reaction_id:  reactionId
+      }
+      http
+        .post(`/messages/${this.user.id}/reactions`, payload)
+        .then(res => {
+          console.log(res)
+        })
+    },
+    deleteMessage() {
+       http
+        .delete(`/messages/${this.item.id}`)
+        .then(res => {
+          console.log(res)
+        })
     }
-  }}
+  }
+}
 </script>
 
 <style scoped></style>
