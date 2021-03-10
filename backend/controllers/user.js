@@ -86,7 +86,14 @@ exports.updateOneUser = (req, res, next) => {
     'id': req.params.id,
     'pseudo': req.body.pseudo,
   }
-  User.modify(user, (err, result) => {
+  if(!req.body.isAdmin && req.body.user_id != req.params.id) {
+    console.log('0', req.body);
+    console.log('1', req.body.isAdmin);
+    console.log('2', req.body.user_id);
+    console.log('3', req.params.id);
+    return res.status(401).json({ message: 'Vous n\'avez pas les droits !' });
+  }
+  User.modifyPseudo(user, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Modification non effectuée' });
     }

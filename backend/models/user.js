@@ -69,7 +69,7 @@ User.findAll = (result) => {
 };
 
 // Modifier un user
-User.modify = (user, result) => {
+User.modifyPseudo = (user, result) => {
     db.query(`UPDATE users 
               SET pseudo=? 
               WHERE id=?`, 
