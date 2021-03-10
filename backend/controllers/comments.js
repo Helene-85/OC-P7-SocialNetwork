@@ -15,7 +15,6 @@ function getSqlDate() {
 // Créer un comment
 exports.createComment = (req, res, next) => 
 {
-  console.log(req.body)
   const newComment = new Comment ({
     user_id: req.body.user_id,
     message_id: req.body.message_id,
@@ -25,10 +24,10 @@ exports.createComment = (req, res, next) =>
   });
 
   Comment.create(newComment, (err, data) => {
-      if(err) {
-          return res.status(400).json({ message: "From Back Impossible de créer le comment" });
-        } 
-        res.send(data);
+    if(err) {
+        return res.status(400).json({ message: "From Back Impossible de créer le comment" });
+      } 
+      res.send(data);
   })
 };
 
@@ -39,16 +38,16 @@ exports.getAllMessageComment = (req, res, next) => {
       return res.status(400).json({ message: 'Impossible de récupérer les messages' });
     } 
       res.status(200).json(data)
-    });
+  });
 };
 
 // Supprimer un comment
 exports.deleteComment = (req, res, next) => {
-    Comment.delete(req.body.comment, (err, data) => {
-        if(err) {
-          return res.status(400).json({ message: 'Comment non supprimé' });
-        } 
-        res.status(200).json({ message: 'Le comment a été supprimé !'})
-      })
-    .catch(error => res.status(500).json({ error : "Erreur serveur" }));
+  Comment.delete(req.body.comment, (err, data) => {
+    if(err) {
+      return res.status(400).json({ message: 'Comment non supprimé' });
+    } 
+    res.status(200).json({ message: 'Le comment a été supprimé !'})
+  })
+  .catch(error => res.status(500).json({ error : "Erreur serveur" }));
 };

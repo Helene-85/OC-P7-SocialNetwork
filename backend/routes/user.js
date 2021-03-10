@@ -10,7 +10,7 @@ const userController = require("../controllers/user");
 
 // Importation du middleware verifyPassword pour contrôler la complexité du mot de passe
 const verifyPassword = require("../middleware/verifyPassword");
-const adminControl = require("../middleware/adminControl");
+const admin = require("../middleware/adminControl");
 
 const limiter = rateLimit({
     windowMs: 5 * 60 * 1000, // 5 minutes de test

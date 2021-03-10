@@ -11,17 +11,16 @@ const Comment = function(comment) {
 
 // Créer un comment
 Comment.create = (newComment, result) => {
-    console.log('toto', newComment);
     db.query("INSERT INTO comments SET ?", newComment, (err, res) => {
         if(err) {
             console.log('tata', err);
             result(err, null);
             return;
         }
-            result(null, {
-                id:res.id,
-                ...newComment
-            })
+        result(null, {
+            id:res.id,
+            ...newComment
+        })
     })
 };
 

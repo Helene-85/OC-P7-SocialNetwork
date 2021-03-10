@@ -11,7 +11,9 @@ const Message = function(message) {
 
 // Créer un message
 Message.create = (newMessage, result) => {
-    let statment = `INSERT INTO messages SET ?`;
+    let statment = `INSERT 
+                    INTO messages 
+                    SET ?`;
     db.query(statment, newMessage, (err, res) => {
         if(err) {
             console.log(err);
@@ -27,7 +29,10 @@ Message.create = (newMessage, result) => {
 
 // Trouver un message
 Message.findOne = (id, result) => {
-    db.query("SELECT * FROM messages WHERE id=?", id, (err, res) => {
+    db.query(`SELECT * 
+              FROM messages 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -39,7 +44,12 @@ Message.findOne = (id, result) => {
 
 // Récupérer le dernier message
 Message.getLatest = (id, result) => {
-    db.query("SELECT * FROM messages ORDER BY id DESC LIMIT 0,1", (err, res) => {
+    db.query(`SELECT * 
+              FROM messages 
+              ORDER BY id 
+              DESC 
+              LIMIT 0,1`, 
+              (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -51,7 +61,14 @@ Message.getLatest = (id, result) => {
 
 // Trouver tous les message
 Message.findAll = (result) => {
-    db.query("SELECT messages.*, users.pseudo, users.profilPic FROM messages JOIN users ON users.id = messages.user_id ORDER BY messages.id DESC", (err, res) => {
+    db.query(`SELECT messages.*, 
+              users.pseudo, users.profilPic 
+              FROM messages 
+              JOIN users 
+              ON users.id = messages.user_id 
+              ORDER BY messages.id 
+              DESC`, 
+              (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -62,12 +79,17 @@ Message.findAll = (result) => {
 };
 // Trouver tous les messages avec commentaires
 Message.findAllWithComments = (result) => {
-    db.query(`SELECT messages.*, users.pseudo, users.profilPic, comments.id AS comment_id, user_comment.pseudo AS comment_pseudo, comments.comment AS comment_content
+    db.query(`SELECT messages.*, 
+              users.pseudo, users.profilPic, 
+              comments.id AS comment_id, 
+              user_comment.pseudo AS comment_pseudo, 
+              comments.comment AS comment_content
               FROM messages 
               LEFT JOIN users ON messages.user_id = users.id
               LEFT JOIN comments ON messages.id = comments.message_id
               LEFT JOIN users AS user_comment ON comments.user_id = user_comment.id
-              ORDER BY messages.id DESC;`, (err, res) => {
+              ORDER BY messages.id DESC;`, 
+              (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -78,7 +100,12 @@ Message.findAllWithComments = (result) => {
 };
 
 Message.getAllComments = (id, result) => {
-    db.query("SELECT * FROM comments WHERE message_id=? ORDER BY comments.id DESC", id, (err, res) => {
+    db.query(`SELECT * 
+              FROM comments 
+              WHERE message_id=? 
+              ORDER BY comments.id 
+              DESC`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -90,8 +117,10 @@ Message.getAllComments = (id, result) => {
 
 // Supprimer un message
 Message.delete = (id, result) => {
-    console.log('je veux supprimer ce fucking message: ', id);
-    db.query("DELETE FROM messages WHERE id=?", id, (err, res) => {
+    db.query(`DELETE 
+              FROM messages 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -102,9 +131,11 @@ Message.delete = (id, result) => {
 };
 
 // Supprimer tous les messages d\'un user précis
-
 Message.deleteAllBy = (id, result) => {
-    db.query("DELETE * FROM comments WHERE id=?", id, (err, res) => {
+    db.query(`DELETE * 
+              FROM comments 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;

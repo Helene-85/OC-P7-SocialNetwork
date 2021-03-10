@@ -9,9 +9,12 @@ const User = function(user) {
     this.isAdmin=!!user.isAdmin
 }
 
-// Création d'un user
+// Création d\'un user
 User.create = (newUser, result) => {
-    db.query("INSERT INTO users SET ?", newUser, (err, res) => {
+    db.query(`INSERT 
+              INTO users 
+              SET ?`, 
+              newUser, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -26,7 +29,10 @@ User.create = (newUser, result) => {
 
 // Trouver un user via son email
 User.findOneByEmail = (email, result) => {
-    db.query("SELECT * FROM users WHERE email=?", email, (err, res) => {
+    db.query(`SELECT * 
+              FROM users 
+              WHERE email=?`, 
+              email, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -37,7 +43,10 @@ User.findOneByEmail = (email, result) => {
 
 // Trouver un user via son id
 User.findOneById = (id, result) => {
-    db.query("SELECT * FROM users WHERE id=?", id, (err, res) => {
+    db.query(`SELECT * 
+              FROM users 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -48,7 +57,9 @@ User.findOneById = (id, result) => {
 
 // Trouver tous les users dans la BDD
 User.findAll = (result) => {
-    db.query("SELECT * FROM users", (err, res) => {
+    db.query(`SELECT * 
+              FROM users`, 
+              (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -59,8 +70,10 @@ User.findAll = (result) => {
 
 // Modifier un user
 User.modify = (user, result) => {
-    db.query("UPDATE users SET pseudo=? WHERE id=?", 
-    [user.pseudo, user.id], (err, res) => {
+    db.query(`UPDATE users 
+              SET pseudo=? 
+              WHERE id=?`, 
+              [user.pseudo, user.id], (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -72,7 +85,10 @@ User.modify = (user, result) => {
 
 // Supprimer un user
 User.delete = (id, result) => {
-    db.query("DELETE FROM users WHERE id=?", id, (err, res) => {
+    db.query(`DELETE 
+              FROM users 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -84,7 +100,10 @@ User.delete = (id, result) => {
 
 // Supprimer un user
 User.deleteAll = (id, result) => {
-    db.query("DELETE FROM message_reaction_user WHERE user_id=?", id, (err, res) => {
+    db.query(`DELETE 
+              FROM message_reaction_user 
+              WHERE user_id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -92,7 +111,9 @@ User.deleteAll = (id, result) => {
             // result(null, res);
         }
     });
-    db.query("DELETE FROM comments WHERE user_id=?", id, (err, res) => {
+    db.query(`DELETE 
+              FROM comments 
+              WHERE user_id=?`, id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -100,7 +121,10 @@ User.deleteAll = (id, result) => {
             // result(null, res);
         }
     });
-    db.query("DELETE FROM messages WHERE user_id=?", id, (err, res) => {
+    db.query(`DELETE 
+              FROM messages 
+              WHERE user_id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -108,7 +132,10 @@ User.deleteAll = (id, result) => {
             // result(null, res);
         }
     });
-    db.query("DELETE FROM users WHERE id=?", id, (err, res) => {
+    db.query(`DELETE 
+              FROM users 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;

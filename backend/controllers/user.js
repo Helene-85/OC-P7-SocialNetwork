@@ -5,23 +5,20 @@ const fs = require('fs');                                                   //
 
 // Inscription
 exports.signup = (req, res, next) => {
-  console.log('abc', req.body);
   bcrypt.hash(req.body.password, 10)                                        // On appelle la fonction de hachage, on créer un nouvel utilisateur, on le sauvegarde dans la BDD
   .then(hash => {
-    console.log(hash);
-      const user = new User({
-        pseudo: req.body.pseudo,
-        email: req.body.email,
-        password: hash,
-      });
-      console.log('user', user);
-      User.create(user, (err, data) => {
-        if(err) {
-          return res.status(400).json({ message: 'Impossible de créer l\'utilisateur' });
-        } 
-        res.send(data);
-      })
+    const user = new User({
+      pseudo: req.body.pseudo,
+      email: req.body.email,
+      password: hash,
+    });
+    User.create(user, (err, data) => {
+      if(err) {
+        return res.status(400).json({ message: 'Impossible de créer l\'utilisateur' });
+      } 
+      res.send(data);
     })
+  })
   .catch(error => res.status(500).json({ error }));
 };
 
@@ -31,7 +28,6 @@ exports.login = (req, res, next) => {
     if (err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } 
-    console.log(req.body.password, result.password);
     bcrypt.compare(req.body.password, result.password)
     .then(valid => {
       if (!valid) {
@@ -45,7 +41,6 @@ exports.login = (req, res, next) => {
       if (!result.profilPic) {
         profile = ''
       }
-      console.log('take', result);
       res.status(200).json({
         pseudo: result.pseudo,
         userId: result.id,
@@ -68,9 +63,9 @@ exports.getAllUsers = (req, res, next) => {
     if(err) {
       return res.status(404).json({ message: 'Utilisateurs non trouvés' });
     } else {
-      console.log(result);
       res.status(200).json(result)
-    }})
+    }
+  })
 };
 
 // Réupérer un seul user
@@ -80,9 +75,9 @@ exports.getOneUser = (req, res, next) => {
     if(err) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     } else {
-      console.log(result);
       res.status(200).json(result)
-    }})
+    }
+  })
 };
 
 // Mofifier un user
@@ -91,7 +86,6 @@ exports.updateOneUser = (req, res, next) => {
     'id': req.params.id,
     'pseudo': req.body.pseudo,
   }
-  console.log(user);
   User.modify(user, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Modification non effectuée' });
