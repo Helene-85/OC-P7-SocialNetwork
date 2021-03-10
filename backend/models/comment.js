@@ -11,7 +11,10 @@ const Comment = function(comment) {
 
 // Créer un comment
 Comment.create = (newComment, result) => {
-    db.query("INSERT INTO comments SET ?", newComment, (err, res) => {
+    db.query(`INSERT 
+              INTO comments 
+              SET ?`, 
+              newComment, (err, res) => {
         if(err) {
             console.log('tata', err);
             result(err, null);
@@ -26,7 +29,10 @@ Comment.create = (newComment, result) => {
 
 // Récupérer les commentaires par message
 Comment.findAllMessageComment = (id, result) => {
-    db.query("SELECT * FROM comments WHERE message_id=?", id, (err, res) => {
+    db.query(`SELECT * 
+              FROM comments 
+              WHERE message_id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -38,7 +44,9 @@ Comment.findAllMessageComment = (id, result) => {
 
 // Supprimer un comment
 Comment.delete = (id, result) => {
-    db.query("DELETE comments WHERE id=?", id, (err, res) => {
+    db.query(`DELETE comments 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
             return;
