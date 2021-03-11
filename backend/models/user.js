@@ -1,5 +1,6 @@
 // Création des modèles User
 const db = require('./db');
+const Utils = require('../libs/utils.js');
 
 const User = function(user) {
     this.pseudo=user.pseudo,
@@ -74,6 +75,21 @@ User.modifyPseudo = (user, result) => {
               SET pseudo=? 
               WHERE id=?`, 
               [user.pseudo, user.id], (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        } else {
+            result(null, res)
+        }
+    })
+};
+
+// Modifier un user
+User.modifyProfilPic = (user, result) => {
+    db.query(`UPDATE users 
+              SET pofilPic=? 
+              WHERE id=?`, 
+              [user.profilPic, user.id], (err, res) => {
         if(err) {
             result(err, null);
             return;

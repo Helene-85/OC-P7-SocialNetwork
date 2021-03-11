@@ -1,5 +1,6 @@
 // Création des modèles Comment
 const db = require('./db');
+const Utils = require('../libs/utils.js');
 
 const Comment = function(comment) {
     this.user_id=comment.user_id,

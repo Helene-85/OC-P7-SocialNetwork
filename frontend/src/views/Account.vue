@@ -25,6 +25,13 @@
                 id="file-input"
                 ref="fileInput"/>
               </div>
+                 <button
+                  @click.prevent="sendImage()"
+                  type="submit"
+                  class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
+                >
+                  <span class="mr-2 uppercase">Modifier ma photo</span>
+                </button>
               <div>
                 <h3 class="text-2xl text-white font-semibold">
                   Mes informations
@@ -60,6 +67,7 @@
 import Avatar from '@/components/Avatar.vue';
 import http from '../http';
 import {mapState} from 'vuex';
+import {mapMutations} from 'vuex';
 
 export default {
   components: { Avatar },
@@ -67,30 +75,44 @@ export default {
   data() {
     return {
       newPseudo: '',
-      newImage: null
+      file: ''
     }
   },
   computed: {
     ...mapState(['user']),
   },
   methods: {
-    uploadImage(event) {
-      this.newImage = event.target.files[0]
-    },
+    ...mapMutations(['updatePseudo']),
     sendImage(){
+      const formData = new FormData();
+      formData.append('file', this.file, this.file.name);
 
+      http
+      .put('/auth/profilPic/' + this.user.id, formData)
+      .then(res => {
+      this.$emit('added', res.data)
+      this.file = ''
+      this.updateProfilPic(this.newProfilPic)
+      })
+      .catch(() => {
+        console.log('FRONT Impossible de poster le message');
+        alert('Impossible de poster le message :/')
+      })
     },
     sendNewPseudo() {
-      let formData = new FormData();
-      //formData.append('profilPic', this.newImage, this.newImage.name)
-      formData.append('pseudo', this.newPseudo);
-      formData.append('user_id', this.user.id);
+      const payload = {
+        pseudo: this.newPseudo,
+        user_id: this.user.id
+      }
       http
-      .put('/auth/profile/' + this.user.id, formData)
+      .put('/auth/profile/' + this.user.id, payload)
         .then((res) => {
-          console.log(res)
+          this.updatePseudo(this.newPseudo)
         })
         .catch(() => console.log('Mise à jour impossible'));
+      },
+      uploadImage(e) {
+      this.file = e.target.files[0];
       }
     }
   }

@@ -1,18 +1,6 @@
 const Message = require('../models/message');
+const Utils = require('../libs/utils.js');
 const fs = require('fs');
-
-// Récupération de la date au moment de la création du message
-function getSqlDate() {
-  let date = new Date();
-  const dateStr =
-    date.getFullYear() + "-" +
-    ("00" + (date.getMonth() + 1)).slice(-2) + "-" +
-    ("00" + date.getDate()).slice(-2) + " " +
-    ("00" + date.getHours()).slice(-2) + ":" +
-    ("00" + date.getMinutes()).slice(-2) + ":" +
-    ("00" + date.getSeconds()).slice(-2);
-    return dateStr;
-};
 
 // Créer un message
 exports.createMessage = (req, res, next) => 
@@ -21,8 +9,8 @@ exports.createMessage = (req, res, next) =>
     user_id: req.body.user_id,
     content: req.body.content,
     image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
-    createdAt: getSqlDate(),
-    updatedAt: getSqlDate(),
+    createdAt: Utils.getSqlDate(),
+    updatedAt: Utils.getSqlDate(),
   });
   
   Message.create(newMessage, (err, data) => {

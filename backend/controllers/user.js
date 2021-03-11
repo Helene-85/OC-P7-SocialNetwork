@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');                                           // I
 const jwt = require('jsonwebtoken');                                        // Importation du package jsonwebtoken
 const User = require('../models/user');                                     // Importation modèle User
 const fs = require('fs');                                                   // 
+const Utils = require('../libs/utils.js');
 
 // Inscription
 exports.signup = (req, res, next) => {
@@ -80,18 +81,17 @@ exports.getOneUser = (req, res, next) => {
   })
 };
 
-// Mofifier un user
-exports.updateOneUser = (req, res, next) => {
+// Mofifier un pseudo
+exports.updateOneUserPseudo = (req, res, next) => {
+  let myToken = Utils.getReqToken(req);
+
+  if((!myToken.isAdmin) && (myToken.userId != req.params.id)) {
+    return res.status(401).json({ message: 'Non authorisé' });
+  }
+
   let user = {
     'id': req.params.id,
     'pseudo': req.body.pseudo,
-  }
-  if(!req.body.isAdmin && req.body.user_id != req.params.id) {
-    console.log('0', req.body);
-    console.log('1', req.body.isAdmin);
-    console.log('2', req.body.user_id);
-    console.log('3', req.params.id);
-    return res.status(401).json({ message: 'Vous n\'avez pas les droits !' });
   }
   User.modifyPseudo(user, (err, result) => {
     if(err) {
@@ -99,6 +99,29 @@ exports.updateOneUser = (req, res, next) => {
     }
     res.status(201).json({
       pseudo: result.pseudo
+    })
+  })
+};
+
+// Mofifier une profilPic
+exports.updateOneUserFile = (req, res, next) => {
+  let myToken = Utils.getReqToken(req);
+
+  if((!myToken.isAdmin) && (myToken.userId != req.params.id)) {
+    return res.status(401).json({ message: 'Non authorisé' });
+  }
+
+  let user = {
+    id: req.params.id,
+    profilPic: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+  }
+  User.modifyProfilPic(user, (err, result) => {
+    if(err) {
+      return res.status(400).json({ message: 'Modification non effectuée' });
+    }
+    res.status(201).json({
+      // TODO:supprimer la photo
+      profilPic: result.profilPic
     })
   })
 };

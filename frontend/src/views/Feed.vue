@@ -46,7 +46,6 @@ export default {
       .get('/messages/')
       .then(res => {
         this.messages = res.data
-        console.log(this.messages);
       })
     }
   }

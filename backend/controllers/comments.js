@@ -1,16 +1,5 @@
 const Comment = require('../models/comment');
-
-function getSqlDate() {
-  let date = new Date();
-  const dateStr =
-    date.getFullYear() + "-" +
-    ("00" + (date.getMonth() + 1)).slice(-2) + "-" +
-    ("00" + date.getDate()).slice(-2) + " " +
-    ("00" + date.getHours()).slice(-2) + ":" +
-    ("00" + date.getMinutes()).slice(-2) + ":" +
-    ("00" + date.getSeconds()).slice(-2);
-    return dateStr;
-};
+const Utils = require('../libs/utils.js');
 
 // Créer un comment
 exports.createComment = (req, res, next) => 
@@ -19,8 +8,8 @@ exports.createComment = (req, res, next) =>
     user_id: req.body.user_id,
     message_id: req.body.message_id,
     comment: req.body.commentInput,
-    createdAt: getSqlDate(),
-    updatedAt: getSqlDate(),
+    createdAt: Utils.getSqlDate(),
+    updatedAt: Utils.getSqlDate(),
   });
 
   Comment.create(newComment, (err, data) => {

@@ -19,6 +19,12 @@ export default new Vuex.Store({
       state.user.isAdmin = data.isAdmin;
       state.user.pseudo = data.pseudo;
       state.user.profilPic = data.profilPic;
+    },
+    updatePseudo(state, newPseudo) {
+      state.user.pseudo = newPseudo;
+    },
+    updateProfilPic(state, newProfilPic) {
+      state.user.profilPic = newProfilPic;
     }
   },
   actions: {},
