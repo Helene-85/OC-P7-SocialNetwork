@@ -15,7 +15,7 @@
       <div class="flex justify-center bg-gray-900">
         <div class="col-span-12 h-full pb-12 md:col-span-10">
           <div class="px-4 pt-4">
-            <form @submit.prevent="sendImage" class="flex flex-col space-y-8">
+            <form class="flex flex-col space-y-8">
               <div class="flex ml-auto">
                 <input
                 class="mt-2"

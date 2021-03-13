@@ -81,9 +81,16 @@
       <div
         v-for="commentaire in item.tabComments"
         :key="commentaire.comment_id"
-        class="px-4 py-2 mt-2">
+        class="px-4 py-2 mt-2 relative">
         <p class="text-green-700">{{ commentaire.comment_pseudo }}</p>
         <p class="w-full md:w-full flex items-start md:w-full px-3 mb-2 rounded py-2 bg-gray-100">{{ commentaire.comment_content }}</p>
+        <a 
+          v-if="isTheAdmin" 
+          class="text-red-600 absolute top-10 right-6" 
+          href="#"
+          @click.prevent="deleteComment()"
+        ><i class="fas fa-trash-alt"></i>
+        </a>
       </div>
     </div>
   </div>
@@ -152,11 +159,18 @@ export default {
         })
     },
     deleteMessage() {
-       http
+      http
         .delete(`/messages/${this.item.id}`)
         .then(res => {
           console.log(res)
-        })
+      })
+    },
+    deleteComment() {
+      http
+        .delete(`/comments/${this.item.id}`)
+        .then(res => {
+          console.log(res)
+      })
     }
   }
 }

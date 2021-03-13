@@ -29,7 +29,10 @@ router.get('/users', userController.getAllUsers);
 router.get('/profile/:id', auth, userController.getOneUser);
 
 // Route PUT pour modifier un user
-router.put('/profile/:id', auth, userController.updateOneUser);
+router.put('/profile/:id', auth, userController.updateOneUserPseudo);
+
+// Route PUT pour modifier un user
+router.put('/profilPic/:id', auth, userController.updateOneUserFile);
 
 // Route DELETE pour supprimer un user
 router.delete('/users/:id', auth, admin, userController.deleteUser);

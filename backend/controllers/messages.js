@@ -72,20 +72,25 @@ exports.getOneMessage = (req, res, next) => {
 // Supprimer un message
 exports.deleteMessage = (req, res, next) => {
   Message.delete (req.params.id, (err, data) => {
+    console.log(data);
     if(err) {
       return res.status(400).json({ message: 'Impossible de supprimer le message' });
+    }
+    let file = data.message.image;
+    if(file) {
+      const filename = data.message.image.split('/images/')[1];
+      fs.unlink(`images/${filename}`, (error) => {
+        if(error) {
+        res.status(400).json({ error });
+        }
+      });
     }
     res.status(204).json({
       message: 'Utilisateur correctement supprimé'
     })
   })
 };
-/* const filename = message.imageUrl.split('/images/')[1];
-fs.unlink(`images/${filename}`, () => {
-  message.deleteOne(req.params.id)
-  .then(() => res.status(200).json({ message: 'Le message a été supprimé !'}))
-  .catch((error) => res.status(400).json({ error }));
-}); */
+
 
 // Ajout des réactions aux messages
 exports.addReactions = (req, res, next) => {
