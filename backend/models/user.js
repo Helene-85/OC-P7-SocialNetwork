@@ -87,7 +87,7 @@ User.modifyPseudo = (user, result) => {
 // Modifier un user
 User.modifyProfilPic = (user, result) => {
     db.query(`UPDATE users 
-              SET pofilPic=? 
+              SET profilPic=? 
               WHERE id=?`, 
               [user.profilPic, user.id], (err, res) => {
         if(err) {
@@ -115,7 +115,7 @@ User.delete = (id, result) => {
 };
 
 // Supprimer un user
-User.deleteAll = (id, result) => {
+User.deleteAllReactions = (id, result) => {
     db.query(`DELETE 
               FROM message_reaction_user 
               WHERE user_id=?`, 

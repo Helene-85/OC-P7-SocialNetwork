@@ -71,26 +71,33 @@ exports.getOneMessage = (req, res, next) => {
 
 // Supprimer un message
 exports.deleteMessage = (req, res, next) => {
-  Message.delete (req.params.id, (err, data) => {
-    console.log(data);
-    if(err) {
-      return res.status(400).json({ message: 'Impossible de supprimer le message' });
-    }
-    let file = data.message.image;
-    if(file) {
-      const filename = data.message.image.split('/images/')[1];
-      fs.unlink(`images/${filename}`, (error) => {
-        if(error) {
-        res.status(400).json({ error });
-        }
+  Message.findOne(req.params.id, (err, data) => {
+    if (req.body.image) {
+      const filename = data.image.split('/images/')[1];
+      fs.unlink(`images/${filename}`, (err) => {
+        if (err) {
+          res.status(500).send({
+            message: err
+          })
+        };
       });
     }
-    res.status(204).json({
-      message: 'Utilisateur correctement supprimé'
+    Message.delete(req.params.id, (err, data) => {
+      if (err) {
+        if (err) {
+          res.status(404).send({
+            message: 'Le message n\'existe pas ou plus'
+          });
+        } else {
+          res.status(500).send({
+            message: 'Impossible de supprimer le message'
+          });
+        }
+        res.send({ message: 'Le message a été supprimé'});
+      }
     })
   })
 };
-
 
 // Ajout des réactions aux messages
 exports.addReactions = (req, res, next) => {
