@@ -17,15 +17,9 @@
       </div>
       <div class="px-4 py-2 mt-2">
         <div class="author flex items-center -ml-3 my-3">
-          <div class="user-logo">
-            <img
-              class="w-12 h-12 object-cover rounded-full mx-4  shadow"
-              src="profile_pic.png"
-              alt="avatar"
-            />
-          </div>
+          <avatar class="h-10 w-10 object-cover rounded-full m-1" :user = "user"/>
           <p class="text-sm tracking-tighter text-gray-900">
-            <a class="text-green-700" href="/profile/:id"><span class="text-gray-900">By </span> {{ item.pseudo }}</a>
+            <a class="text-green-700 mr-2" href="/profile/:id"><span class="text-gray-900">By </span> {{ item.pseudo }}</a>
             <span class="text-gray-600">{{ item.createdAt }}</span>
           </p>
         </div>
@@ -82,7 +76,7 @@
         v-for="commentaire in item.tabComments"
         :key="commentaire.comment_id"
         class="px-4 py-2 mt-2 relative">
-        <p class="text-green-700">{{ commentaire.comment_pseudo }}</p>
+        <p class="text-green-700 m-1">{{ commentaire.comment_pseudo }}</p>
         <p class="w-full md:w-full flex items-start md:w-full px-3 mb-2 rounded py-2 bg-gray-100">{{ commentaire.comment_content }}</p>
         <a 
           v-if="isTheAdmin" 
