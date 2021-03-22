@@ -82,17 +82,18 @@ export default {
     ...mapState(['user']),
   },
   methods: {
-    ...mapMutations(['updatePseudo']),
+    ...mapMutations(['updatePseudo', 'updateProfilPic']),
     sendImage(){
       const formData = new FormData();
       formData.append('file', this.file, this.file.name);
+      formData.append('userId', this.user.id);
 
       http
       .put('/auth/profilPic/' + this.user.id, formData)
       .then(res => {
-      this.$emit('added', res.data)
       this.file = ''
-      this.updateProfilPic(this.newProfilPic)
+      this.updateProfilPic(res.data.profilPic)
+      this.file = ''
       })
       .catch(() => {
         console.log('FRONT Impossible de poster le message');

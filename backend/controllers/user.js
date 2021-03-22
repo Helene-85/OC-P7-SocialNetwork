@@ -29,6 +29,11 @@ exports.login = (req, res, next) => {
     if (err) {
       return res.status(400).json({ message: 'Utilisateur non trouvé' });
     } 
+
+    if (!result.isActive) {
+      return res.status(400).json({ message: 'Utlisateur trouvé mais désactivé' });
+    }
+
     bcrypt.compare(req.body.password, result.password)
     .then(valid => {
       if (!valid) {
@@ -47,6 +52,7 @@ exports.login = (req, res, next) => {
         userId: result.id,
         profilPic: profile,
         isAdmin: result.isAdmin,
+        isActive: result.isActive,
         token: jwt.sign(
           payload,
           `${process.env.JWT_KEY}`,
