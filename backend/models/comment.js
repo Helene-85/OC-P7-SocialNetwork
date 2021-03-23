@@ -17,14 +17,27 @@ Comment.create = (newComment, result) => {
               SET ?`, 
               newComment, (err, res) => {
         if(err) {
-            console.log('tata', err);
             result(err, null);
             return;
         }
-        result(null, {
-            id:res.id,
-            ...newComment
-        })
+        result(null, res)
+    })
+};
+
+// Récupérer le dernier commentaire
+Comment.latest = (result) => {
+    db.query(`SELECT comments.*,
+              users.pseudo as pseudo
+              FROM comments
+              JOIN users ON users.id=comments.user_id
+              ORDER BY id
+              DESC LIMIT 0,1`, 
+              (err, res) => {
+        if(err) {
+            result(err, null);
+            return;
+        }
+        result(null, res[0])
     })
 };
 
@@ -45,9 +58,9 @@ Comment.findAllMessageComment = (id, result) => {
 
 // Supprimer un comment
 Comment.delete = (id, result) => {
-    db.query(`DELETE comments 
+    db.query(`DELETE FROM comments 
               WHERE id=?`, 
-              id, (err, res) => {
+              Number(id), (err, res) => {
         if(err) {
             result(err, null);
             return;
@@ -56,18 +69,5 @@ Comment.delete = (id, result) => {
         }
     })
 };
-
-// Supprimer tous les comment d\'un user précis
-/* 
-Comment.deleteAllBy = (id, result) => {
-    db.query("DELETE * FROM comments WHERE id=?", id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            result(null, res)
-        }
-    })
-*/
 
 module.exports = Comment;

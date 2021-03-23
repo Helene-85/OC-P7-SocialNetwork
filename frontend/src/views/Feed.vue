@@ -7,7 +7,7 @@
     </h1>
     <newMessage @added="add"></newMessage>
     <div v-for="message in messages" :key="message.id">
-      <message :item="message"></message>
+      <message :item="message" @added="newComment"></message>
     </div>
   </div>
 </template>
@@ -38,7 +38,6 @@ export default {
     },
   methods: {
     add(message) {
-      //this.messages.push(message)
       this.refresh()
     },
     refresh() {
@@ -47,6 +46,10 @@ export default {
       .then(res => {
         this.messages = res.data
       })
+    },
+    newComment(comment) {
+      let message = this.messages.filter((message) => message.id === comment.message_id)[0];
+      message.tabComments.push(comment)
     }
   }
 }

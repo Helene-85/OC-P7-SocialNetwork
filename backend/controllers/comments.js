@@ -15,8 +15,15 @@ exports.createComment = (req, res, next) =>
   Comment.create(newComment, (err, data) => {
     if(err) {
         return res.status(400).json({ message: "From Back Impossible de créer le commentaire" });
-      } 
-      res.send(data);
+    }
+    Comment.latest((err, result) => {
+      res.send({
+        message_id: result.message_id, 
+        comment_id: result.id, 
+        comment_pseudo: result.pseudo, 
+        comment_content: result.comment
+      });
+    }); 
   })
 };
 
@@ -32,7 +39,7 @@ exports.getAllMessageComment = (req, res, next) => {
 
 // Supprimer un comment
 exports.deleteComment = (req, res, next) => {
-  Comment.delete(req.body.comment, (err, data) => {
+  Comment.delete(req.params.id, (err, data) => {
     if(err) {
       return res.status(400).json({ message: 'Comment non supprimé' });
     } 

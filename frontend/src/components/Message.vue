@@ -3,7 +3,7 @@
     <div class="bg-white rounded-lg mb-6 relative tracking-wide">
        <a 
         v-if="isTheAdmin" 
-        class="text-red-600 absolute top-5 right-5" 
+        class="text-red-600 absolute top-3 right-3" 
         href="#"
         @click.prevent="deleteMessage()"
         ><i class="fas fa-trash-alt"></i>
@@ -80,9 +80,9 @@
         <p class="w-full md:w-full flex items-start md:w-full px-3 mb-2 rounded py-2 bg-gray-100">{{ commentaire.comment_content }}</p>
         <a 
           v-if="isTheAdmin" 
-          class="text-red-600 absolute top-10 right-6" 
+          class="text-red-600 absolute top-12 right-6" 
           href="#"
-          @click.prevent="deleteComment()"
+          @click.prevent="deleteComment(commentaire.comment_id)"
         ><i class="fas fa-trash-alt"></i>
         </a>
       </div>
@@ -159,9 +159,9 @@ export default {
           console.log(res)
       })
     },
-    deleteComment() {
+    deleteComment(id) {
       http
-        .delete(`/comments/${this.item.id}`)
+        .delete(`/comments/${id}`)
         .then(res => {
           console.log(res)
       })
