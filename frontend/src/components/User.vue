@@ -13,7 +13,7 @@
           v-if="isTheAdmin"
           @click="deleteOneUser"
           href="#" class="text-green-700 hover:text-green-700"
-          >Supprimer</a>
+          >Désactiver</a>
       </div>
     </div>
   </div>

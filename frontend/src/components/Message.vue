@@ -3,10 +3,10 @@
     <div class="bg-white rounded-lg mb-6 relative tracking-wide">
        <a 
         v-if="isTheAdmin" 
-        class="text-red-600 absolute top-3 right-3" 
+        class="text-red-600 absolute top-2 right-3" 
         href="#"
         @click.prevent="deleteMessage()"
-        ><i class="fas fa-trash-alt"></i>
+        ><i class="fas fa-times"></i>
         </a>
       <div class="md:flex-shrink-0">
         <img v-if="(item.image != null)"
@@ -19,8 +19,8 @@
         <div class="author flex items-center -ml-3 my-3">
           <avatar class="h-10 w-10 object-cover rounded-full m-1" :user = "user"/>
           <p class="text-sm tracking-tighter text-gray-900">
-            <a class="text-green-700 mr-2" href="/profile/:id"><span class="text-gray-900">By </span> {{ item.pseudo }}</a>
-            <span class="text-gray-600">{{ item.createdAt }}</span>
+            <a class="text-green-700 mr-2" href="/profile/:id"><span class="text-gray-900"></span> {{ item.pseudo }}</a>
+            <span class="text-gray-600">{{ item.createdAt | moment("dddd, MMMM Do YYYY") }}</span>
           </p>
         </div>
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
@@ -44,10 +44,10 @@
             <p class="w-full md:w-full flex items-start md:w-full px-3 rounded py-2 bg-gray-100">{{ commentaire.comment_content }}</p>
             <a 
               v-if="isTheAdmin" 
-              class="text-red-600 absolute top-9 right-2" 
+              class="text-red-600 absolute top-10 right-2" 
               href="#"
               @click.prevent="deleteComment(commentaire.comment_id)"
-              ><i class="fas fa-trash-alt"></i>
+              ><i class="fas fa-times"></i>
             </a>
         </div>
         <form class="w-full max-w-xl bg-white rounded-lg px-4">
