@@ -9,7 +9,7 @@
       v-for="user of users"
       :key="user.id"
       class="-my-2 mt-12 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <user :member="user" @deleted="removeUser"></user>
+      <user :member="user" @refresh="refresh"></user>
     </div>
   </div>
 </template>
@@ -29,16 +29,8 @@ export default {
       default: false
     }
   },
-    created() {
-    http
-      .get('/auth/users')
-      .then((res) => {
-        console.log(res.data)
-        this.users = res.data
-      })
-      .catch(() => {
-        console.log('Impossible d\'afficher les users');
-      })
+  mounted() {
+    this.refresh();
   },
   data() {
     return {
@@ -55,9 +47,16 @@ export default {
     },
   },
   methods: {
-    removeUser(id) {
-      let index = this.users.findIndex(user => user.id == id)
-      this.users.splice(index, 1);
+    refresh() {
+      http
+      .get('/auth/users')
+      .then((res) => {
+        console.log(res.data)
+        this.users = res.data
+      })
+      .catch(() => {
+        console.log('Impossible d\'afficher les users');
+      })
     }
   }
 }

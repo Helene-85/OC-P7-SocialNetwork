@@ -33,7 +33,8 @@ User.create = (newUser, result) => {
 User.findOneByEmail = (email, result) => {
     db.query(`SELECT * 
               FROM users 
-              WHERE email=?`, 
+              WHERE email=?
+              AND isActive=true`, 
               email, (err, res) => {
         if(err) {
             result(err, null);
@@ -47,7 +48,8 @@ User.findOneByEmail = (email, result) => {
 User.findOneById = (id, result) => {
     db.query(`SELECT * 
               FROM users 
-              WHERE id=?`, 
+              WHERE id=?
+              AND isActive=true`, 
               id, (err, res) => {
         if(err) {
             result(err, null);
@@ -60,7 +62,8 @@ User.findOneById = (id, result) => {
 // Trouver tous les users dans la BDD
 User.findAll = (result) => {
     db.query(`SELECT * 
-              FROM users`, 
+              FROM users
+              WHERE isActive=true`, 
               (err, res) => {
         if(err) {
             result(err, null);
@@ -74,7 +77,8 @@ User.findAll = (result) => {
 User.modifyPseudo = (user, result) => {
     db.query(`UPDATE users 
               SET pseudo=? 
-              WHERE id=?`, 
+              WHERE id=?
+              AND isActive=true`, 
               [user.pseudo, user.id], (err, res) => {
         if(err) {
             result(err, null);
@@ -89,7 +93,8 @@ User.modifyPseudo = (user, result) => {
 User.modifyProfilPic = (user, result) => {
     db.query(`UPDATE users 
               SET profilPic=? 
-              WHERE id=?`, 
+              WHERE id=?
+              AND isActive=true`, 
               [user.profilPic, user.id], (err, res) => {
         if(err) {
             result(err, null);
@@ -101,9 +106,9 @@ User.modifyProfilPic = (user, result) => {
 };
 
 // Supprimer un user
-User.delete = (id, result) => {
-    db.query(`DELETE 
-              FROM users 
+User.deactivate = (id, result) => {
+    db.query(`UPDATE users
+              SET isActive=false
               WHERE id=?`, 
               id, (err, res) => {
         if(err) {
@@ -113,53 +118,6 @@ User.delete = (id, result) => {
             result(null, res)
         }
     })
-};
-
-// Supprimer un user
-User.deleteAllReactions = (id, result) => {
-    db.query(`DELETE 
-              FROM message_reaction_user 
-              WHERE user_id=?`, 
-              id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            // result(null, res);
-        }
-    });
-    db.query(`DELETE 
-              FROM comments 
-              WHERE user_id=?`, id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            // result(null, res);
-        }
-    });
-    db.query(`DELETE 
-              FROM messages 
-              WHERE user_id=?`, 
-              id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            // result(null, res);
-        }
-    });
-    db.query(`DELETE 
-              FROM users 
-              WHERE id=?`, 
-              id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            result(null, res);
-        }
-    });
 };
 
  module.exports = User;

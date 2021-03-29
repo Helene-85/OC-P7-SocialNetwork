@@ -11,7 +11,7 @@
         </div>
         <a
           v-if="isTheAdmin"
-          @click="deleteOneUser"
+          @click="deactivateOneUser"
           href="#" class="text-green-700 hover:text-green-700"
           >Désactiver</a>
       </div>
@@ -25,8 +25,8 @@ import Avatar from '@/components/Avatar.vue'
 import { mapState } from 'vuex';
 
 export default {
-  components: { Avatar },
   name: 'user',
+  components: { Avatar },
   props: {
     member: {
       type: Object
@@ -48,14 +48,14 @@ export default {
     }
   },
   methods: {
-    deleteOneUser() {
+    deactivateOneUser() {
       http
-        .delete("/auth/users/" + this.member.id)
-        .then((res) => {
-          this.$emit('deleted', this.member.id)
-          console.log(res)
-        }) 
-        .catch(() => console.log('Impossible de suprimer le user'));
+      .delete("/auth/users/" + this.member.id)
+      .then((res) => {
+        this.$emit('refresh')
+        console.log(res)
+      }) 
+      .catch(() => console.log('Impossible de suprimer le user'));
     }
   }
 }

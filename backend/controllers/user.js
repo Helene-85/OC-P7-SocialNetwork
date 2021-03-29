@@ -90,7 +90,7 @@ exports.getOneUser = (req, res, next) => {
 // Mofifier un pseudo
 exports.updateOneUserPseudo = (req, res, next) => {
   let myToken = Utils.getReqToken(req);
-
+  // check pas d'usurpation de user_id
   if((!myToken.isAdmin) && (myToken.userId != req.params.id)) {
     return res.status(401).json({ message: 'Non authorisé' });
   }
@@ -112,7 +112,7 @@ exports.updateOneUserPseudo = (req, res, next) => {
 // Mofifier une profilPic
 exports.updateOneUserFile = (req, res, next) => {
   let myToken = Utils.getReqToken(req);
-
+  // check pas d'usurpation de user_id
   if((!myToken.isAdmin) && (myToken.userId != req.params.id)) {
     return res.status(401).json({ message: 'Non authorisé' });
   }
@@ -133,8 +133,8 @@ exports.updateOneUserFile = (req, res, next) => {
 };
 
 // Supprimer un user
-exports.deleteUser = (req, res, next) => {
-  User.deleteAll(req.params.id, (err, result) => {
+exports.deactivateUser = (req, res, next) => {
+  User.deactivate(req.params.id, (err, result) => {
     if(err) {
     return res.status(400).json({ message: 'Impossible de supprimer l\'utilisateur'});
     }

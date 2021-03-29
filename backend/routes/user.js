@@ -35,6 +35,6 @@ router.put('/profile/:id', auth, userController.updateOneUserPseudo);
 router.put('/profilPic/:id', auth, userController.updateOneUserFile);
 
 // Route DELETE pour supprimer un user
-router.delete('/users/:id', auth, admin, userController.deleteUser);
+router.delete('/users/:id', auth, admin, userController.deactivateUser);
 
 module.exports = router;
