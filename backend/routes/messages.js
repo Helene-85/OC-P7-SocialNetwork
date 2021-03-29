@@ -9,6 +9,7 @@ const admin = require('../middleware/adminControl');                    // Impor
 router.post('/', auth, multer, messageControllers.createMessage);
 router.get('/', auth, messageControllers.getAllMessages);
 router.get('/:id', auth, messageControllers.getOneMessage);
+router.get('/reactions', auth, messageControllers.getAllReactions);
 router.post('/:id/reactions', auth, messageControllers.createReaction);
 router.delete('/:id', auth, admin, messageControllers.deleteMessage);
 

@@ -92,7 +92,6 @@ Message.findAllWithComments = (result) => {
               (err, res) => {
         if(err) {
             result(err, null);
-            return;
         } else {
             result(null, res)
         }
@@ -144,5 +143,34 @@ Message.deleteAllBy = (id, result) => {
         }
     })
 };
+
+Message.findReactionType = (id, result) => {
+    db.query(`SELECT * 
+    FROM reaction_type_id 
+    WHERE id=?`, id, (err, res) => {
+      if(err) {
+        result(err, null);
+      } 
+      else {
+        result(null, res);
+      }
+    });
+};
+
+
+Message.findReaction = (reaction, result) => {
+    db.query(`SELECT * 
+        FROM message_reaction_user
+        WHERE message_id=?
+        AND user_id=?`, [reaction.message_id, reaction.user_id], (err, res) => {
+    if(err) {
+        result(err, null);
+    } 
+    else {
+        result(null, res);
+    }
+    });
+};
+
 
 module.exports = Message;

@@ -29,11 +29,11 @@
         <div class="flex ml-3 mt-4 mb-4 space-x-3">
           <a href="#"
             @click.prevent="addReaction(1)"
-            ><span><i class="far fa-thumbs-up  text-green-700"></i></span></a
+            ><span><i class="far fa-thumbs-up  text-green-700"></i>0</span></a
           >
           <a href="#"
             @click.prevent="addReaction(2)"
-            ><span><i class="far fa-thumbs-down text-red-600"></i></span></a
+            ><span><i class="far fa-thumbs-down text-red-600"></i>0</span></a
           >
         </div>
         <div

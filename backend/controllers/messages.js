@@ -56,6 +56,15 @@ exports.getAllMessages = (req, res, next) => {
   })
 };
 
+exports.getAllReactions = (req, res, next) => {
+  Message.findAllReaction ((err, data) => {
+    if(err) {
+      return res.status(400).json({ message: 'Impossible de récupérer les messages' });
+    } 
+    res.status(200).json(data);
+  });
+};
+
 // Récupérer un message
 exports.getOneMessage = (req, res, next) => {
   Message.findOne (req.params.id, (err, data) => {
@@ -100,37 +109,42 @@ exports.deleteMessage = (req, res, next) => {
 };
 
 // Ajouter une réaction
-exports.createReaction = (req, res, next) => 
-{
+exports.createReaction = (req, res, next) => {
   let myToken = Utils.getReqToken(req);
 
-  if(myToken.userId != req.body.user_id) {// check pas d'usurpation de user_id
-    return res.status(401).json({ message: 'Non authorisé' });
+  if(myToken.userId != req.body.user_id){ // check pas dusurpation de user_id
+    return res.status(401).json({ message: "Non authorise" });
   }
 
-  // TODO : une reaction du type demandée existe ? si oui et qu'elle existe deja une reaction de cet user pour ce message
-  // alors on modifie la reaction
-  // sinon on ajoute une nouvelle reaction
-  // mais si un user a deja ajoute une reaction on ne veut pas qu'il en ajoute une autre ???
- 
-  return;
-  const newReaction = new Reaction ({
+  const newReaction = {
     user_id: req.body.user_id,
     message_id: req.body.message_id,
     reaction_id: req.body.reaction_id,
-  });
+  };
 
-  Reaction.create(newReaction, (err, data) => {
+  console.log('Reaction', newReaction);
+
+  Message.findReactionType(newReaction.reaction_id, (err, data) => {
     if(err) {
       return res.status(400).json({ message: "Impossible d'ajouter la réaction" });
     }
-    Reaction.latest((err, result) => {
-      res.send({
-        message_id: result.message_id, 
-        comment_id: result.id, 
-        comment_pseudo: result.pseudo, 
-        comment_content: result.comment
+
+    if(data.length == 1){
+      console.log('toto', data);
+
+      Message.findReaction(newReaction, (err, data) => {
+        if(data.length == 0) {
+          console.log('First Time?');
+        } else {
+          console.log('Another Time!');
+        }
       });
-    }); 
-  })
+
+      res.send({ message: 'Réaction acceptée'});
+    }
+    else
+    {
+      res.send({ message: 'Bad guy !!'});
+    }
+  });
 };

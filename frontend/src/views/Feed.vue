@@ -44,7 +44,12 @@ export default {
       http
       .get('/messages/')
       .then(res => {
-        this.messages = res.data
+        this.messages = res.data;
+        http
+        .get('/messages/reactions')
+        .then(res => {
+          console.log('toto', res);
+        })
       })
     },
     newComment(comment) {
