@@ -12,7 +12,3 @@ new Vue({
 }).$mount('#app')
 
 Vue.use(require('vue-moment'));
-
-Vue.use(VueMoment, {
-    moment,
-})
