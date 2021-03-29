@@ -104,7 +104,7 @@ exports.createReaction = (req, res, next) =>
 {
   let myToken = Utils.getReqToken(req);
 
-  if(myToken.userId != req.body.user_id) // check pas d'usurpation de user_id
+  if(myToken.userId != req.body.user_id) {// check pas d'usurpation de user_id
     return res.status(401).json({ message: 'Non authorisé' });
   }
 
