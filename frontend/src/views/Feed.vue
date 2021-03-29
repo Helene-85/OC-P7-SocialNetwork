@@ -7,7 +7,7 @@
     </h1>
     <newMessage @added="add"></newMessage>
     <div v-for="message in messages" :key="message.id">
-      <message :item="message" @added="newComment"></message>
+      <message :item="message" @added="newComment" @refresh="refresh"></message>
     </div>
   </div>
 </template>

@@ -28,11 +28,11 @@
         </p>
         <div class="flex ml-3 mt-4 mb-4 space-x-3">
           <a href="#"
-            @click.prevent="react('like')"
+            @click.prevent="addReaction(1)"
             ><span><i class="far fa-thumbs-up  text-green-700"></i></span></a
           >
           <a href="#"
-            @click.prevent="react('dislike')"
+            @click.prevent="addReaction(2)"
             ><span><i class="far fa-thumbs-down text-red-600"></i></span></a
           >
         </div>
@@ -140,16 +140,17 @@ export default {
           alert('Impossible de poster le message :/')
         })
     },
-    react(reaction) {
+    addReaction(reactionId) {
       const payload = {
         user_id: this.user.id,
         message_id: this.item.id,
-        reaction_id:  reactionId
+        reaction_id: reactionId
       }
       http
         .post(`/messages/${this.user.id}/reactions`, payload)
         .then(res => {
           console.log(res)
+          this.$emit('refresh')
         })
     },
     deleteMessage() {
@@ -157,6 +158,7 @@ export default {
         .delete(`/messages/${this.item.id}`)
         .then(res => {
           console.log(res)
+          this.$emit('refresh')
       })
     },
     deleteComment(id) {
@@ -164,6 +166,7 @@ export default {
         .delete(`/comments/${id}`)
         .then(res => {
           console.log(res)
+          this.$emit('refresh')
       })
     }
   }

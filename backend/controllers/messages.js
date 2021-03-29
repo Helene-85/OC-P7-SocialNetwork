@@ -99,45 +99,38 @@ exports.deleteMessage = (req, res, next) => {
   })
 };
 
-// Ajout des réactions aux messages
-exports.addReactions = (req, res, next) => {
-  Message.findOne({ _id: req.params.id })
-    .then(message => {
-      const userId = req.body.userId;
-      let userWantsToLike = (req.body.like === 1);
-      let userWantsToDislike = (req.body.like === -1);
-      let userWantsToCancel = (req.body.like === 0);
-      const userCanLike = (!message.usersLiked.includes(userId));
-      const userCanDislike = (!message.usersDisliked.includes(userId));
-      const notTheFirstVote = (message.usersLiked.includes(userId) || message.usersDisliked.includes(userId));
+// Ajouter une réaction
+exports.createReaction = (req, res, next) => 
+{
+  let myToken = Utils.getReqToken(req);
 
-      if (userWantsToLike && userCanLike) {
-          message.usersLiked.push(userId)                             // Ajouter le like
-        }
-  
-        if (userWantsToCancel && notTheFirstVote) {
-          if (userCanLike) {
-                                                                      // Annuler le like de l'utlisateur
-            let index = message.usersDisliked.indexOf(userId)
-            message.usersDisliked.splice(index, 1)
-          }
-          if (userCanDislike) {
-                                                                      // Annuler le dislike de l'utilisateur
-            let index = message.usersLiked.indexOf(userId)
-            message.usersLiked.splice(index, 1)
-          }
-        }
-  
-        if (userWantsToDislike && userCanDislike) {                    // Ajouter le dislike
-          message.usersDisliked.push(userId)
-        }
-        message.likes = message.usersLiked.length                      // Calculer le nombre de like et dislike
-        message.dislikes = message.usersDisliked.length
-        let newMessage = message;
-        newMessage.save();                                            // Mettre à jour le message avec les nouvelles valeurs
-  
-      return newMessage;
-    })
-  .then(message => res.status(200).json(message))
-  .catch(error => res.status(400).json({error}));
+  if(myToken.userId != req.body.user_id) // check pas d'usurpation de user_id
+    return res.status(401).json({ message: 'Non authorisé' });
+  }
+
+  // TODO : une reaction du type demandée existe ? si oui et qu'elle existe deja une reaction de cet user pour ce message
+  // alors on modifie la reaction
+  // sinon on ajoute une nouvelle reaction
+  // mais si un user a deja ajoute une reaction on ne veut pas qu'il en ajoute une autre ???
+ 
+  return;
+  const newReaction = new Reaction ({
+    user_id: req.body.user_id,
+    message_id: req.body.message_id,
+    reaction_id: req.body.reaction_id,
+  });
+
+  Reaction.create(newReaction, (err, data) => {
+    if(err) {
+      return res.status(400).json({ message: "Impossible d'ajouter la réaction" });
+    }
+    Reaction.latest((err, result) => {
+      res.send({
+        message_id: result.message_id, 
+        comment_id: result.id, 
+        comment_pseudo: result.pseudo, 
+        comment_content: result.comment
+      });
+    }); 
+  })
 };
