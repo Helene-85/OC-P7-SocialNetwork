@@ -65,19 +65,6 @@ exports.getAllReactions = (req, res, next) => {
   });
 };
 
-// Récupérer un message
-exports.getOneMessage = (req, res, next) => {
-  Message.findOne (req.params.id, (err, data) => {
-    if(err) {
-      return res.status(404).json({ message: 'Message non trouvé' });
-    }
-    res.status(200).json({
-      content: result.content,
-      image: result.image
-    })
-  })
-};
-
 // Supprimer un message
 exports.deleteMessage = (req, res, next) => {
   Message.findOne(req.params.id, (err, data) => {
@@ -130,20 +117,25 @@ exports.createReaction = (req, res, next) => {
     }
 
     if(data.length == 1){
-      console.log('toto', data);
-
       Message.findReaction(newReaction, (err, data) => {
         if(data.length == 0) {
-          console.log('First Time?');
-        } else {
-          console.log('Another Time!');
+          Message.addReaction(newReaction, (err, data) => {
+            if (err) {
+              return res.status(400).json({message: "Impossible d'ajouter une réactions" });
+            }
+            res.send({ message: 'Réaction ajoutée'});
+          });
+        } 
+        else {
+          Message.updateReaction(newReaction, (err, data) => {
+            if (err) {
+              return res.status(400).json({message: "Mise à jour impossible" });
+            }
+            res.send({ message: 'Réaction mise à jour'});
+          });
         }
       });
-
-      res.send({ message: 'Réaction acceptée'});
-    }
-    else
-    {
+    } else {
       res.send({ message: 'Bad guy !!'});
     }
   });

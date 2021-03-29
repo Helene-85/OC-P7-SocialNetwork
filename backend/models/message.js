@@ -157,7 +157,6 @@ Message.findReactionType = (id, result) => {
     });
 };
 
-
 Message.findReaction = (reaction, result) => {
     db.query(`SELECT * 
         FROM message_reaction_user
@@ -170,6 +169,48 @@ Message.findReaction = (reaction, result) => {
         result(null, res);
     }
     });
+};
+
+Message.findAllReaction = (result) => {
+    db.query(`SELECT message_id, reaction_id, COUNT(*) AS sumReaction
+      FROM message_reaction_user
+      GROUP BY message_id, reaction_id
+      ORDER BY message_id DESC;`,
+        (err, res) => {
+        if(err) {
+          result(err, null);
+        } else {
+          result(null, res)
+        }
+    })
+};
+
+Message.addReaction = (newReaction, result) => {
+    let statment = `INSERT 
+                    INTO message_reaction_user 
+                    SET ?`;
+    db.query(statment, newReaction, (err, res) => {
+        if(err) {
+            console.log(err);
+            result(err, null);
+        }
+        result(null, null);
+    })
+};
+
+// Supprimer un user
+Message.updateReaction = (newReaction, result) => {
+    db.query(`UPDATE message_reaction_user
+              SET reaction_id=?
+              WHERE message_id=?
+              AND user_id=?`, 
+              [newReaction.reaction_id, newReaction.message_id, newReaction.user_id], (err, res) => {
+        if(err) {
+            result(err, null);
+        } else {
+            result(null, res)
+        }
+    })
 };
 
 

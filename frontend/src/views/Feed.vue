@@ -40,15 +40,35 @@ export default {
     add(message) {
       this.refresh()
     },
+    updateReactionsInMessages(tabReaction){
+      for(let i in this.messages){
+
+        this.$set(this.messages[i], 'nbReaction_1', 0);
+        this.$set(this.messages[i], 'nbReaction_2', 0);
+        // Si d'autres réactions
+
+    // Pour chaque message, on va regarder s'il y a des réactions !!!
+      for(let j in tabReaction){
+        if(tabReaction[j].message_id == this.messages[i].id){
+          switch(tabReaction[j].reaction_id){
+            case 1 : this.messages[i].nbReaction_1 = tabReaction[j].sumReaction; break;
+            case 2 : this.messages[i].nbReaction_2 = tabReaction[j].sumReaction; break;
+            // Si d'autres réactions
+        }
+      }
+    }
+  }
+},
     refresh() {
       http
       .get('/messages/')
       .then(res => {
+        let context = this;
         this.messages = res.data;
         http
         .get('/messages/reactions')
         .then(res => {
-          console.log('toto', res);
+          context.updateReactionsInMessages(res.data);
         })
       })
     },

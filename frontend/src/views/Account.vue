@@ -49,7 +49,7 @@
                 />
               </div>
                 <button
-                  @click="sendNewPseudo()"
+                  @click.prevent="sendNewPseudo()"
                   type="submit"
                   class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
                 >
@@ -117,7 +117,6 @@ export default {
       }
     }
   }
-
 </script>
 
 <style scoped></style>
