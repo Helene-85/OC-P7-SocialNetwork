@@ -51,7 +51,7 @@ export default {
       http
       .get('/auth/users')
       .then((res) => {
-        console.log(res.data)
+        console.log('toto', res.data)
         this.users = res.data
       })
       .catch(() => {

@@ -115,20 +115,19 @@ exports.updateOneUserFile = (req, res, next) => {
   if((!myToken.isAdmin) && (myToken.userId != req.params.id)) {
     return res.status(401).json({ message: 'Non authorisé' });
   }
+
   let user = {
     'id' : req.params.id,
-    'profilPic' : req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
+    'profilPic' : req.file ? req.file.filename : null,
   }
-  console.log(user);
   User.modifyProfilPic(user, (err, result) => {
     if(err) {
-      return res.status(400).json({ message: 'Modification non effectuée' });
+      return res.status(400).json({ message: 'BACK Modification non effectuée' });
     }
-    res.status(201).json({
-      // TODO : supprimer la photo
-      profilPic: result.profilPic
-    })
-  })
+      res.status(201).json({
+      profilPic: req.file.filename,
+    });
+  });
 };
 
 // Supprimer un user

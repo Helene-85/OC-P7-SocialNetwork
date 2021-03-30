@@ -3,6 +3,7 @@ const router = express.Router();                    // Création routeur avec la
 const rateLimit = require("express-rate-limit");    // Contre les attaques de force brute
 
 const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config');  // Importation du middleware multer pour les images
 const admin = require('../middleware/adminControl')
 
 // Importation des logiques métier pour les routes
@@ -32,7 +33,7 @@ router.get('/profile/:id', auth, userController.getOneUser);
 router.put('/profile/:id', auth, userController.updateOneUserPseudo);
 
 // Route PUT pour modifier un user
-router.put('/profilPic/:id', auth, userController.updateOneUserFile);
+router.post('/profilPic/:id', auth, multer, userController.updateOneUserFile);
 
 // Route DELETE pour supprimer un user
 router.delete('/users/:id', auth, admin, userController.deactivateUser);

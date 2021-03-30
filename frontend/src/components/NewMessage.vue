@@ -33,7 +33,7 @@
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
               <button
                 type="button"
-                @click.prevent="postMessage()"
+                @click.prevent="postMessage"
                 class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
               >
                 <span class="mr-2 uppercase">Envoyer</span>

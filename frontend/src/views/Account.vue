@@ -23,11 +23,11 @@
                 accept="image/*" 
                 @change="uploadImage($event)"
                 id="file-input"
-                ref="fileInput"/>
+                ref="fileInput">
               </div>
                  <button
+                  type="button"
                   @click.prevent="sendImage"
-                  type="submit"
                   class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span class="mr-2 uppercase">Modifier ma photo</span>
@@ -49,7 +49,7 @@
                 />
               </div>
                 <button
-                  @click.prevent="sendNewPseudo()"
+                  @click.prevent="sendNewPseudo"
                   type="submit"
                   class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
                 >
@@ -84,16 +84,19 @@ export default {
   methods: {
     ...mapMutations(['updatePseudo', 'updateProfilPic']),
     sendImage(){
+      if(this.file == '') {
+        return;
+      }
       const formData = new FormData();
+      formData.append('user_Id', this.user.id);
       formData.append('file', this.file, this.file.name);
-      formData.append('userId', this.user.id);
-      console.log(formData);
+
       http
-      .put('/auth/profilPic/' + this.user.id, formData)
+      .post('/auth/profilPic/' + this.user.id, formData)
       .then(res => {
-      this.file = ''
-      this.updateProfilPic(res.data.profilPic)
-      this.file = ''
+        console.log('newImage', res.data.profilPic);
+        this.updateProfilPic(res.data.profilPic)
+        this.file = ''
       })
       .catch(() => {
         console.log('FRONT Impossible de poster le message');
@@ -107,16 +110,16 @@ export default {
       }
       http
       .put('/auth/profile/' + this.user.id, payload)
-        .then((res) => {
-          this.updatePseudo(this.newPseudo)
-        })
-        .catch(() => console.log('Mise à jour impossible'));
-      },
-      uploadImage(e) {
+      .then((res) => {
+        this.updatePseudo(this.newPseudo)
+      })
+      .catch(() => console.log('Mise à jour impossible'));
+    },
+    uploadImage(e) {
       this.file = e.target.files[0];
-      }
     }
   }
+}
 </script>
 
 <style scoped></style>

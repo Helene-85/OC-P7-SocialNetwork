@@ -2,8 +2,9 @@ const express = require('express');                                     // Impor
 const router = express.Router();                                        // Méthode router() d'express
 const auth = require('../middleware/auth');                             // Importation du middleware d'authentification
 const multer = require('../middleware/multer-config');                  // Importation du middleware multer pour les images
-const messageControllers = require('../controllers/messages');          // Importation du controlleur Message
 const admin = require('../middleware/adminControl');                    // Importation du middleware admin pour la suppr des messages
+
+const messageControllers = require('../controllers/messages');          // Importation du controlleur Message
 
 // CRUD
 router.post('/', auth, multer, messageControllers.createMessage);

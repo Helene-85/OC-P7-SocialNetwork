@@ -109,8 +109,6 @@ exports.createReaction = (req, res, next) => {
     reaction_id: req.body.reaction_id,
   };
 
-  console.log('Reaction', newReaction);
-
   Message.findReactionType(newReaction.reaction_id, (err, data) => {
     if(err) {
       return res.status(400).json({ message: "Impossible d'ajouter la réaction" });
