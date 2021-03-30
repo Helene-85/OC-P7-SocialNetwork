@@ -1,7 +1,7 @@
 <template>
   <img
-  :src="avatar"
-  alt="avatar"
+    :src="avatar"
+    alt="avatar"
   />
 </template>
 

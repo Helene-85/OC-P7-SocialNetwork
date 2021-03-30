@@ -17,7 +17,7 @@
       </div>
       <div class="px-4 py-2 mt-2">
         <div class="author flex items-center -ml-3 my-3">
-          <avatar class="h-10 w-10 object-cover rounded-full m-1" :user = "user"/>
+          <avatar class="h-10 w-10 object-cover rounded-full m-1" :user = "item"/>
           <p class="text-sm tracking-tighter text-gray-900">
             <a class="text-green-700 mr-2" href="/profile/:id"><span class="text-gray-900"></span> {{ item.pseudo }}</a>
             <span class="text-gray-600">{{ item.createdAt | moment("dddd, MMMM Do YYYY") }}</span>
@@ -40,15 +40,20 @@
           v-for="commentaire in item.tabComments"
           :key="commentaire.comment_id"
           :commentaire="commentaire"
+          @refresh="refresh"
           class="py-2 relative">
         </comment>
-        <newComment></newComment>
+        <newComment
+          :message_id="item.id"
+          @added="refresh"
+        ></newComment>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import http from '../http';
 import Avatar from './Avatar.vue';
 import { mapState } from 'vuex';
 import Comment from './Comment.vue';
@@ -72,7 +77,33 @@ export default {
       }
       return false
       }
-  }, 
+  },
+  methods: { 
+    refresh( ) {
+      this.$emit('refresh');
+    },
+    addReaction(reactionId) {
+      const payload = {
+        user_id: this.user.id,
+        message_id: this.item.id,
+        reaction_id: reactionId
+      }
+      http
+        .post(`/messages/${this.user.id}/reactions`, payload)
+        .then(res => {
+          console.log(res)
+          this.refresh();
+        })
+    },
+    deleteMessage() {
+      http
+        .delete(`/messages/${this.item.id}`)
+        .then(res => {
+          console.log(res)
+          this.refresh();
+      })
+    }
+  }
 }
 </script>
 

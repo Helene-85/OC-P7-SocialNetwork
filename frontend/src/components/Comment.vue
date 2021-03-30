@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import http from '../http';
 import { mapState } from 'vuex';
 import Avatar from './Avatar.vue';
 
@@ -33,5 +34,15 @@ export default {
       return false
       }
   },
+  methods: {
+    deleteComment(id) {
+      http
+        .delete(`/comments/${id}`)
+        .then(res => {
+          console.log(res)
+          this.$emit('refresh')
+      })
+    }
+  }
 }
 </script>

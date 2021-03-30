@@ -40,21 +40,23 @@
 
 <script>
 import http from '../http';
+import { mapState } from 'vuex';
 import Avatar from './Avatar.vue';
 
 export default {
     components: { Avatar },
     name: 'newComment',
     props: { 
-        commentaire : {
-            type: Object
-        }
+      message_id: Number,
     },
     data() {
     return {
       commentInput: '',
     }
   },
+  computed: {
+  ...mapState(['user']),
+      },
   methods: {
     postComment() {
       if(this.commentInput.trim() == '') {
@@ -64,7 +66,7 @@ export default {
       const payload = {
         commentInput: this.commentInput,
         user_id: this.user.id,
-        message_id: this.item.id,
+        message_id: this.message_id,
       }
       http     
         .post('/comments/', payload)
@@ -75,35 +77,6 @@ export default {
         .catch(() => {
           alert('Impossible de poster le message :/')
         })
-    },
-    addReaction(reactionId) {
-      const payload = {
-        user_id: this.user.id,
-        message_id: this.item.id,
-        reaction_id: reactionId
-      }
-      http
-        .post(`/messages/${this.user.id}/reactions`, payload)
-        .then(res => {
-          console.log(res)
-          this.$emit('refresh')
-        })
-    },
-    deleteMessage() {
-      http
-        .delete(`/messages/${this.item.id}`)
-        .then(res => {
-          console.log(res)
-          this.$emit('refresh')
-      })
-    },
-    deleteComment(id) {
-      http
-        .delete(`/comments/${id}`)
-        .then(res => {
-          console.log(res)
-          this.$emit('refresh')
-      })
     }
   }
 }
