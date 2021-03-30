@@ -39,12 +39,72 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import http from '../http';
 import Avatar from './Avatar.vue';
 
 export default {
     components: { Avatar },
-    name: 'comment',
+    name: 'newComment',
+    props: { 
+        commentaire : {
+            type: Object
+        }
+    },
+    data() {
+    return {
+      commentInput: '',
+    }
+  },
+  methods: {
+    postComment() {
+      if(this.commentInput.trim() == '') {
+        alert('Merci de remplir le champs commentaire')
+        return
+      }
+      const payload = {
+        commentInput: this.commentInput,
+        user_id: this.user.id,
+        message_id: this.item.id,
+      }
+      http     
+        .post('/comments/', payload)
+        .then(res => {
+          this.$emit('added', res.data)
+          this.commentInput = ''
+        })
+        .catch(() => {
+          alert('Impossible de poster le message :/')
+        })
+    },
+    addReaction(reactionId) {
+      const payload = {
+        user_id: this.user.id,
+        message_id: this.item.id,
+        reaction_id: reactionId
+      }
+      http
+        .post(`/messages/${this.user.id}/reactions`, payload)
+        .then(res => {
+          console.log(res)
+          this.$emit('refresh')
+        })
+    },
+    deleteMessage() {
+      http
+        .delete(`/messages/${this.item.id}`)
+        .then(res => {
+          console.log(res)
+          this.$emit('refresh')
+      })
+    },
+    deleteComment(id) {
+      http
+        .delete(`/comments/${id}`)
+        .then(res => {
+          console.log(res)
+          this.$emit('refresh')
+      })
+    }
+  }
 }
 </script>

@@ -14,7 +14,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import http from '../http';
 import Avatar from './Avatar.vue';
 
 export default {
