@@ -36,20 +36,12 @@
             ><span><i class="far fa-thumbs-down text-red-600"></i>{{ item.nbReaction_2 }}</span></a
           >
         </div>
-        <div
+        <comment
           v-for="commentaire in item.tabComments"
           :key="commentaire.comment_id"
+          :commentaire="commentaire"
           class="py-2 relative">
-            <p class="text-green-700">{{ commentaire.comment_pseudo }}</p>
-            <p class="w-full md:w-full flex items-start md:w-full px-3 rounded py-2 bg-gray-100">{{ commentaire.comment_content }}</p>
-            <a 
-              v-if="isTheAdmin" 
-              class="text-red-600 absolute top-10 right-2" 
-              href="#"
-              @click.prevent="deleteComment(commentaire.comment_id)"
-              ><i class="fas fa-times"></i>
-            </a>
-        </div>
+        </comment>
         <form class="w-full max-w-xl bg-white rounded-lg px-4">
           <div class="w-full md:w-full px-3 mb-2 mt-2">
             <textarea
@@ -94,9 +86,10 @@
 import { mapState } from 'vuex';
 import http from '../http';
 import Avatar from './Avatar.vue';
+import Comment from './Comment.vue';
 
 export default {
-  components: { Avatar },
+  components: { Avatar, Comment },
   name: 'message',
   props: {
     item: {

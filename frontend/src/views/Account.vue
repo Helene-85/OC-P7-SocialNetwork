@@ -26,7 +26,7 @@
                 ref="fileInput"/>
               </div>
                  <button
-                  @click.prevent="sendImage()"
+                  @click.prevent="sendImage"
                   type="submit"
                   class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
                 >
@@ -87,7 +87,7 @@ export default {
       const formData = new FormData();
       formData.append('file', this.file, this.file.name);
       formData.append('userId', this.user.id);
-
+      console.log(formData);
       http
       .put('/auth/profilPic/' + this.user.id, formData)
       .then(res => {

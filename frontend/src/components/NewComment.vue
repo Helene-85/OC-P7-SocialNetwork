@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="w-full max-w-xl bg-white rounded-lg px-4">
+      <form class="w-full max-w-xl bg-white rounded-lg px-4">
           <div class="w-full md:w-full px-3 mb-2 mt-2">
             <textarea
               v-model="commentInput"

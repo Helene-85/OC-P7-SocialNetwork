@@ -121,6 +121,7 @@ exports.updateOneUserFile = (req, res, next) => {
     id: req.params.id,
     profilPic: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
   }
+  console.log(user);
   User.modifyProfilPic(user, (err, result) => {
     if(err) {
       return res.status(400).json({ message: 'Modification non effectuée' });
