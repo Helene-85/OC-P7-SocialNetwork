@@ -12,6 +12,7 @@ exports.signup = (req, res, next) => {
       pseudo: req.body.pseudo,
       email: req.body.email,
       password: hash,
+      isActive: true,
     });
     User.create(user, (err, data) => {
       if(err) {

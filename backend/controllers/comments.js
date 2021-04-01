@@ -2,8 +2,7 @@ const Comment = require('../models/comment');
 const Utils = require('../libs/utils.js');
 
 // Créer un comment
-exports.createComment = (req, res, next) => 
-{
+exports.createComment = (req, res, next) => {
   const newComment = new Comment ({
     user_id: req.body.user_id,
     message_id: req.body.message_id,
