@@ -19,8 +19,8 @@
         <div class="author flex items-center -ml-3 my-3">
           <avatar class="h-10 w-10 object-cover rounded-full m-1" :user = "item"/>
           <p class="text-sm tracking-tighter text-gray-900">
-            <a class="text-green-700 mr-2" href="/profile/:id"><span class="text-gray-900"></span> {{ item.pseudo }}</a>
-            <span class="text-gray-600">{{ item.createdAt | moment("dddd, MMMM Do YYYY") }}</span>
+            <p class="text-green-700 ml-1 mr-8"></span> {{ item.pseudo }}</p>
+            <span class="text-gray-600 text-sm font-light">{{ item.createdAt | moment("dddd, MMMM Do YYYY") }}</span>
           </p>
         </div>
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
