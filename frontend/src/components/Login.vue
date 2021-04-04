@@ -1,18 +1,18 @@
 <template>
   <div
-    class="flex flex-col mt-28 bg-white px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md"
+    class="flex flex-col m-auto bg-white px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-11/12 max-w-md"
   >
-    <div
+    <h1
       class="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800"
     >
       Connectez-vous
-    </div>
+    </h1>
     <div class="relative mt-10 h-px bg-gray-300">
-      <div class="absolute left-0 top-0 flex justify-center w-full -mt-2">
+      <h2 class="absolute left-0 top-0 flex justify-center w-full -mt-2">
         <span class="bg-white px-4 text-xs text-gray-500 uppercase"
           >Groupo'Link</span
         >
-      </div>
+      </h2>
     </div>
     <div class="mt-10">
       <form action="#">
@@ -89,7 +89,10 @@
         <div class="flex items-center mb-6 -mt-4">
           <div class="flex ml-auto">
             <span class="text-sm text-color-gray-500">
-            <input type="checkbox" v-model="show">
+            <input 
+            type="checkbox" 
+            v-model="show"
+            aria-label="Voir mon mot de passe">
             Voir mon mot de passe
             </span>
           </div>
@@ -99,7 +102,8 @@
             <button
               @click.prevent="login"
               type="submit"
-              class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
+              aria-label="Se connecter"
+              class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
             >
               <span class="mr-2 uppercase">Se connecter</span>
               <span>
@@ -127,7 +131,8 @@
         <a
           href="#"
           target="_blank"
-          class="inline-flex items-center text-green-500 hover:text-green-700 text-xs text-center"
+          aria-label="Cliquer sur inscription"
+          class="inline-flex items-center text-green-700 hover:text-green-700 text-xs text-center"
         >
           <span>
             <svg

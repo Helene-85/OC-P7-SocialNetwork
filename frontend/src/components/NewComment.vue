@@ -8,6 +8,7 @@
               name="body"
               placeholder="Écrivez un commentaire"
               required
+              aria-label="Écrire un commentaire"
             ></textarea>
           </div>
           <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">

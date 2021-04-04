@@ -13,29 +13,31 @@
         </div>
       </div>
       <div class="flex justify-center bg-gray-900">
-        <div class="col-span-12 h-full pb-12 md:col-span-10">
+        <div class="col-span-12 w-full h-full pb-12 md:col-span-10">
           <div class="px-4 pt-4">
             <form class="flex flex-col space-y-8">
-              <div class="flex ml-auto">
+              <div class="flex justify-center">
                 <input
                 class="mt-2"
                 type="file"
                 accept="image/*" 
                 @change="uploadImage($event)"
                 id="file-input"
-                ref="fileInput">
+                ref="fileInput"
+                aria-label="Ajouter une image">
               </div>
                  <button
                   type="button"
                   @click.prevent="sendImage"
+                  aria-label="Envoyer ma nouvelle photo"
                   class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span class="mr-2 uppercase">Modifier ma photo</span>
                 </button>
               <div>
-                <h3 class="text-2xl text-white font-semibold">
+                <h2 class="text-2xl text-white font-semibold">
                   Mes informations
-                </h3>
+                </h2>
                 <hr class="mt-2 border-green-500" />
               </div>
               <div class="form-item">
@@ -46,11 +48,13 @@
                   id="pseudo"
                   type="text"
                   placeholder="Nouveau pseudo"
+                  aria-label="Écrire un nouveau pseudonyme"
                 />
               </div>
                 <button
                   @click.prevent="sendNewPseudo"
                   type="submit"
+                  aria-label="Envoyer mon nouveau pseudonyme"
                   class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span class="mr-2 uppercase">Modifier mon pseudo</span>

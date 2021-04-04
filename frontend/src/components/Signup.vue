@@ -5,21 +5,22 @@
         <div class="w-full xl:w-3/4 lg:w-11/12 flex">
           <div
             class="w-full h-auto bg-gray-400 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
-            style="background-image: url('https://images.unsplash.com/photo-1604882355165-4450cb6155b2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80')"
-          ></div>
+            style="background-image: url('https://images.unsplash.com/photo-1604882355165-4450cb6155b2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80')">
+          </div>
           <div
             class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none"
           >
-            <div
+            <h1
               class="font-medium text-center text-xl sm:text-2xl uppercase text-gray-800 mt-3"
             >
               Inscrivez-vous
-            </div>
+            </h1>
             <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
               <div class="mb-4">
                 <label
                   class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                   for="pseudo"
+                  aria-label="Écrire mon pseudonyme"
                   >Pseudo :</label
                 >
                 <input
@@ -27,6 +28,7 @@
                   id="text"
                   type="text"
                   placeholder="Mon pseudo"
+                  aria-label="Écrire mon adresse email"
                   v-model="pseudo"
                 />
               </div>
@@ -41,6 +43,7 @@
                   id="email"
                   type="email"
                   placeholder="xxx@yyy.zzz"
+                  aria-label="Écrire mon mot de passe"
                   v-model="email"
                 />
               </div>
@@ -56,9 +59,10 @@
                     id="password"
                     type="password"
                     placeholder="******************"
+                    aria-label="Écrire un mot de passe identique"
                     v-model="password"
                   />
-                  <p class="text-xs italic text-green-400">
+                  <p class="text-xs italic text-green-700">
                     Merci de choisir un mot de passe
                   </p>
                 </div>
@@ -69,13 +73,13 @@
                     >Confirmez votre mot de passe</label
                   >
                   <input
-                    class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
+                    class="text-sm sm:text-base placeholder-gray-700 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-green-400"
                     id="c_password"
                     type="password"
                     placeholder="******************"
                     v-model="confirm_password"
                   />
-                  <p class="text-xs italic text-green-400">
+                  <p class="text-xs italic text-green-700">
                     Le mot de passe doit être identique
                   </p>
                 </div>
@@ -85,7 +89,8 @@
                   :disabled="!isValid"
                   @click.prevent="signUp"
                   type="button"
-                  class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-500 hover:bg-green-700 rounded py-2 w-full transition duration-150 ease-in"
+                  aria-label="Cliquer sur s'incrire"
+                  class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
                 >
                   <span class="mr-2 uppercase">S'inscrire</span>
                   <span>
@@ -108,7 +113,7 @@
               <router-link to="/">
                 <div class="text-center">
                   <a
-                    class="inline-block text-sm text-green-500 align-baseline hover:text-green-700"
+                    class="inline-block text-sm text-green-700 align-baseline hover:text-green-700"
                     href="./index.html"
                   >
                     Vous êtes déjà inscrit ? Connectez-vous

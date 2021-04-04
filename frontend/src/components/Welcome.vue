@@ -10,19 +10,19 @@
           <div
             class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none"
           >
-            <div
+            <h1
               class="font-medium text-center text-xl sm:text-2xl uppercase text-green-700 mt-3 mb-14"
             >
               Bienvenue sur Groupo'Link
-            </div>
+            </h1>
             <div class="relative mb-8 mt-10 h-px bg-gray-300">
-              <div
+              <h2
                 class="absolute left-0 top-0 flex justify-center w-full -mt-2"
               >
                 <span class="bg-white px-4 text-xs text-gray-500 uppercase"
                   >Informations</span
                 >
-              </div>
+              </h2>
             </div>
             <form class="px-8 py-8 mb-4 bg-white rounded">
               <div class="text-center text-gray-800">

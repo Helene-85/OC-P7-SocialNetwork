@@ -17,6 +17,7 @@
                 placeholder="Écrivez votre message"
                 v-model="content"
                 required
+                aria-label="Écrivez un message"
               ></textarea>
             </div>
             <div class="flex items-center mb-6 -mt-4 mr-3">
@@ -27,12 +28,14 @@
                 accept="image/*" 
                 @change="uploadImage($event)"
                 id="file-input"
-                ref="fileInput">
+                ref="fileInput"
+                aria-label="Ajouter une image">
               </div>
             </div>
             <div class="w-full md:w-full flex items-start md:w-full px-3 mb-2">
               <button
                 type="button"
+                aria-label="Poster le message"
                 @click.prevent="postMessage"
                 class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
               >

@@ -13,6 +13,7 @@
           v-if="isTheAdmin"
           @click="deactivateOneUser"
           href="#" class="text-green-700 hover:text-green-700"
+          aria-label="Désactiver l'utilisateur"
           >Désactiver</a>
       </div>
     </div>
