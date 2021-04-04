@@ -8,18 +8,33 @@
 
 Mon rôle est de développer les parties **frontend** et **backend** de l'application.
 
-### Compétences évaluées
+## Compétences évaluées
 
 - Authentifier un utilisateur et maintenir sa session
 - Implémenter un stockage de données sécurisé en utilisant SQL
 - Gérer un stockage de données à l'aide de SQL
 - Presonnaliser le contenu envoyé à un client web
 
-### Progression
+## Progression
 
-En cours de création  🚀
+En attente de soutenance  🚀
 
-### Visual Studio Code  🖥️
+## Visual Studio Code  🖥️
+
+## Démarrage
+
+### Les instructions suivantes vous permettrons d'installer le projet
+
+- Afin de cloner le projet, entrez la ligne de commande suivante : 
+```npm clone https://github.com/Helene-mb/OC-P7-SocialNetwork.git```
+- Backend : 
+```cd backend```
+```npm install```
+```nodemon server```
+- Frontend : 
+```cd frontend```
+```npm install```
+```npm run serve```
 
 ## Backend
 
