@@ -77,6 +77,7 @@ Message.findAll = (result) => {
         }
     })
 };
+
 // Trouver tous les messages avec commentaires
 Message.findAllWithComments = (result) => {
     db.query(`SELECT messages.*, 
@@ -144,39 +145,41 @@ Message.deleteAllBy = (id, result) => {
     })
 };
 
+// Trouver le type de réactions
 Message.findReactionType = (id, result) => {
     db.query(`SELECT * 
     FROM reaction_type_id 
     WHERE id=?`, id, (err, res) => {
-      if(err) {
-        result(err, null);
-      } 
-      else {
-        result(null, res);
-      }
+        if(err) {
+            result(err, null);
+        } 
+        else {
+            result(null, res);
+        }
     });
 };
 
+// Trouver une réction
 Message.findReaction = (reaction, result) => {
     db.query(`SELECT * 
         FROM message_reaction_user
         WHERE message_id=?
         AND user_id=?`, [reaction.message_id, reaction.user_id], (err, res) => {
-    if(err) {
-        result(err, null);
-    } 
-    else {
-        result(null, res);
-    }
+        if(err) {
+            result(err, null);
+        } 
+        else {
+            result(null, res);
+        }
     });
 };
 
+// Trouver toutes les réactions
 Message.findAllReaction = (result) => {
     db.query(`SELECT message_id, reaction_id, COUNT(*) AS sumReaction
-      FROM message_reaction_user
-      GROUP BY message_id, reaction_id
-      ORDER BY message_id DESC;`,
-        (err, res) => {
+              FROM message_reaction_user
+              GROUP BY message_id, reaction_id
+              ORDER BY message_id DESC;`, (err, res) => {
         if(err) {
           result(err, null);
         } else {
@@ -185,6 +188,7 @@ Message.findAllReaction = (result) => {
     })
 };
 
+// Ajouter une réaction
 Message.addReaction = (newReaction, result) => {
     let statment = `INSERT 
                     INTO message_reaction_user 
@@ -198,7 +202,7 @@ Message.addReaction = (newReaction, result) => {
     })
 };
 
-// Supprimer un user
+// Modifier la réaction d'un message
 Message.updateReaction = (newReaction, result) => {
     db.query(`UPDATE message_reaction_user
               SET reaction_id=?
@@ -212,6 +216,5 @@ Message.updateReaction = (newReaction, result) => {
         }
     })
 };
-
 
 module.exports = Message;
