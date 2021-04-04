@@ -41,7 +41,7 @@ En attente de soutenance  🚀
 - serveur **Node.js**
 - base de données **MySQL**
 - modélisation de la bdd avec **Workbench**
-- framework **Express**
+- framework **Express.js**
 - **API REST**
 - sécurité **RGPD** & **OSWAP**
 
