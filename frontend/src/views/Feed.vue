@@ -1,9 +1,8 @@
 <template>
-  <div
-    class="min-h-screen flex flex-col items-center justify-center bg-gray-900"
-  >
+  <div class="min-h-screen flex flex-col items-center justify-center bg-gray-900">
     <h1 class="mt-12 text-2xl text-center text-white">
-    Bienvenue <span class="text-green-500 uppercase">{{ pseudo }}</span> !
+      Bienvenue
+      <span class="text-green-500 uppercase">{{ pseudo }}</span> !
     </h1>
     <newMessage @added="add"></newMessage>
     <div v-for="message in messages" :key="message.id">
@@ -35,7 +34,7 @@ export default {
   },
   mounted() {
     this.refresh()
-    },
+  },
   methods: {
     add(message) {
       this.refresh()
@@ -47,18 +46,18 @@ export default {
         this.$set(this.messages[i], 'nbReaction_2', 0);
         // Si d'autres réactions
 
-    // Pour chaque message, on va regarder s'il y a des réactions !!!
+    // Pour chaque message on regarde si il y a des réactions
       for(let j in tabReaction){
         if(tabReaction[j].message_id == this.messages[i].id){
           switch(tabReaction[j].reaction_id){
             case 1 : this.messages[i].nbReaction_1 = tabReaction[j].sumReaction; break;
             case 2 : this.messages[i].nbReaction_2 = tabReaction[j].sumReaction; break;
             // Si d'autres réactions
+            }
+          }
         }
       }
-    }
-  }
-},
+    },
     refresh() {
       http
       .get('/messages/')
@@ -79,5 +78,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

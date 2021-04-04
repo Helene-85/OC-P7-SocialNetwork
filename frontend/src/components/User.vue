@@ -13,8 +13,9 @@
           v-if="isTheAdmin"
           @click="deactivateOneUser"
           href="#" class="text-green-700 hover:text-green-700"
-          aria-label="Désactiver l'utilisateur"
-          >Désactiver</a>
+          aria-label="Désactiver l'utilisateur">
+          Désactiver
+        </a>
       </div>
     </div>
   </div>
@@ -34,18 +35,18 @@ export default {
     }
   },
   computed: {
-  ...mapState(['user']),
-  isTheAdmin() {
-    if (this.user.isAdmin) {
-      return true;
-    }
-    return false
-  },
-  role() {
-    if (this.member.isAdmin) {
-      return 'Administrateur'
-    }
-    return 'Membre'
+    ...mapState(['user']),
+    isTheAdmin() {
+      if (this.user.isAdmin) {
+        return true;
+      }
+      return false
+    },
+    role() {
+      if (this.member.isAdmin) {
+        return 'Administrateur'
+      }
+      return 'Membre'
     }
   },
   methods: {
@@ -61,5 +62,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

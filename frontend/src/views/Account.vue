@@ -1,15 +1,10 @@
 <template>
-  <div
-    class="min-h-screen flex flex-col items-center justify-center bg-gray-900"
-  >
+  <div class="min-h-screen flex flex-col items-center justify-center bg-gray-900">
     <div class="w-9/12 relative mt-4 my-24 overflow-hidden">
       <div class="top h-64 w-full bg-gray-900 overflow-hidden relative">
-        <div
-          class="flex flex-col justify-center items-center relative h-full text-white"
-        >
+        <div class="flex flex-col justify-center items-center relative h-full text-white">
           <avatar class="h-24 w-24 mb-4 object-cover rounded-full object-cover" :user = "user"/>
           <h1 class="text-2xl text-green-500 font-semibold uppercase"> {{ user.pseudo }} </h1>
-        
         </div>
       </div>
       <div class="flex justify-center bg-gray-900">
@@ -30,8 +25,7 @@
                   type="button"
                   @click.prevent="sendImage"
                   aria-label="Envoyer ma nouvelle photo"
-                  class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
-                >
+                  class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in">
                   <span class="mr-2 uppercase">Modifier ma photo</span>
                 </button>
               <div>
@@ -48,15 +42,13 @@
                   id="pseudo"
                   type="text"
                   placeholder="Nouveau pseudo"
-                  aria-label="Écrire un nouveau pseudonyme"
-                />
+                  aria-label="Écrire un nouveau pseudonyme"/>
               </div>
                 <button
                   @click.prevent="sendNewPseudo"
                   type="submit"
                   aria-label="Envoyer mon nouveau pseudonyme"
-                  class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
-                >
+                  class="flex mt-5 items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in">
                   <span class="mr-2 uppercase">Modifier mon pseudo</span>
                 </button>
             </form>
@@ -125,5 +117,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

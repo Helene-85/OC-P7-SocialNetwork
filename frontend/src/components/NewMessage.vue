@@ -17,8 +17,8 @@
                 placeholder="Écrivez votre message"
                 v-model="content"
                 required
-                aria-label="Écrivez un message"
-              ></textarea>
+                aria-label="Écrivez un message">
+              </textarea>
             </div>
             <div class="flex items-center mb-6 -mt-4 mr-3">
               <div class="flex ml-auto">
@@ -37,8 +37,7 @@
                 type="button"
                 aria-label="Poster le message"
                 @click.prevent="postMessage"
-                class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
-              >
+                class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in">
                 <span class="mr-2 uppercase">Envoyer</span>
                 <span>
                   <svg
@@ -48,11 +47,8 @@
                     stroke-linejoin="round"
                     stroke-width="2"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
+                    stroke="currentColor">
+                    <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </span>
               </button>
@@ -123,5 +119,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>
