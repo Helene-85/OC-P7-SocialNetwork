@@ -7,7 +7,9 @@
         </a>
       </div>
       <div class="block lg:hidden">
-        <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
+        <button 
+        class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white"
+        aria-label="Cliquer sur menu">
           <svg
             class="h-3 w-3"
             viewBox="0 0 20 20"
@@ -23,7 +25,8 @@
             <a
               v-if="isConnected"
               href="http://localhost:8080/feed"
-              class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-green-400 hover:text-white mr-4">
+              class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-green-400 hover:text-white mr-4"
+              aria-label="Accéder aux articles">
               Groupo'Link
             </a>
           </router-link>
@@ -31,7 +34,8 @@
             <a
               v-if="isConnected"
               href="http://localhost:8080/profile/:id"
-              class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400">
+              class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
+              aria-label="Accéder à mon compte">
               Mon compte
             </a>
           </router-link>
@@ -39,7 +43,8 @@
             <a
               v-if="isConnected"
               href="http://localhost:8080/Users"
-              class="block ml-4 mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400">
+              class="block ml-4 mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
+              aria-label="Accéder à la page membres">
               Membres
             </a>
           </router-link>
@@ -49,7 +54,8 @@
             v-if="isConnected"
             @click="logout()"
             href="#"
-            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:text-green-400 mt-4 lg:mt-0">
+            class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:text-green-400 mt-4 lg:mt-0"
+            aria-label="Se déconnecter">
             Se déconnecter
           </a>
         </div>
