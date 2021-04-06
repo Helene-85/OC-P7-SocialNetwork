@@ -1,6 +1,6 @@
 <template>
   <div
-    :is-admin="isAdmin"
+    :is-admin="this.user.isAdmin"
     class="min-h-screen pb-20 -mb-20 bg-gray-900 m-6 flex flex-col">
     <h1 class="mt-12 text-2xl text-center text-white">
     Découvrez les membres de <span class="uppercase text-green-500">Groupo'link</span>
@@ -38,20 +38,11 @@ export default {
     users: [],
     }
   },
-  computed: {
-    isTheAdmin() {
-      if(this.user.isAdmin) {
-        return true;
-      }
-      return false
-    },
-  },
   methods: {
     refresh() {
       http
       .get('/auth/users')
       .then((res) => {
-        console.log('toto', res.data)
         this.users = res.data
       })
       .catch(() => {

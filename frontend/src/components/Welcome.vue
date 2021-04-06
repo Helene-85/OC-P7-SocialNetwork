@@ -58,15 +58,3 @@
     </div>
   </div>
 </template>
-
-<script>
-
-export default {
-  name: 'welcome',
-  data() {
-    return {
-      pseudo: 'Welcome'
-    }
-  }
-}
-</script>

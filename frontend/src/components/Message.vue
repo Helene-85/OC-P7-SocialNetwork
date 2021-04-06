@@ -2,7 +2,7 @@
   <div class="mx-auto px-4 py-8 max-w-xl my-2">
     <div class="bg-white rounded-lg mb-6 relative tracking-wide">
        <a 
-        v-if="isTheAdmin" 
+        v-if="this.user.isAdmin" 
         class="text-red-600 absolute top-2 right-3" 
         @click.prevent="deleteMessage()"
         aria-label="Supprimer ce message">
@@ -72,12 +72,6 @@ export default {
   },
   computed: {
   ...mapState(['user']),
-  isTheAdmin() {
-    if(this.user.isAdmin) {
-      return true;
-    }
-    return false
-    }
   },
   methods: { 
     refresh( ) {

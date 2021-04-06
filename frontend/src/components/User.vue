@@ -10,7 +10,7 @@
           {{ role }}
         </div>
         <a
-          v-if="isTheAdmin"
+          v-if="this.user.isAdmin"
           @click="deactivateOneUser"
           href="#" class="text-green-700 hover:text-green-700"
           aria-label="Désactiver l'utilisateur">
@@ -36,12 +36,6 @@ export default {
   },
   computed: {
     ...mapState(['user']),
-    isTheAdmin() {
-      if (this.user.isAdmin) {
-        return true;
-      }
-      return false
-    },
     role() {
       if (this.member.isAdmin) {
         return 'Administrateur'
