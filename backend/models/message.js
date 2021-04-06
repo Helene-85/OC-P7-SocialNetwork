@@ -6,7 +6,8 @@ const Message = function(message) {
     this.content=message.content,
     this.image=message.image,
     this.createdAt=message.createdAt,
-    this.updatedAt=message.updatedAt
+    this.updatedAt=message.updatedAt,
+    this.isActive=!!message.isActive
 }
 
 // Créer un message
@@ -31,7 +32,8 @@ Message.create = (newMessage, result) => {
 Message.findOne = (id, result) => {
     db.query(`SELECT * 
               FROM messages 
-              WHERE id=?`, 
+              WHERE id=?
+              AND isActive=true`, 
               id, (err, res) => {
         if(err) {
             result(err, null);
@@ -45,7 +47,8 @@ Message.findOne = (id, result) => {
 // Récupérer le dernier message
 Message.getLatest = (id, result) => {
     db.query(`SELECT * 
-              FROM messages 
+              FROM messages
+              WHERE isActive=true 
               ORDER BY id 
               DESC 
               LIMIT 0,1`, 
@@ -65,7 +68,8 @@ Message.findAll = (result) => {
               users.pseudo, users.profilPic 
               FROM messages 
               JOIN users 
-              ON users.id = messages.user_id 
+              ON users.id = messages.user_id
+              WHERE messages.isActive=true
               ORDER BY messages.id 
               DESC`, 
               (err, res) => {
@@ -89,6 +93,7 @@ Message.findAllWithComments = (result) => {
               LEFT JOIN users ON messages.user_id = users.id
               LEFT JOIN comments ON messages.id = comments.message_id
               LEFT JOIN users AS user_comment ON comments.user_id = user_comment.id
+              WHERE messages.isActive=true 
               ORDER BY messages.id DESC;`, 
               (err, res) => {
         if(err) {
@@ -97,48 +102,16 @@ Message.findAllWithComments = (result) => {
             result(null, res)
         }
     })
-};
 
-Message.getAllComments = (id, result) => {
-    db.query(`SELECT * 
-              FROM comments 
-              WHERE message_id=? 
-              ORDER BY comments.id 
-              DESC`, 
-              id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
-        } else {
-            result(null, res)
-        }
-    })
-};
 
 // Supprimer un message
 Message.delete = (id, result) => {
-    db.query(`DELETE 
-              FROM messages 
+    db.query(`UPDATE messages
+              SET isActive=0 
               WHERE id=?`, 
               id, (err, res) => {
         if(err) {
             result(err, null);
-            return;
-        } else {
-            result(null, res)
-        }
-    })
-};
-
-// Supprimer tous les messages d\'un user précis
-Message.deleteAllBy = (id, result) => {
-    db.query(`DELETE * 
-              FROM comments 
-              WHERE id=?`, 
-              id, (err, res) => {
-        if(err) {
-            result(err, null);
-            return;
         } else {
             result(null, res)
         }

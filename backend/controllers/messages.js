@@ -11,6 +11,7 @@ exports.createMessage = (req, res, next) =>
     image: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null,
     createdAt: Utils.getSqlDate(),
     updatedAt: Utils.getSqlDate(),
+    isActive: true,
   });
   
   Message.create(newMessage, (err, data) => {
@@ -80,15 +81,10 @@ exports.deleteMessage = (req, res, next) => {
     }
     Message.delete(req.params.id, (err, data) => {
       if (err) {
-        if (err) {
-          res.status(404).send({
-            message: 'Le message n\'existe pas ou plus'
-          });
-        } else {
-          res.status(500).send({
-            message: 'Impossible de supprimer le message'
-          });
-        }
+        res.status(500).send({
+          message: 'Impossible de supprimer le message'
+        });
+      } else {
         res.send({ message: 'Le message a été supprimé'});
       }
     })
