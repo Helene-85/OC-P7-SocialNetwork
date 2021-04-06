@@ -3,7 +3,7 @@
     <div class="bg-white rounded-lg mb-6 relative tracking-wide">
        <a 
         v-if="isTheAdmin" 
-        class="text-red-600 absolute top-2 right-3" 
+        class="text-red-600 absolute top-2 right-3 cursor-pointer" 
         @click.prevent="deleteMessage()"
         aria-label="Supprimer ce message">
         <i class="fas fa-times"></i>

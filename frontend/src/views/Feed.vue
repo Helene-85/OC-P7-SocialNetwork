@@ -2,7 +2,7 @@
   <div class="min-h-screen flex flex-col items-center justify-center bg-gray-900">
     <h1 class="mt-12 text-2xl text-center text-white">
       Bienvenue
-      <span class="text-green-500 uppercase">{{ pseudo }}</span> !
+      <span class="text-green-500 uppercase">{{ user.pseudo }}</span> !
     </h1>
     <newMessage @added="add"></newMessage>
     <div v-for="message in messages" :key="message.id">
@@ -13,8 +13,9 @@
 
 <script>
 import http from '../http';
-import NewMessage from '@/components/NewMessage.vue'
-import Message from '@/components/Message.vue'
+import NewMessage from '@/components/NewMessage.vue';
+import Message from '@/components/Message.vue';
+import {mapState} from 'vuex';
 
 export default {
   name: 'feed',
@@ -31,6 +32,9 @@ export default {
       pseudo: 'Pseudo',
       messages: []
     }
+  },
+    computed: {
+    ...mapState(['user']),
   },
   mounted() {
     this.refresh()

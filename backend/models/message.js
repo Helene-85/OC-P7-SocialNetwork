@@ -17,7 +17,6 @@ Message.create = (newMessage, result) => {
                     SET ?`;
     db.query(statment, newMessage, (err, res) => {
         if(err) {
-            console.log(err);
             result(err, null);
             return;
         }
@@ -102,7 +101,7 @@ Message.findAllWithComments = (result) => {
             result(null, res)
         }
     })
-
+};
 
 // Supprimer un message
 Message.delete = (id, result) => {
@@ -121,8 +120,9 @@ Message.delete = (id, result) => {
 // Trouver le type de réactions
 Message.findReactionType = (id, result) => {
     db.query(`SELECT * 
-    FROM reaction_type_id 
-    WHERE id=?`, id, (err, res) => {
+              FROM reaction_type_id 
+              WHERE id=?`, 
+              id, (err, res) => {
         if(err) {
             result(err, null);
         } 
@@ -137,7 +137,8 @@ Message.findReaction = (reaction, result) => {
     db.query(`SELECT * 
         FROM message_reaction_user
         WHERE message_id=?
-        AND user_id=?`, [reaction.message_id, reaction.user_id], (err, res) => {
+        AND user_id=?`,
+        [reaction.message_id, reaction.user_id], (err, res) => {
         if(err) {
             result(err, null);
         } 
@@ -152,7 +153,8 @@ Message.findAllReaction = (result) => {
     db.query(`SELECT message_id, reaction_id, COUNT(*) AS sumReaction
               FROM message_reaction_user
               GROUP BY message_id, reaction_id
-              ORDER BY message_id DESC;`, (err, res) => {
+              ORDER BY message_id DESC;`, 
+              (err, res) => {
         if(err) {
           result(err, null);
         } else {
@@ -175,7 +177,7 @@ Message.addReaction = (newReaction, result) => {
     })
 };
 
-// Modifier la réaction d'un message
+// Modifier la réaction dun message
 Message.updateReaction = (newReaction, result) => {
     db.query(`UPDATE message_reaction_user
               SET reaction_id=?
