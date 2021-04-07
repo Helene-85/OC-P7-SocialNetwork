@@ -31,10 +31,11 @@
                   Commencez dès maintenant à partager des messages, avec ou sans
                   image.
                 </p>
-                <router-link to="/feed">
                   <button
+                    @click="$router.push('/feed')"
                     type="submit"
-                    class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in">
+                    class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-700 hover:bg-green-900 rounded py-2 w-full transition duration-150 ease-in"
+                    >
                     <span class="mr-2 uppercase">Poster un message</span>
                     <span>
                       <svg
@@ -49,7 +50,6 @@
                       </svg>
                     </span>
                   </button>
-                </router-link>
               </div>
             </form>
           </div>

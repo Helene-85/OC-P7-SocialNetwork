@@ -21,32 +21,29 @@
       </div>
       <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-sm lg:flex-grow">
-          <router-link to="/feed">
-            <a
-              v-if="isConnected"
-              href="http://localhost:8080/feed"
-              class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-green-400 hover:text-white mr-4"
-              aria-label="Accéder aux articles">
-              Groupo'Link
-            </a>
+          <router-link 
+            to="/feed"
+            v-if="isConnected"
+            href="http://localhost:8080/feed"
+            class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-green-400 hover:text-white mr-4"
+            aria-label="Accéder aux articles">
+            Groupo'Link
           </router-link>
-          <router-link to="/profile/:id">
-            <a
-              v-if="isConnected"
-              href="http://localhost:8080/profile/:id"
-              class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
-              aria-label="Accéder à mon compte">
-              Mon compte
-            </a>
+          <router-link 
+            to="/profile/:id"
+            v-if="isConnected"
+            href="http://localhost:8080/profile/:id"
+            class="block mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
+            aria-label="Accéder à mon compte">
+            Mon compte
           </router-link>
-          <router-link to="/Users">
-            <a
-              v-if="isConnected"
-              href="http://localhost:8080/Users"
-              class="block ml-4 mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
-              aria-label="Accéder à la page membres">
-              Membres
-            </a>
+          <router-link 
+            to="/Users"
+            v-if="isConnected"
+            href="http://localhost:8080/Users"
+            class="block ml-4 mt-4 lg:inline-block lg:mt-0 text-lg text-teal-lighter text-white hover:text-green-400"
+            aria-label="Accéder à la page membres">
+            Membres
           </router-link>
         </div>
         <div>
