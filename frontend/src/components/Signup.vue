@@ -151,7 +151,6 @@ export default {
       http
         .post('/auth/signup', payload)
         .then(res => {
-          console.log(res)
           alert('Inscription réussie !')
           window.location.href='/'
         })

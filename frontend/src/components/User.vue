@@ -49,7 +49,6 @@ export default {
       .delete("/auth/users/" + this.member.id)
       .then((res) => {
         this.$emit('refresh')
-        console.log(res)
       }) 
       .catch(() => console.log('Impossible de suprimer le user'));
     }

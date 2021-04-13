@@ -24,7 +24,6 @@ export default new Vuex.Store({
       state.user.pseudo = newPseudo;
     },
     updateProfilPic(state, newProfilPic) {
-      console.log('profilPicUpdate');
       state.user.profilPic = newProfilPic;
     }
   },

@@ -16,7 +16,6 @@ export default {
   },
   computed: {
     avatar() {
-      console.log(this.user);
     if (this.user.profilPic == '' || this.user.profilPic == null) {
       return '/profile_pic.png'
       }

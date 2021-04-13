@@ -95,7 +95,7 @@ export default {
         this.file = ''
       })
       .catch(() => {
-        console.log('FRONT Impossible de poster le message');
+        console.log('Impossible de poster le message');
         alert('Impossible de poster le message :/')
       })
     },

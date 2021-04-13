@@ -6,7 +6,7 @@
         class="text-red-600 absolute top-2 right-3 cursor-pointer" 
         @click.prevent="deleteMessage()"
         aria-label="Supprimer ce message">
-        <i class="fas fa-times"></i>
+        <i class="fas fa-trash-alt"></i>
         </a>
       <div class="md:flex-shrink-0">
         <img v-if="(item.image != null)"
@@ -17,10 +17,10 @@
       <div class="px-4 py-2 mt-2">
         <div class="author flex items-center -ml-3 my-3">
           <avatar class="h-10 w-10 object-cover rounded-full m-1" :user = "item"/>
-          <p class="text-sm tracking-tighter text-gray-900">
-            <p class="text-green-700 ml-1 mr-8"></span> {{ item.pseudo }}</p>
-            <span class="text-gray-600 text-sm font-light">{{ item.createdAt | moment("dddd, MMMM Do YYYY") }}</span>
-          </p>
+          <div class="text-sm tracking-tighter text-gray-900">
+            <p class="text-green-700 ml-1 mr-16"></span> {{ item.pseudo }}</p>
+            <span class="text-gray-600 text-sm ml-1 font-light">{{ item.createdAt | moment("from", "now", true) }} ago</span>
+          </div>
         </div>
         <p class="mt-4 text-m text-gray-700 px-2 mr-1">
           {{ item.content }}
@@ -86,7 +86,6 @@ export default {
       http
         .post(`/messages/${this.user.id}/reactions`, payload)
         .then(res => {
-          console.log(res)
           this.refresh();
         })
     },
@@ -94,7 +93,7 @@ export default {
       http
         .delete(`/messages/${this.item.id}`)
         .then(res => {
-          console.log(res)
+          alert('Le message a correctement été supprimé')
           this.refresh();
       })
     }

@@ -7,7 +7,7 @@
         class="text-red-600 absolute top-10 right-2 cursor-pointer"
         @click.prevent="deleteComment(commentaire.comment_id)"
         aria-label="Supprimer le commentaire">
-        <i class="fas fa-times"></i>
+        <i class="fas fa-trash-alt"></i>
       </a>
     </div>
 </template>
@@ -33,7 +33,7 @@ export default {
       http
         .delete(`/comments/${id}`)
         .then(res => {
-          console.log(res)
+          alert('Le commentaire a correctement été supprimé')
           this.$emit('refresh')
       })
     }

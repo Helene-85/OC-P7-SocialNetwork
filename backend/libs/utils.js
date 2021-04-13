@@ -12,7 +12,7 @@ Utils.getSqlDate = () => {
     ("00" + date.getSeconds()).slice(-2);
     return dateStr;
 };
-// On récupère les ifnos du token
+// On récupère les infos du token
 Utils.getReqToken = (req) => {
   const token = req.headers.authorization.split(' ')[1];                    // Extraction du token du header authorization
   const decodedToken = jwt.verify(token, `${process.env.JWT_KEY}`);         // Décodage du token
@@ -20,4 +20,3 @@ Utils.getReqToken = (req) => {
 }  
 
 module.exports = Utils;
-
