@@ -4,7 +4,7 @@
       <p class="w-full md:w-full flex items-start md:w-full px-3 rounded py-2 bg-gray-100">{{ commentaire.comment_content }}</p>
       <a 
         v-if="this.user.isAdmin" 
-        class="text-red-600 absolute top-10 right-2 cursor-pointer"
+        class="text-red-600 absolute top-10 right-1 cursor-pointer"
         @click.prevent="deleteComment(commentaire.comment_id)"
         aria-label="Supprimer le commentaire">
         <i class="fas fa-trash-alt"></i>
