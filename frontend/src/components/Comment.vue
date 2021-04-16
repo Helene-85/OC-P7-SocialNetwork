@@ -20,6 +20,7 @@ import Avatar from './Avatar.vue';
 export default {
     components: { Avatar },
     name: 'comment',
+    // On récupère l'objet commentaire en tant que props
     props: { 
       commentaire : {
           type: Object

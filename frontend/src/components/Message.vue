@@ -37,9 +37,11 @@
             <span><i class="far fa-thumbs-down text-red-600"></i>{{ item.nbReaction_2 }}</span>
           </a>
         </div>
+        <!-- Le  message affiche une liste de commentaires / ligne 42 et 43 : chq commentaire reçoit en props sa clé (besoin de la boucle) 
+        et un objet commentaire -->
         <comment
           v-for="commentaire in item.tabComments"
-          :key="commentaire.comment_id"
+          :key="commentaire.comment_id"  
           :commentaire="commentaire"
           @refresh="refresh"
           class="py-2 relative">
