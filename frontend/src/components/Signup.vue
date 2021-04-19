@@ -78,7 +78,6 @@
               </div>
               <div class="mb-6 text-center">
                 <button
-                  :disabled="!isValid"
                   @click.prevent="signUp"
                   type="button"
                   aria-label="Cliquer sur s'incrire"
@@ -143,6 +142,15 @@ export default {
   },
   methods: {
     signUp() {
+
+       if (this.pseudo.length < 3) {
+          alert('Votre pseudo est trop court');
+        return false;
+      }
+      if (this.password != this.confirm_password) {
+        alert('Les mots de passe doivent être identiques');
+        return false;
+      }
       const payload = {
         pseudo: this.pseudo,
         email: this.email,
